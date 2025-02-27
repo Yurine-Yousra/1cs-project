@@ -52,10 +52,7 @@ const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setA
   // Password visibility state
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted");
-  };
+ 
 
   const ChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAdminInfos((prev) => ({
@@ -95,7 +92,7 @@ const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setA
   ];
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-4" onSubmit={() => PostFunction("url" , content)}>
       <div>
         {labels.map((label, index) => (
           <InputForm
@@ -125,7 +122,6 @@ const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setA
 
         <button
           className="flex items-center bg-[var(--color-secondary)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
-          onClick={() => PostFunction("url" , content)}
         >
           Créer
         </button>
