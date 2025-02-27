@@ -55,7 +55,14 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
          <div className="relative w-full">
              <label.icon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
              {label.selectElement ? (
-             <select onChange={handleSelect} className="w-full rounded-[5px] h-[45px] border-gray-400 border-[2px] focus:border-[var(--color-secondary)] focus:outline-none pl-10">
+             <select
+              onChange={handleSelect}
+               className="w-full rounded-[5px] h-[45px] border-gray-400 border-[2px] focus:border-[var(--color-secondary)] focus:outline-none pl-10"
+             name="Type_détablissement"
+             required
+             id="Type_détablissement"
+             value={label.value}
+             >
               <option value="Primaire">Primaire</option>
               <option value="Moyenne">Moyenne</option>
               <option value="Secondaire">Secondaire</option>
