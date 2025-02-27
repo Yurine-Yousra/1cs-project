@@ -1,5 +1,5 @@
 import Image1 from '../assets/image copy 2.png'
-import { LoginForm } from '../components/LoginForm';
+import  LoginForm  from '../components/LoginForm';
 
 
 function Login() {

@@ -1,19 +1,26 @@
 import { MdClose, MdLockOutline, MdOutlineEmail } from "react-icons/md";
-import InputForm from "./InputForm";
+import InputForm from "./ui/InputForm";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FormEvent, useState } from "react";
 
 export const LoginForm = () => {
-  const [showPassword, setShowPassword] = useState<'password' | 'text'>('password');
+  const [showPassword, setShowPassword] = useState(false);
+  
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+
 
   const labels = [
     { text: "Adresse Email", icon: MdOutlineEmail, type: "email" },
     {
       text: "Mot de passe",
       icon: MdLockOutline,
-      type: showPassword,
-      eyeIcon: showPassword === 'password' ? FaRegEye : FaRegEyeSlash,
-      onClick: () => setShowPassword(showPassword === 'password' ? 'text' : 'password'),
+      type: showPassword ? "text" : "password",
+      EyeIcon: showPassword ? FaRegEye : FaRegEyeSlash, 
+      onToggleVisibility: togglePasswordVisibility, 
     },
   ];
 
@@ -30,8 +37,8 @@ export const LoginForm = () => {
           Inputtext={label.text}
           InputIcon={label.icon}
           type={label.type}
-          EyeIcon={label.eyeIcon} // password field
-          onClick={label.onClick} //  password field
+          EyeIcon={label.EyeIcon} 
+          onToggleVisibility={label.onToggleVisibility} 
         />
       ))}
 
@@ -54,3 +61,6 @@ export const LoginForm = () => {
     </form>
   );
 };
+
+
+export default LoginForm

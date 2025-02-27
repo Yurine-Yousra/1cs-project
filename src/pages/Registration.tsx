@@ -1,12 +1,46 @@
 import Image1 from "../assets/image.png";
 import Image2 from '../assets/image copy 3.png'
-import AdminInfoForm from "../components/AdminInfosForm";
+import AdminInfoForm from "../components/AdminComponents/AdminInfosForm";
 import SchoolInfoForm from "../components/SchoolInfosForm";
-import Button1 from "../components/Button1";
 import { useState } from "react";
 
 function Registration() {
   const [displayed, setDisplayed] = useState(false);
+
+   const [schoolInfos , setSchoolInfos] = useState({
+        Nom_détablissement : "",
+        Type_détablissement : "",
+        Adress : "",
+        Adresse_Email : "",
+        Numéro_de_Téléphone : "",
+      })
+    
+
+
+      const [adminInfos, setAdminInfos] = useState({
+        prénom: "",
+        nom: "",
+        phone: "",
+        email: "",
+        pass: "",
+        confirm_pass: "",
+      });
+      
+
+      const content = {
+        Nom_détablissement :schoolInfos.Nom_détablissement ,
+        Type_détablissement : schoolInfos.Type_détablissement ,
+        Adress :  schoolInfos.Adress,
+        Adresse_Email : schoolInfos.Adresse_Email ,
+        Numéro_de_Téléphone : schoolInfos.Numéro_de_Téléphone ,
+        prénom: adminInfos.prénom ,
+        nom: adminInfos.nom,
+        phone: adminInfos.phone ,
+        email: adminInfos.email ,
+        pass: adminInfos.pass ,
+        confirm_pass: adminInfos.confirm_pass ,
+      }
+
 
   return (
     <div className="h-screen w-screen p-[50px] bg-[url('./assets/background.png')] bg-cover bg-center">
@@ -27,9 +61,8 @@ function Registration() {
             </div>
             <div className="flex flex-col gap-4 w-[80%] items-center">
               <div className="w-full flex flex-col gap-2">
-                {!displayed ? <SchoolInfoForm /> : <AdminInfoForm />}
+                {!displayed ? <SchoolInfoForm  setDisplayed={setDisplayed} setSchoolInfos={setSchoolInfos} schoolInfos={schoolInfos} /> : <AdminInfoForm  setDisplayed={setDisplayed} adminInfos={adminInfos} setAdminInfos={setAdminInfos} content={content}/>}
               </div>
-              <Button1  displayed={displayed} setDisplayed={setDisplayed} />
             </div>
           </div>
         </div>
