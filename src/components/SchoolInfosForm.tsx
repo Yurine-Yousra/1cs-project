@@ -2,7 +2,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FiPhone } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import { FaSchool } from "react-icons/fa";
-import InputForm from "./InputForm";
+import InputForm from "./ui/InputForm";
 
 
 const SchoolInfoForm = () => {

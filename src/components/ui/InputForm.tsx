@@ -22,6 +22,7 @@ const InputForm: React.FC<InputProps> = ({ Inputtext, InputIcon,EyeIcon, type , 
           name={name}
           type={type}
           value={value}
+          required
           onChange={onChange}
           placeholder="Enter value..."
           className=" w-full rounded-[5px] h-[45px] border-gray-400 border-[2px] focus:border-[var(--color-secondary)] focus:outline-none pl-10"

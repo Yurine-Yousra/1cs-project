@@ -2,7 +2,7 @@ import Image1 from "../assets/image.png";
 import Image2 from '../assets/image copy 3.png'
 import AdminInfoForm from "../components/AdminInfosForm";
 import SchoolInfoForm from "../components/SchoolInfosForm";
-import Button1 from "../components/Button1";
+import Button1 from "../components/ui/Button1";
 import { useState } from "react";
 
 function Registration() {

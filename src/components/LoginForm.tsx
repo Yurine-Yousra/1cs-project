@@ -1,5 +1,5 @@
 import { MdClose, MdLockOutline, MdOutlineEmail } from "react-icons/md";
-import InputForm from "./InputForm";
+import InputForm from "./ui/InputForm";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FormEvent, useState } from "react";
 
@@ -46,7 +46,7 @@ export const LoginForm = () => {
       </button>
 
       <div className="flex mt-2 items-center gap-4 bg-[#F87171] text-white p-4 rounded-xl shadow-lg ">
-      <MdClose className="text-white bg-[#DC2626] text-xl rounded-full " size={30} />
+      <MdClose className="text-white bg-error text-xl rounded-full " size={30} />
       <span className="font-poppins font-semibold  leading-[20px] tracking-[0]">
         Mot de passe ou adresse email incorrecte, veuillez réessayer
       </span>

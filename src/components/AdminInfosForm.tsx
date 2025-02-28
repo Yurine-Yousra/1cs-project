@@ -1,7 +1,7 @@
 import { FiPhone, FiLock } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
-import InputForm from "./InputForm";
+import InputForm from "./ui/InputForm";
 
 const AdminInfoForm = () => {
   const labels = [

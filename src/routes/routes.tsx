@@ -5,7 +5,7 @@ import Login from "../pages/Login";
 function AppRoutes() {
   return (
       <Routes>
-        <Route path="/" element={<Registration />} />
+        <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
       </Routes>
   );
