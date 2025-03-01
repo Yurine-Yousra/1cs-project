@@ -6,7 +6,7 @@ interface InputProps {
   name?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
 }
 
 const InputForm: React.FC<InputProps> = ({ Inputtext, InputIcon,EyeIcon, type , name, value, onChange , onClick }) => {
