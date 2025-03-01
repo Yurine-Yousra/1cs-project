@@ -47,17 +47,13 @@ interface AdminProps {
 }
 
 const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setAdminInfos , content}) => {
- 
-
   // Password visibility state
   const [showPassword, setShowPassword] = useState(false);
-
- 
 
   const ChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAdminInfos((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value, // Use name instead of id
+      [e.target.name]: e.target.value, 
     }));
   };
 
