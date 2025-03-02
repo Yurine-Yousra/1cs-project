@@ -8,11 +8,8 @@ interface InputProps {
   name?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-<<<<<<< HEAD
   onToggleVisibility?: () => void; 
-=======
   onClick?: () => void;
->>>>>>> 5873b6e912ead1f8ca2d94159e74e465d7779eb9
 }
 
 const InputForm: React.FC<InputProps> = ({
@@ -40,7 +37,7 @@ const InputForm: React.FC<InputProps> = ({
           required
           onChange={onChange}
           placeholder="Enter value..."
-          required
+          
           className="w-full rounded-[5px] h-[45px] border-gray-400 border-[2px] focus:border-[var(--color-secondary)] focus:outline-none pl-10"
         />
         {EyeIcon && (

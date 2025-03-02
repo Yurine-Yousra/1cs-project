@@ -1,28 +1,13 @@
 import { MdClose, MdLockOutline, MdOutlineEmail } from "react-icons/md";
 import InputForm from "./ui/InputForm";
-<<<<<<< HEAD
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-=======
 import { FaRegEye, FaRegEyeSlash, FaSpinner } from "react-icons/fa";
->>>>>>> 5873b6e912ead1f8ca2d94159e74e465d7779eb9
 import { FormEvent, useState } from "react";
 import { uselogin } from "../hooks/useLogin";
 
 export const LoginForm = () => {
-<<<<<<< HEAD
-  const [showPassword, setShowPassword] = useState(false);
-  
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
-
-
-=======
   const [showPassword, setShowPassword] = useState<'password' | 'text'>('password');
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
->>>>>>> 5873b6e912ead1f8ca2d94159e74e465d7779eb9
 
   const labels = [
     { text: "Adresse Email", icon: MdOutlineEmail, type: "email",name:"email",value:email },
@@ -30,17 +15,11 @@ export const LoginForm = () => {
       text: "Mot de passe",
       name:"password",
       icon: MdLockOutline,
-<<<<<<< HEAD
-      type: showPassword ? "text" : "password",
-      EyeIcon: showPassword ? FaRegEye : FaRegEyeSlash, 
-      onToggleVisibility: togglePasswordVisibility, 
-=======
       password:password,
       type: showPassword,
       value:password,
       eyeIcon: showPassword === 'password' ? FaRegEye : FaRegEyeSlash,
       onClick: () => setShowPassword(showPassword === 'password' ? 'text' : 'password'),
->>>>>>> 5873b6e912ead1f8ca2d94159e74e465d7779eb9
     },
   ];
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,15 +48,10 @@ export const LoginForm = () => {
           Inputtext={label.text}
           InputIcon={label.icon}
           type={label.type}
-<<<<<<< HEAD
-          EyeIcon={label.EyeIcon} 
-          onToggleVisibility={label.onToggleVisibility} 
-=======
           value={label.value}
           onChange={handleChange}
           EyeIcon={label.eyeIcon} // password field
           onClick={label.onClick} //  password field
->>>>>>> 5873b6e912ead1f8ca2d94159e74e465d7779eb9
         />
       ))}
 

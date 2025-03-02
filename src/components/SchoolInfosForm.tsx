@@ -2,10 +2,6 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FiPhone } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaSchool } from "react-icons/fa";
-<<<<<<< HEAD
-=======
-import InputForm from "./ui/InputForm";
->>>>>>> 5873b6e912ead1f8ca2d94159e74e465d7779eb9
 
 interface SchoolProps {
   setDisplayed: React.Dispatch<React.SetStateAction<boolean>>;

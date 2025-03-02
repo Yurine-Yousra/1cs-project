@@ -1,10 +1,6 @@
 import Image1 from '../assets/image copy 2.png'
-<<<<<<< HEAD
-import  LoginForm  from '../components/LoginForm';
-=======
 import Logo from '../assets/5895699245443434210.jpg'
 import { LoginForm } from '../components/LoginForm';
->>>>>>> 5873b6e912ead1f8ca2d94159e74e465d7779eb9
 
 
 function Login() {
