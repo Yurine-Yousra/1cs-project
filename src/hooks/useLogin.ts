@@ -4,7 +4,7 @@ import { useUserStore } from "../zustand/userStore";
 import { useNavigate } from "react-router-dom";
 
 
-export const uselogin = () => {
+export const Uselogin = () => {
 
     const [err,setErr] = useState<boolean>(false);
     const [isLoading,setIsLoading] = useState<boolean>(false);
