@@ -4,8 +4,10 @@ import AdminInfoForm from "../../components/AdminComponents/AdminInfosForm";
 import SchoolInfoForm from "../../components/SchoolInfosForm";
 import { useState } from "react";
 
+
 function Registration() {
   const [displayed, setDisplayed] = useState(false);
+  
 
   const [schoolInfos, setSchoolInfos] = useState({
     Nom_détablissement: "",
@@ -26,6 +28,9 @@ function Registration() {
     pass: "",
     confirm_pass: "",
   });
+
+  
+
 
 
   return (
@@ -56,7 +61,7 @@ function Registration() {
                 {!displayed ? (
                   <SchoolInfoForm setDisplayed={setDisplayed} setSchoolInfos={setSchoolInfos} schoolInfos={schoolInfos} />
                 ) : (
-                  <AdminInfoForm setDisplayed={setDisplayed} adminInfos={adminInfos} setAdminInfos={setAdminInfos}  />
+                  <AdminInfoForm setDisplayed={setDisplayed} adminInfos={adminInfos} setAdminInfos={setAdminInfos} schoolInfos={schoolInfos}  />
                 )}
               </div>
             </div>
