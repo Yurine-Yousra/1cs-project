@@ -401,6 +401,7 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
       </div>
 
       <div>
+      
         <button
           type="button"
           className="flex items-center bg-[var(--color-secondary)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
@@ -409,7 +410,9 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
           Suivant
         </button>
       </div>
+
     </form>
+    
   );
 };
 

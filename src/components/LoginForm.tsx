@@ -51,8 +51,8 @@ export const LoginForm = () => {
           value={label.value}
           onChange={handleChange}
           EyeIcon={label.eyeIcon} // password field
-          onClick={label.onClick} //  password field
-        />
+          onToggleVisibility={label.onClick} //  password field
+          />
       ))}
 
       <h1 className="font-poppins font-semibold text-[15px] leading-[22.5px] tracking-[0] ml-auto hover:underline cursor-pointer ">

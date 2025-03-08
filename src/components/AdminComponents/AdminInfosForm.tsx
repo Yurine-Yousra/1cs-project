@@ -3,8 +3,9 @@ import { MdOutlineEmail } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import InputForm from "../ui/InputForm";
-import { useState } from "react";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FormEvent, useState } from "react";
+import { FaRegEye, FaRegEyeSlash, FaSpinner } from "react-icons/fa";
+import { useSignup } from "../../hooks/useSignup";
 
 
 interface AdminProps {
@@ -19,6 +20,7 @@ interface AdminProps {
         confirm_pass: string,
   }>
   >;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
 
   adminInfos : {
     prénom: string,
@@ -32,9 +34,8 @@ interface AdminProps {
 
 }
 
-const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setAdminInfos }) => {
+const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setAdminInfos , handleSubmit }) => {
 
- 
 
 {/*
    const [loading , setLoading] = useState<boolean>(false)
@@ -86,8 +87,8 @@ return {loading,error}
   // Password visibility state
   const [showPassword, setShowPassword] = useState(false);
 
- 
-
+  const {isLoading} = useSignup();
+  
   const ChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAdminInfos((prev) => ({
       ...prev,
@@ -126,7 +127,7 @@ return {loading,error}
   ];
 
   return (
-    <form className="flex flex-col gap-4" >
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit} >
       <div>
         {labels.map((label, index) => (
           <InputForm
@@ -157,7 +158,10 @@ return {loading,error}
         <button
           className="flex items-center bg-[var(--color-secondary)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
         >
-          CFréer
+           {isLoading ? <span className="flex items-center gap-2">
+                <FaSpinner className="animate-spin" /> Connexion en cours...
+              </span> : "CFréer"}
+          
         </button>
       </div>
     </form>
