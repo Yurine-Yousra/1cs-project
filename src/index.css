@@ -3,6 +3,8 @@
 @theme {
   --color-primary: hsla(233, 80%, 71%, 1);
   --color-secondary: hsla(232, 39%, 36%, 1);
+  --color-yousra  :hsla(232, 39%, 36%, 1);
+  --color-sous : hsla(233, 100%, 90%, 1);
   --color-error:#DC2626;
   --font-body: 'Inter', sans-serif;
   --breakpoint-sm: 640px;
