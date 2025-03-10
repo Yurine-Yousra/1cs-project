@@ -1,6 +1,7 @@
 import { BiPhoneCall, BiBook } from "react-icons/bi";
 import { BsPeople } from "react-icons/bs";
 import Image1 from "../../assets/image copy 4.png";
+import { NavLink } from "react-router-dom";
 
 const Card = () => {
   return (
@@ -12,7 +13,7 @@ const Card = () => {
           alt="user image"
           className="rounded-full w-12 h-12"
         />
-        <h3 className="font-semibold text-gray-800">Yousra Bouhriz Daidj</h3>
+        <h3 className="font-semibold text-gray-800"><NavLink to="/dashboard/TeacherProfil">Yousra Bouhriz Daidj</NavLink></h3>
       </div>
 
       {/* Infos principales */}

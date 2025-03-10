@@ -33,6 +33,7 @@ export const Uselogin = () => {
                    // localStorage.setItem('user',JSON.stringify(json))
                         toast.success("user Login succefully")
                         setUser(json);
+                        document.cookie= `token=${json.token}`
                         naviagte("/dashboard");
                 }
             } catch (error) {

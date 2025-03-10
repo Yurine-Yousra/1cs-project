@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import { SignupData } from "../../types/register.type";
 import { useSignup } from "../../hooks/useSignup";
 
+
 function Registration() {
   const [displayed, setDisplayed] = useState(false);
+  
 
   const [schoolInfos, setSchoolInfos] = useState({
     Nom_détablissement: "",
