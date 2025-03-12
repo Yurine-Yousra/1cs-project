@@ -7,6 +7,7 @@ import Enseignants from "./Enseignants";
 import AddTeacher from "./AddTeacher";
 import DashboardUpper from "./DashboardUpper";
 import TeacherProfil from "./TeacherProfil";
+import  Eleves from "./Eleve";
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -31,10 +32,10 @@ const Dashboard: React.FC = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:relative col-span-1 top-0 left-0 h-full bg-white flex flex-col items-start p-4 transition-transform duration-300 
+        className={`fixed  lg:relative col-span-1 top-0 left-0 h-full bg-white flex flex-col items-start p-4 transition-transform duration-300 
         ${isSidebarOpen ? "translate-x-0 w-[50%]" : "-translate-x-full"} lg:translate-x-0`}
       >
-        <div className="w-full">
+        <div className="w-full ">
           <SideBar />
         </div>
       </div>
@@ -53,7 +54,9 @@ const Dashboard: React.FC = () => {
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
             <Route path="addTeacher" element={<AddTeacher />} />
+            <Route path="eleves"  element={<Eleves />} />
             <Route path="TeacherProfil" element={<TeacherProfil />} />
+            <Route path="*" element={<div>Page Not Found</div>} />
           </Routes>
         </div>
       </div>

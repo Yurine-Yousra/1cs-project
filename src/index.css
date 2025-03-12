@@ -6,6 +6,7 @@
   --color-yousra  :hsla(245, 45%, 49%, 1);
   --color-sous : hsla(235, 100%, 98%, 1);
   --color-error:#DC2626;
+  --color-gray:#777777;
   --font-body: 'Inter', sans-serif;
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;

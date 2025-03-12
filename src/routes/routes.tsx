@@ -9,8 +9,9 @@ function AppRoutes() {
       <Routes>
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/dashboard/*" element={<Dashboard/>} />
         <Route path="/addTeacher" element={<AddTeacher/>} />
+        
       </Routes>
   );
 }

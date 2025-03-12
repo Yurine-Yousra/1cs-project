@@ -13,7 +13,7 @@ const SideBar: React.FC = () => {
   const isAddTeacherPage = location.pathname.includes("addTeacher");
     
   const sidebarArray = [
-    { path: "/dashboard/", icon: <FaArrowUpRightDots size={24} />, title: "Dashboard" },
+    { path: "/dashboard", icon: <FaArrowUpRightDots size={24} />, title: "Dashboard" },
     { path: "/dashboard/enseignants", icon: <PiChalkboardTeacherLight size={24} />, title: "Enseignants" },
     { path: "/dashboard/eleves", icon: <BsPerson size={24} />, title: "Élèves" },
     { path: "/dashboard/employes", icon: <BsPeople size={24} />, title: "Employés" },
@@ -23,7 +23,7 @@ const SideBar: React.FC = () => {
   ];
 
   return (
-    <div className="h-screen">
+    <div className="h-screen ">
       {!isAddTeacherPage && <h1 className="text-xl font-bold mb-6">Dirassati</h1>}
 
       {/* Main Sidebar List */}
