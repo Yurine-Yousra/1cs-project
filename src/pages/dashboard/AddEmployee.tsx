@@ -1,5 +1,5 @@
-import FormulaireTeacher from "../../components/ui/FormulaireTeacher";
-const AddTeacher = () => {
+import FormulaireEmployee from "../../components/ui/FormulaireEmployee";
+const AddEmployee = () => {
   const labels = [
     { text: "Nom*", type: "text", name: "nom", select: false },
     { text: "Adresse Email*", type: "email", name: "email", select: false },
@@ -10,19 +10,18 @@ const AddTeacher = () => {
     { text: "", type: "text", name: "lieu", select: true },
     { text: "Diplome*", type: "text", name: "diplome", select: false },
     { text: "Date Début*", type: "date", name: "date_début", select: true },
-    { text: "Matière*", type: "text", name: "matière", select: true },
+    { text: "Position*", type: "text", name: "matière", select: true },
     { text: "Salaire par Mois*", type: "text", name: "salaire", select: false },
-
   ];
-  const type_E = "Enseignant"
+  const type_E = "Employée"
 
  
 
   return (
     <div>
-      <FormulaireTeacher  labels={labels} type_E={type_E}/>
+      <FormulaireEmployee  labels={labels} type_E={type_E}/>
     </div>
   );
 };
 
-export default AddTeacher;
+export default AddEmployee;

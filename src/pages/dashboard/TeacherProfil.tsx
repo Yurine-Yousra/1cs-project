@@ -6,7 +6,7 @@ import { BiDotsHorizontalRounded } from "react-icons/bi"
 import { PiNotePencil } from "react-icons/pi";
 const TeacherProfil = () => {
   return (
-    <div className=" px-4">
+    <div className=" px-8">
       <div >
         <h1 className='text-[20px] font-semibold text-[var(--color-yousra)] mb-4'>{`Détails D'enseigant`}</h1>
       </div>
@@ -70,11 +70,7 @@ const TeacherProfil = () => {
     <span className='font-[400]'>4 Heures</span>
     </div>
     </div>
-
-
   </div>
-
-
 </div>
 
 <div className="flex h-[130px] w-full shadow-lg rounded-lg overflow-hidden mb-4">
