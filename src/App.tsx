@@ -6,6 +6,9 @@ import Enseignants from "./pages/dashboard/Enseignants";
 import AddTeacher from "./pages/dashboard/AddTeacher";
 import TeacherProfil from "./pages/dashboard/TeacherProfil";
 import Eleve from "./pages/dashboard/Eleve";
+import AddEmployee from "./pages/dashboard/AddEmployee";
+import Employees from "./pages/dashboard/Employees";
+import GestionClass from "./pages/dashboard/GestionClass";
 function AppRoutes() {
   return (
     <Routes>
@@ -20,6 +23,10 @@ function AppRoutes() {
         <Route path="TeacherProfil" element={<TeacherProfil />} />
         <Route path="eleves" element={<Eleve />} />
         <Route path="*" element={<div>Page Not Found</div>} />
+        <Route path="employes" element={<Employees />} />
+        <Route path="addEmployee" element={<AddEmployee />} />
+        <Route path="gestion" element={<GestionClass />} />
+
       </Route>
       
     </Routes>

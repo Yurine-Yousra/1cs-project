@@ -2,9 +2,9 @@ import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { GrAddCircle } from "react-icons/gr"
 import SearchBar from "../../components/ui/SearchBar"
-import { DataTable } from "../../components/ui/TableData";
+import ClassCard from "../../components/ui/ClassTable";
 
- const Eleve = () => {
+ const GestionClass = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -48,7 +48,7 @@ import { DataTable } from "../../components/ui/TableData";
                             className="flex items-center gap-2 bg-yousra text-white px-4 py-2 rounded-4xl shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200"
     //                        onClick={() => navigate("/dashboard/addTeacher")}
                           >
-                              <span>Ajouter un Eleve</span>
+                                <span>Ajouter une classe</span>
                             <GrAddCircle /> 
                           </button>
                     
@@ -61,11 +61,11 @@ import { DataTable } from "../../components/ui/TableData";
             
             
             
-            
             </div>  
 
+            <ClassCard />
                                         
-            <DataTable />                        
+                                    
 
 
 
@@ -73,4 +73,4 @@ import { DataTable } from "../../components/ui/TableData";
     </main>
   )
 }
-export default Eleve
+export default GestionClass

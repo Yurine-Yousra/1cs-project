@@ -15,7 +15,7 @@ interface Label {
   }
   
 
-const Formulaire:React.FC<LabelsProps> = ({labels , type_E}) => {
+const FormulaireTeacher:React.FC<LabelsProps> = ({labels , type_E}) => {
 
   // List of Algerian cities
   const algerianCities = [
@@ -183,4 +183,4 @@ const Formulaire:React.FC<LabelsProps> = ({labels , type_E}) => {
   );
 };
 
-export default Formulaire;
+export default FormulaireTeacher;
