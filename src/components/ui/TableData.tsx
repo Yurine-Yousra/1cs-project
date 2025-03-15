@@ -1,4 +1,4 @@
-import {users} from "../../types/users.constant"
+import {users} from "../../constants/users.constant"
 
 
 export const DataTable = () => {

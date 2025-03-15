@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
   
   return (
     <div
-      className={`grid grid-cols-1 h-max-content text-black overflow-x-hidden relative ${
+      className={`grid grid-cols-1  text-black  relative ${
         (isAddTeacherPage || minimized) ? "lg:grid-cols-16" : "lg:grid-cols-5"
       }`}
     >
@@ -43,11 +43,11 @@ const Dashboard: React.FC = () => {
 
       {/* Sidebar */}
       <div
- className={`fixed lg:relative col-span-1 top-0 left-0 h-full flex flex-col items-start 
+ className={` lg:relative col-span-1   flex flex-col items-start 
   transition-all duration-300 
-  ${isSidebarOpen ? " min-w-[50%]" : " min-w-full"} lg:translate-x-0`}
+  ${isSidebarOpen ? " min-w-[40%]" : " min-w-full"} lg:translate-x-0`}
 >
-  <div className={isSidebarOpen ? " min-w-[50%]" : " min-w-full"} >
+  <div className={isSidebarOpen ? " min-w-[40%]" : " min-w-full"} >
     <SideBar minimized={minimized} setMinimized={setMinimized} />
   </div>
 </div>
@@ -61,7 +61,7 @@ const Dashboard: React.FC = () => {
         {/* Search Bar for "Enseignants" */}
         {isAddTeacherPage1 && <DashboardUpper />}
 
-        <div className="mt-10 h-screen overflow-y-auto">
+        <div className="mt-10 h-screen overflow-auto">
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
             <Route path="addTeacher" element={<AddTeacher />} />

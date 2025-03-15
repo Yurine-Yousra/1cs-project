@@ -1,5 +1,5 @@
 
-import { classes } from "../../types/users.constant";
+import { classes } from "../../constants/users.constant";
 
 const getBadgeColor = (type: string) => {
   switch (type) {

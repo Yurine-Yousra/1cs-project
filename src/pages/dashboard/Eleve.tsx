@@ -3,12 +3,14 @@ import { IoIosArrowDown } from "react-icons/io";
 import { GrAddCircle } from "react-icons/gr"
 import SearchBar from "../../components/ui/SearchBar"
 import { DataTable } from "../../components/ui/TableData";
+import AddEleve from "./AddEleve";
 
  const Eleve = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <main>
+ 
             <nav className="flex justify-between items-center px-10">
                 <h1 className="text-yousra text-3xl font-semibold"  >Listes des élèves</h1>
                 <div className="flex gap-4 items-center">
@@ -63,11 +65,11 @@ import { DataTable } from "../../components/ui/TableData";
             
             
             </div>  
-
-                                        
+                             
             <DataTable />                        
 
-
+              { //   <AddEleve />
+              }
 
         
     </main>

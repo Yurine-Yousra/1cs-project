@@ -17,7 +17,6 @@ interface Label {
 
 const FormulaireTeacher:React.FC<LabelsProps> = ({labels , type_E}) => {
 
-  // List of Algerian cities
   const algerianCities = [
     "Alger",
     "Oran",

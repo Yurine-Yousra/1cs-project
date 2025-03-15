@@ -34,7 +34,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized, setMinimized }) => {
   ];
 
   return (
-    <div className="h-screen w-[90%] m-auto">
+    <div className=" w-[97%] m-auto">
       {!isAddTeacherPage && !minimized && (
         <h1 className="text-xl font-bold mb-6 pl-20">Dirassati</h1>
       )}
@@ -52,7 +52,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized, setMinimized }) => {
             <img 
               src={sidebarArray[7].icon} 
               alt={sidebarArray[7].title} 
-              className={`w-6 h-6 transition-all ${
+              className={`w-8 h-8 transition-all ${
                 location.pathname.startsWith(sidebarArray[7].path) ? "filter brightness-0 invert" : ""
               }`}
             />
@@ -132,7 +132,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized, setMinimized }) => {
                 <img 
                   src={item.icon} 
                   alt={item.title} 
-                  className={`w-6 h-6 transition-all ${
+                  className={`w-10 h-10 transition-all ${
                     location.pathname.startsWith(item.path) ? "filter brightness-0 invert" : ""
                   }`}
                 />

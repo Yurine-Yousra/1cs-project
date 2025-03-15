@@ -9,12 +9,15 @@ import Eleve from "./pages/dashboard/Eleve";
 import AddEmployee from "./pages/dashboard/AddEmployee";
 import Employees from "./pages/dashboard/Employees";
 import GestionClass from "./pages/dashboard/GestionClass";
+import Home from "./pages/home/Home";
+import { Toaster } from "react-hot-toast";
 function AppRoutes() {
   return (
+    <>
     <Routes>
       <Route path="/register" element={<Registration />} />
       <Route path="/login" element={<Login />} />
-      
+      <Route path="/" element={<Home />} />
       {/* Dashboard with subroutes */}
       <Route path="/dashboard" element={<Dashboard />}>
         <Route index element={<Enseignants />} /> {/* Default route */}
@@ -30,6 +33,9 @@ function AppRoutes() {
       </Route>
       
     </Routes>
+    <Toaster />
+
+    </>
   );
 }
 
