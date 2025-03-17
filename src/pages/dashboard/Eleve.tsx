@@ -68,7 +68,7 @@ import AddEleve from "./AddEleve";
                              
             <DataTable />                        
 
-              { //   <AddEleve />
+              {   <AddEleve />
               }
 
         

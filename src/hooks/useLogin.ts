@@ -1,7 +1,8 @@
 import { useState } from "react"
 import toast from "react-hot-toast";
-import { useUserStore } from "../zustand/userStore";
+import { useUserStore } from "../store/userStore";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../lib/config";
 
 
 export const Uselogin = () => {
@@ -16,7 +17,7 @@ export const Uselogin = () => {
         setIsLoading(true)
         setErr(false);
             try {
-                const response = await fetch('http://localhost:5080/api/auth/login',{
+                const response = await fetch(`${API_URL}/api/auth/login`,{
                     method:"POST",
                     body:JSON.stringify({email,password}),
                     headers:{'Content-type':"application/json"},

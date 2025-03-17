@@ -1,5 +1,5 @@
-import Image1 from "../../assets/image.png";
-import Image2 from '../../assets/image copy 3.png';
+
+import { AuthImage1,AuthImage2 } from "../../assets";
 import AdminInfoForm from "../../components/AdminComponents/AdminInfosForm";
 import SchoolInfoForm from "../../components/SchoolInfosForm";
 import { FormEvent, useState } from "react";
@@ -66,7 +66,7 @@ function Registration() {
  
 
   return (
-    <div className="h-screen w-screen p-[50px] bg-[url('./assets/background.png')] bg-cover bg-center">
+    <div className="h-screen w-screen p-[50px] bg-[url('./assets/images/background.png')] bg-cover bg-center">
       <div className="container py-4 relative">
         <div className="absolute left-10 top-8">
           <h1 className="font-bold">LOGO</h1>
@@ -74,9 +74,9 @@ function Registration() {
         <div className="custom-container flex flex-col lg:flex-row items-center gap-10">
           <div className="hidden lg:block lg:w-[50%]">
             {!displayed ? (
-              <img src={Image1} alt="Illustration" className="w-[500px]" />
+              <img src={AuthImage1} alt="Illustration" className="w-[500px]" />
             ) : (
-              <img src={Image2} alt="Illustration" className="w-[500px]" />
+              <img src={AuthImage2} alt="Illustration" className="w-[500px]" />
             )}
           </div>
           <div className="lg:w-[50%] pl-10 flex flex-col gap-10">

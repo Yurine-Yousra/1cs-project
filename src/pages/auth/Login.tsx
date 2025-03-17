@@ -1,19 +1,19 @@
-import Image1 from '../../assets/image copy 2.png'
-import Logo from '../../assets/5895699245443434210.jpg'
+import { AuthImage3 ,Logo } from '../../assets';
 import { LoginForm } from '../../components/LoginForm';
+import { Link } from 'react-router-dom';
 
 
 function Login() {
 
   return (
-    <div className="h-screen w-screen p-[50px] bg-[url('./assets/background.png')] bg-cover bg-center">
+    <div className="h-screen w-screen p-[50px] bg-[url('./assets/images/background.png')] bg-cover bg-center">
       <div className="container py-4 relative">
         <div className="absolute left-10 top-1">
          <img src={Logo} alt="logo" width={250} />
         </div>
         <div className="custom-container flex flex-col lg:flex-row items-center gap-10">
           <div className="hidden lg:block lg:w-[50%]">
-          <img src={Image1} alt="Illustration"  className="w-[600px]"/>
+          <img src={AuthImage3} alt="Illustration"  className="w-[600px]"/>
           </div>
           <div className="lg:w-1/2 pl-10 h-[500px] flex flex-col gap-20 ">
             <div className="w-full">
@@ -24,7 +24,16 @@ function Login() {
               <div className="w-full flex flex-col gap-2">
                 <LoginForm />
               </div>
-
+              <p className="text-gray-700 mt-4">
+      Don't have an account?{" "}
+      <Link
+        to="/register"
+        className="text-blue-600 hover:underline hover:text-blue-800 transition duration-300"
+      >
+        Register here
+      </Link>
+      .
+    </p>
             </div>
           </div>
         </div>

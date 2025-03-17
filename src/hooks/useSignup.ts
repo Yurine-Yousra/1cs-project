@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../lib/config";
 
 
 
@@ -40,7 +41,7 @@ export const useSignup = () => {
     setErr(null);
 
     try {
-      const response = await fetch("http://localhost:5080/api/auth/register", {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

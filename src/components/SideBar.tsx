@@ -1,15 +1,8 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
-import Image1 from '../assets/image copy 6.png';
-import Image2 from '../assets/image copy 7.png';
-import Image3 from '../assets/image copy 8.png';
-import Image4 from '../assets/image copy 9.png';
-import Image5 from '../assets/image copy 15.png';
-import Image6 from '../assets/image copy 11.png';
-import Image7 from '../assets/image copy 12.png';
-import Image8 from '../assets/image copy 13.png';
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack ,IoIosArrowForward} from "react-icons/io";
+import { Image1,Image2,Image3,Image4,Image5,Image6,Image7,Image8 } from "../assets";
+
 
 interface SidebarProps {
   minimized: boolean;
