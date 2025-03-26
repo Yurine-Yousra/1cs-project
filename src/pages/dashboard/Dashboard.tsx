@@ -9,11 +9,15 @@ import DashboardUpper from "./DashboardUpper";
 import TeacherProfil from "./TeacherProfil";
 import Employees from "./Employees";
 import AddEmployee from "./AddEmployee";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const [minimized , setMinimized] = useState(false)
+  const [showArrow, setShowArrow] = useState(false);
 
   // Check if we are in the "addTeacher" route
   const isAddTeacherPage = ["addTeacher", "addEmployee"].some(substring =>
@@ -27,7 +31,7 @@ const Dashboard: React.FC = () => {
   return (
     <div
       className={`grid grid-cols-1 h-max-content text-black overflow-x-hidden relative ${
-        (isAddTeacherPage || minimized) ? "lg:grid-cols-16" : "lg:grid-cols-5"
+        (isAddTeacherPage || minimized) ? "lg:grid-cols-21" : "lg:grid-cols-5"
       }`}
     >
       {/* Mobile Menu Button */}
@@ -40,9 +44,40 @@ const Dashboard: React.FC = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:relative col-span-1 top-0 left-0 h-full flex flex-col items-start  transition-transform duration-300 
-        ${isSidebarOpen ? "translate-x-0 w-[50%]" : "-translate-x-full"} lg:translate-x-0`}
+        className={`relative col-span-1 top-0 left-0 h-full flex flex-col items-start  transition-transform duration-300  z-50  
+        ${isSidebarOpen ? "translate-x-0  bg-white" : "-translate-x-full"} lg:translate-x-0`}
+        onMouseEnter={() => setShowArrow(true)} onMouseLeave={() => setShowArrow(false)}
       >
+           
+           {showArrow && !minimized && (
+  <div
+    className="absolute -right-3 top-18 bg-white rounded-full cursor-pointer border border-gray-400 w-7 h-7 flex items-center justify-center shadow-2xl 
+               hover:bg-[var(--color-yousra)] transition duration-300 "
+    onClick={() => setMinimized(!minimized)}
+  >
+    <IoIosArrowBack
+      className="text-[var(--color-yousra)] font-bold hover:text-white transition duration-300" 
+      size={14} 
+    />
+  </div>
+)}
+
+
+{showArrow && minimized && (
+  <div
+    className="absolute -right-3 top-18 bg-white rounded-full cursor-pointer border border-gray-400 w-6 h-6 flex items-center justify-center shadow-2xl 
+               hover:bg-[var(--color-yousra)] transition duration-300"
+    onClick={() => setMinimized(!minimized)}
+  >
+    <IoIosArrowForward 
+      className="text-[var(--color-yousra)] font-bold hover:text-white transition duration-300" 
+      size={14} 
+    />
+  </div>
+)}
+
+
+
         <div className="w-full  fixed h-full overflow-hidden ">
           <SideBar minimized={minimized} setMinimized={setMinimized} />
         </div>
@@ -50,8 +85,8 @@ const Dashboard: React.FC = () => {
 
       {/* Content Area */}
       <div
-        className={`col-span-1 gap-10 mb-10 bg-[var(--color-sous)] ${
-          (isAddTeacherPage || minimized) ? "lg:col-span-15" : "lg:col-span-4"
+        className={`col-span-1 gap-10 mb-10  bg-[var(--color-sous)] ${
+          (isAddTeacherPage || minimized) ? "lg:col-span-20" : "lg:col-span-4"
         }`}
       >
         {/* Search Bar for "Enseignants" */}
