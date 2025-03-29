@@ -24,17 +24,18 @@ export const Uselogin = () => {
                 })
         
                 const json = await response.json();
-        
                 if(! response.ok){
                     setIsLoading(false);
                     setErr(json.error);
                 }
                 if (response.ok) {
                     // save the user to local storage
-                   // localStorage.setItem('user',JSON.stringify(json))
+                    localStorage.setItem('token',json.token)
                         toast.success("user Login succefully")
                         setUser(json);
                         document.cookie= `token=${json.token}`
+                        
+                       // console.log(user)
                         naviagte("/dashboard");
                 }
             } catch (error) {

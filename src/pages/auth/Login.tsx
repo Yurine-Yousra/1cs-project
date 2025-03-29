@@ -1,6 +1,6 @@
 import { AuthImage3 ,Logo } from '../../assets';
-import { LoginForm } from '../../components/LoginForm';
 import { Link } from 'react-router-dom';
+import { LoginForm } from '../../components/auth/LoginForm';
 
 
 function Login() {

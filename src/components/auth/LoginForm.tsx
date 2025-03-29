@@ -1,8 +1,8 @@
 import { MdClose, MdLockOutline, MdOutlineEmail } from "react-icons/md";
-import InputForm from "./ui/InputForm";
+import InputForm from "../ui/InputForm";
 import { FaRegEye, FaRegEyeSlash, FaSpinner } from "react-icons/fa";
 import { FormEvent, useState } from "react";
-import { Uselogin } from "../hooks/useLogin";
+import { Uselogin } from "../../hooks/useLogin";
 
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState<'password' | 'text'>('password');

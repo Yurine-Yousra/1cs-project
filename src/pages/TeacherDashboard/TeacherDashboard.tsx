@@ -2,21 +2,17 @@ import { useState } from "react";
 import { BiCloset } from "react-icons/bi";
 import { BiMenu } from "react-icons/bi";
 import { Routes, Route, useLocation } from "react-router-dom";
-import SideBar from "../../components/sideBars/SideBar";
-import Enseignants from "./Enseignants";
-import AddTeacher from "./AddTeacher";
+import Enseignants from "../dashboard/Enseignants";
 import DashboardUpper from "../../components/AdminComponents/DashboardUpper";
-import TeacherProfil from "./TeacherProfil";
-import  Eleves from "./Eleve";
-import Employees from "./Employees";
-import AddEmployee from "./AddEmployee";
-import GestionClass from "./GestionClass";
-
+import TeacherProfil from "../dashboard/TeacherProfil";
+import Employees from "../dashboard/Employees";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import Etablisment from "./Etablisment";
+import TeacherSideBar from "../../components/sideBars/TeacherSide";
+import Absence from "./Absence";
 
-const Dashboard: React.FC = () => {
+
+const TeacherDashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const [minimized , setMinimized] = useState(false)
@@ -82,7 +78,7 @@ const Dashboard: React.FC = () => {
 
 
         <div className="w-full  fixed h-full overflow-hidden ">
-          <SideBar minimized={minimized} setMinimized={setMinimized} />
+          <TeacherSideBar minimized={minimized} setMinimized={setMinimized} />
         </div>
       </div>
 
@@ -95,17 +91,12 @@ const Dashboard: React.FC = () => {
         {/* Search Bar for "Enseignants" */}
         {isAddTeacherPage1 && <DashboardUpper />}
 
-        <div className=" h-screen overflow-y-auto">
+        <div className="h-screen overflow-y-auto overflow-x-hidden">
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
-            <Route path="addTeacher" element={<AddTeacher />} />
-            <Route path="eleves"  element={<Eleves />} />
             <Route path="TeacherProfil" element={<TeacherProfil />} />
-            <Route path="*" element={<div>Page Not Found</div>} />
-            <Route path="employes" element={<Employees />} />
-            <Route path="addEmployee" element={<AddEmployee />} />
-            <Route path="gestion" element={<GestionClass />} />
-            <Route path="établisment" element={<Etablisment />} />
+            <Route path="eleves" element={<Absence />} />
+            <Route path="employees" element={<Employees />} />
           </Routes>
         </div>
       </div>
@@ -113,4 +104,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default TeacherDashboard;

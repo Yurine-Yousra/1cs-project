@@ -1,4 +1,5 @@
 import FormulaireStudent from "../../components/ui/FormulaireStudent";
+
 const AddEleve = () => {
   const labels = [
     { text: "Noms", type: "text", name: "nom", select: false },

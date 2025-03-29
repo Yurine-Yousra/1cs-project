@@ -1,7 +1,7 @@
 
 import { AuthImage1,AuthImage2 } from "../../assets";
 import AdminInfoForm from "../../components/AdminComponents/AdminInfosForm";
-import SchoolInfoForm from "../../components/SchoolInfosForm";
+import SchoolInfoForm from "../../components/auth/SchoolInfosForm";
 import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { SignupData } from "../../types/register.type";

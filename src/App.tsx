@@ -8,10 +8,15 @@ import TeacherProfil from "./pages/dashboard/TeacherProfil";
 import Eleve from "./pages/dashboard/Eleve";
 import AddEmployee from "./pages/dashboard/AddEmployee";
 import Employees from "./pages/dashboard/Employees";
-import GestionClass from "./pages/dashboard/GestionClass";
+import TeacherDashboard from './pages/TeacherDashboard/TeacherDashboard'
+import Absence from "./pages/TeacherDashboard/Absence";
+import Etablisment from "./pages/dashboard/Etablisment";
 import Home from "./pages/home/Home";
+import GestionClass from "./pages/dashboard/GestionClass";
 import { Toaster } from "react-hot-toast";
-function AppRoutes() {
+
+const App = () => {
+ 
   return (
     <>
     <Routes>
@@ -20,7 +25,7 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       {/* Dashboard with subroutes */}
       <Route path="/dashboard" element={<Dashboard />}>
-        <Route index element={<Enseignants />} /> {/* Default route */}
+        <Route index element={<Etablisment />} /> {/* Default route */}
         <Route path="enseignants" element={<Enseignants />} />
         <Route path="addTeacher" element={<AddTeacher />} />
         <Route path="TeacherProfil" element={<TeacherProfil />} />
@@ -30,6 +35,15 @@ function AppRoutes() {
         <Route path="addEmployee" element={<AddEmployee />} />
         <Route path="gestion" element={<GestionClass />} />
 
+        <Route path="établisment" element={<Etablisment />} />
+      </Route>
+
+      <Route path="/Teacherdashboard" element={<TeacherDashboard />}>
+        <Route index element={<Etablisment />} /> {/* Default route */}
+        <Route path="enseignants" element={<Enseignants />} />
+        <Route path="TeacherProfil" element={<TeacherProfil />} />
+        <Route path="eleves" element={<Absence />} />
+        <Route path="établisment" element={<Etablisment />} />
       </Route>
       
     </Routes>
@@ -39,4 +53,4 @@ function AppRoutes() {
   );
 }
 
-export default AppRoutes;
+export default App;

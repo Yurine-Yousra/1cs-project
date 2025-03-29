@@ -1,6 +1,6 @@
 import { GrAddCircle } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
-import EmployeeCard from "../../components/ui/EmployeeCard";
+import EmployeeCard from "../../components/cards/EmployeeCard";
 
 const Employees: React.FC = () => {
   const navigate = useNavigate();
