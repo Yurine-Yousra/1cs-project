@@ -16,23 +16,24 @@ export const Uselogin = () => {
         setIsLoading(true)
         setErr(false);
             try {
-                const response = await fetch('http://localhost:5000/api/login',{
+                const response = await fetch('http://localhost:5080/api/auth/login',{
                     method:"POST",
                     body:JSON.stringify({email,password}),
                     headers:{'Content-type':"application/json"},
                 })
         
                 const json = await response.json();
-        
                 if(! response.ok){
                     setIsLoading(false);
                     setErr(json.error);
                 }
                 if (response.ok) {
                     // save the user to local storage
-                   // localStorage.setItem('user',JSON.stringify(json))
+                    localStorage.setItem('token',json.token)
                         toast.success("user Login succefully")
                         setUser(json);
+                        
+                       // console.log(user)
                         naviagte("/dashboard");
                 }
             } catch (error) {

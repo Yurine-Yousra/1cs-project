@@ -1,4 +1,4 @@
-import FormulaireEmployee from "../../components/ui/FormulaireEmployee";
+import FormulaireEmployee from "../../components/forms/FormulaireEmployee";
 const AddEmployee = () => {
   const labels = [
     { text: "Nom*", type: "text", name: "nom", select: false },

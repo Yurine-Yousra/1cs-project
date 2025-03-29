@@ -1,34 +1,35 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
-import Image1 from '../assets/image copy 6.png';
-import Image2 from '../assets/image copy 7.png';
-import Image3 from '../assets/image copy 8.png';
-import Image4 from '../assets/image copy 9.png';
-import Image5 from '../assets/image copy 15.png';
-import Image6 from '../assets/image copy 11.png';
-import Image7 from '../assets/image copy 12.png';
-import Image8 from '../assets/image copy 13.png';
+import Image1 from '../../assets/image copy 6.png';
+import Image2 from '../../assets/image copy 7.png';
+import Image3 from '../../assets/image copy 8.png';
+import Image4 from '../../assets/image copy 9.png';
+import Image5 from '../../assets/image copy 15.png';
+import Image7 from '../../assets/image copy 12.png';
+import Image8 from '../../assets/image copy 13.png';
+
+
+
 
 interface SidebarProps {
   minimized: boolean;
   setMinimized: (value: boolean) => void;
 }
 
-const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
+const TeacherSideBar: React.FC<SidebarProps> = ({ minimized }) => {
   const location = useLocation();
   const isAddTeacherPage = ["addTeacher", "addEmployee"].some(substring =>
     location.pathname.includes(substring)
   );
 
   const sidebarArray = [
-    { path: "/dashboard/statistics", icon: Image2, title: "Statistiques" },
-    { path: "/dashboard/enseignants", icon: Image5, title: "Enseignants" },
-    { path: "/dashboard/eleves", icon: Image7, title: "Élèves" },
-    { path: "/dashboard/employes", icon: Image3, title: "Employés" },
-    { path: "/dashboard/gestion", icon: Image4, title: "Gestion des classes" },
-    { path: "/dashboard/examens", icon: Image8, title: "Planification" },
-    { path: "/dashboard/paiments", icon: Image6, title: "Paiments" },
-    { path: "/dashboard/etablissement", icon: Image1, title: "Etablissement" },
+    { path: "/Teacherdashboard/statistics", icon: Image2, title: "Statistiques" },
+    { path: "/Teacherdashboard/enseignants", icon: Image5, title: "Enseignants" },
+    { path: "/Teacherdashboard/eleves", icon: Image7, title: "Élèves" },
+    { path: "/Teacherdashboard/employes", icon: Image3, title: "Employés" },
+    { path: "/Teacherdashboard/gestion", icon: Image4, title: "Gestion des classes" },
+    { path: "/Teacherdashboard/examens", icon: Image8, title: "Planification" },
+    { path: "/Teacherdashboard/etablissement", icon: Image1, title: "Etablissement" },
   ];
 
   
@@ -42,7 +43,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
       {!isAddTeacherPage && !minimized && (
         <div className="mb-4 border-b-2 border-gray-300 pb-3" >
           <NavLink
-            to={sidebarArray[7].path}
+            to={sidebarArray[6].path}
             className={({ isActive }) =>
               `flex gap-2 items-center w-full p-2 rounded-lg cursor-pointer transition-all ${
                 isActive ? "bg-[var(--color-yousra)] text-white" : "hover:bg-gray-200"
@@ -50,13 +51,13 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
             }
           >
             <img 
-              src={sidebarArray[7].icon} 
-              alt={sidebarArray[7].title} 
+              src={sidebarArray[6].icon} 
+              alt={sidebarArray[6].title} 
               className={`w-6 h-6 transition-all ${
-                location.pathname.startsWith(sidebarArray[7].path) ? "filter brightness-0 invert" : ""
+                location.pathname.startsWith(sidebarArray[6].path) ? "filter brightness-0 invert" : ""
               }`}
             />
-            <span className="text-[14px] font-semibold">{sidebarArray[7].title}</span>
+            <span className="text-[14px] font-semibold">{sidebarArray[6].title}</span>
           </NavLink>
         </div>
       )}
@@ -65,7 +66,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
       {(!isAddTeacherPage && !minimized) && (
         <div className="relative">
           <ul className="flex flex-col items-start gap-3 font-semibold border-b-2 border-gray-300 ">
-            {sidebarArray.slice(0, 7).map((item, index) => (
+            {sidebarArray.slice(0, 6).map((item, index) => (
               <NavLink
                 key={index}
                 to={item.path}
@@ -88,7 +89,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
           </ul>
 
           {/* Settings & Logout */}
-          <ul className="flex flex-col items-start gap-2 font-semibold mt-10  w-full ">
+          <ul className="flex flex-col items-start gap-2 font-semibold mt-60  w-full ">
             <li className="flex gap-2 items-center w-full p-2 hover:bg-gray-200 rounded-md cursor-pointer text-red-500 ">
               <BiLogOut  size={24}/>
               <span>Se Déconnecter</span>
@@ -105,7 +106,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
 
 
           <NavLink
-            to={sidebarArray[7].path}
+            to={sidebarArray[6].path}
             className={({ isActive }) =>
               `flex gap-2 items-center w-full p-2 rounded-lg cursor-pointer transition-all ${
                 isActive ? "bg-[var(--color-yousra)] text-white" : "hover:bg-gray-200"
@@ -113,16 +114,16 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
             }
           >
             <img 
-              src={sidebarArray[7].icon} 
-              alt={sidebarArray[7].title} 
+              src={sidebarArray[6].icon} 
+              alt={sidebarArray[6].title} 
               className={`w-6 h-6 transition-all ${
-                location.pathname.startsWith(sidebarArray[7].path) ? "filter brightness-0 invert" : ""
+                location.pathname.startsWith(sidebarArray[6].path) ? "filter brightness-0 invert" : ""
               }`}
             />
           </NavLink>
 
         </div>
-            {sidebarArray.slice(0, 7).map((item, index) => (
+            {sidebarArray.slice(0, 6).map((item, index) => (
               <NavLink
                 key={index}
                 to={item.path}
@@ -144,7 +145,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
           </ul>
 
           {/* Settings & Logout */}
-          <ul className="flex flex-col items-start  font-semibold mt-10  w-[70%] m-auto">
+          <ul className="flex flex-col items-start  font-semibold mt-60  w-[70%] m-auto">
             <li className="flex gap-2 items-center w-full p-2 hover:bg-gray-200 rounded-md cursor-pointer text-red-500 ">
               <BiLogOut  size={24}/>
             </li>
@@ -155,4 +156,4 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
   );
 };
 
-export default SideBar;
+export default TeacherSideBar;

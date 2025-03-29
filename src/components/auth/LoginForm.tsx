@@ -1,8 +1,8 @@
 import { MdClose, MdLockOutline, MdOutlineEmail } from "react-icons/md";
-import InputForm from "./ui/InputForm";
+import InputForm from "../ui/InputForm";
 import { FaRegEye, FaRegEyeSlash, FaSpinner } from "react-icons/fa";
 import { FormEvent, useState } from "react";
-import { Uselogin } from "../hooks/useLogin";
+import { Uselogin } from "../../hooks/useLogin";
 
 export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState<'password' | 'text'>('password');
@@ -51,8 +51,8 @@ export const LoginForm = () => {
           value={label.value}
           onChange={handleChange}
           EyeIcon={label.eyeIcon} // password field
-          onClick={label.onClick} //  password field
-        />
+          onToggleVisibility={label.onClick} //  password field
+          />
       ))}
 
       <h1 className="font-poppins font-semibold text-[15px] leading-[22.5px] tracking-[0] ml-auto hover:underline cursor-pointer ">

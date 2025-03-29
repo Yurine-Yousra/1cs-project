@@ -1,13 +1,13 @@
 import { GrAddCircle } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
-import Card from "../../components/ui/TeacherCard";
+import Card from "../../components/cards/TeacherCard";
 
 const Enseignants: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <div>
-      <div className="w-[90%] p-4 m-auto  ">
+      <div className="w-[90%] p-4 m-auto">
 
         <div className="flex w-full justify-between items-center ">
           {/* Filtres */}
@@ -23,13 +23,13 @@ const Enseignants: React.FC = () => {
                 <option value="age">Âge</option>
               </select>
                 {/* Bouton Ajouter */}
-          <button
+         
+            </div> <button
             className="flex items-center gap-2 bg-[var(--color-yousra)] text-white px-4 py-2 rounded-full shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200"
             onClick={() => navigate("/dashboard/addTeacher")}
           >
             <span>Nouveau</span> <GrAddCircle />
           </button>
-            </div>
             </div>
           </div>  
         </div>
@@ -37,6 +37,22 @@ const Enseignants: React.FC = () => {
       {/* Grid of Cards */}
       <div className="w-[90%] m-auto grid grid-cols-3 gap-4">
         <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card /> <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card /> <Card />
         <Card />
         <Card />
         <Card />

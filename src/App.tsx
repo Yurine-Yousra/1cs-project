@@ -7,7 +7,12 @@ import AddTeacher from "./pages/dashboard/AddTeacher";
 import TeacherProfil from "./pages/dashboard/TeacherProfil";
 import AddEmployee from "./pages/dashboard/AddEmployee";
 import Employees from "./pages/dashboard/Employees";
-function AppRoutes() {
+import TeacherDashboard from './pages/TeacherDashboard/TeacherDashboard'
+import Absence from "./pages/TeacherDashboard/Absence";
+import Etablisment from "./pages/dashboard/Etablisment";
+
+const App = () => {
+ 
   return (
     <Routes>
       <Route path="/register" element={<Registration />} />
@@ -15,15 +20,24 @@ function AppRoutes() {
       
       {/* Dashboard with subroutes */}
       <Route path="/dashboard" element={<Dashboard />}>
-        <Route index element={<Enseignants />} /> {/* Default route */}
+        <Route index element={<Etablisment />} /> {/* Default route */}
         <Route path="enseignants" element={<Enseignants />} />
         <Route path="addTeacher" element={<AddTeacher />} />
         <Route path="TeacherProfil" element={<TeacherProfil />} />
         <Route path="employes" element={<Employees />} />
         <Route path="addEmployee" element={<AddEmployee />} />
+        <Route path="établisment" element={<Etablisment />} />
+      </Route>
+
+      <Route path="/Teacherdashboard" element={<TeacherDashboard />}>
+        <Route index element={<Etablisment />} /> {/* Default route */}
+        <Route path="enseignants" element={<Enseignants />} />
+        <Route path="TeacherProfil" element={<TeacherProfil />} />
+        <Route path="eleves" element={<Absence />} />
+        <Route path="établisment" element={<Etablisment />} />
       </Route>
     </Routes>
   );
 }
 
-export default AppRoutes;
+export default App;

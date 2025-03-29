@@ -1,6 +1,6 @@
 import Image1 from '../../assets/image copy 2.png'
 import Logo from '../../assets/5895699245443434210.jpg'
-import { LoginForm } from '../../components/LoginForm';
+import { LoginForm } from '../../components/auth/LoginForm';
 
 
 function Login() {

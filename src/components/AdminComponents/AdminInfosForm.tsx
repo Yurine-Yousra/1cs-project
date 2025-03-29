@@ -3,11 +3,10 @@ import { MdOutlineEmail } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import InputForm from "../ui/InputForm";
-import { FormEvent, useState  , useEffect} from "react";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import toast from "react-hot-toast";
-import { FiAlertTriangle } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { FaRegEye, FaRegEyeSlash, FaSpinner } from "react-icons/fa";
+import { useSignup } from "../../hooks/useSignup";
+
 
 interface AdminProps {
   setDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,6 +20,8 @@ interface AdminProps {
         confirm_pass: string,
   }>
   >;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
+
   adminInfos : {
     prénom: string,
     nom: string,
@@ -29,60 +30,17 @@ interface AdminProps {
     pass: string,
     confirm_pass: string,
   }
-  schoolInfos: {
-    Nom_détablissement: string;
-    Type_détablissement: string;
-    rue:string,
-    ville:string,
-      région:string,
-      code_postal : string,
-    Adresse_Email: string;
-    Numéro_de_Téléphone: string;
-  };
+
+
 }
 
-const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setAdminInfos  , schoolInfos}) => {
+const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setAdminInfos , handleSubmit }) => {
+
+
+{/*
    const [loading , setLoading] = useState<boolean>(false)
 const [error  ,  setError] = useState<boolean>(false)
-const [content , setContent] = useState({})
-const [message , setMessage] = useState("")
 const navigate = useNavigate()
-
-useEffect(() => {
-  if(adminInfos.pass !== adminInfos.confirm_pass){
-    setMessage("password mismatch")
-    console.log("password mismatch")
-  }
-  if (
-    Object.values(schoolInfos).every((value) => value.trim() !== "") &&
-    Object.values(adminInfos).every((value) => value.trim() !== "")  && adminInfos.pass == adminInfos.confirm_pass
-  ){
-    setContent({
-      school : {
-        schoolName:schoolInfos.Nom_détablissement ,
-        schoolType:schoolInfos.Type_détablissement ,
-        schoolEmail: schoolInfos.Adresse_Email ,
-        phoneNumber: schoolInfos.Numéro_de_Téléphone ,
-        address: {
-          street:schoolInfos.rue ,
-          city:  schoolInfos.ville,
-          state: schoolInfos.région ,
-          postalCode:schoolInfos.code_postal ,
-          country: "Algéria", 
-        }
-      },
-      employee : {
-        firstName: adminInfos.prénom ,
-        lastName: adminInfos.nom ,
-        email: adminInfos.email ,
-        phoneNumber: adminInfos.phone,
-        password: adminInfos.pass ,
-        permission: 0
-      }
-    }) }
-}, [adminInfos , schoolInfos , adminInfos.confirm_pass])
-
-
 const HandleRegistration = async(e :FormEvent<HTMLFormElement>) => {
   e.preventDefault()
   setLoading(true)
@@ -124,13 +82,13 @@ const HandleRegistration = async(e :FormEvent<HTMLFormElement>) => {
 
 return {loading,error}
 
-}
+}*/}
 
   // Password visibility state
   const [showPassword, setShowPassword] = useState(false);
 
- 
-
+  const {isLoading} = useSignup();
+  
   const ChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAdminInfos((prev) => ({
       ...prev,
@@ -142,7 +100,6 @@ return {loading,error}
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
-
 
   const labels = [
     { text: "Prénom", icon: BsPerson, type: "text", name: "prénom", value: adminInfos.prénom },
@@ -170,7 +127,7 @@ return {loading,error}
   ];
 
   return (
-    <form className="flex flex-col gap-4"  onSubmit={HandleRegistration}>
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit} >
       <div>
         {labels.map((label, index) => (
           <InputForm
@@ -186,7 +143,6 @@ return {loading,error}
           />
         ))}
       </div>
-      {message && <span><FiAlertTriangle />Password missmatch</span>}
 
       <div className="w-full flex items-center justify-between">
         <button
@@ -202,7 +158,10 @@ return {loading,error}
         <button
           className="flex items-center bg-[var(--color-secondary)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
         >
-          Créer
+           {isLoading ? <span className="flex items-center gap-2">
+                <FaSpinner className="animate-spin" /> Connexion en cours...
+              </span> : "CFréer"}
+          
         </button>
       </div>
     </form>

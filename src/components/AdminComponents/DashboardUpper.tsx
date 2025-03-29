@@ -1,4 +1,4 @@
-import SearchBar from "../../components/ui/SearchBar"
+import SearchBar from "../ui/SearchBar"
 import Image1 from '../../assets/image copy 4.png'
 
 

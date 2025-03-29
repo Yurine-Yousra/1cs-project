@@ -1,8 +1,11 @@
 import Image1 from "../../assets/image.png";
 import Image2 from '../../assets/image copy 3.png';
 import AdminInfoForm from "../../components/AdminComponents/AdminInfosForm";
-import SchoolInfoForm from "../../components/SchoolInfosForm";
-import { useState } from "react";
+import SchoolInfoForm from "../../components/auth/SchoolInfosForm";
+import { FormEvent, useState } from "react";
+import { Link } from "react-router-dom";
+import { SignupData } from "../../types/register.type";
+import { useSignup } from "../../hooks/useSignup";
 
 
 function Registration() {
@@ -29,9 +32,38 @@ function Registration() {
     confirm_pass: "",
   });
 
-  
+      const {signup} = useSignup();
 
-
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault(); 
+      const data: SignupData = {
+        school: {
+          schoolName: schoolInfos.Nom_détablissement,
+          schoolType: schoolInfos.Type_détablissement,
+          schoolEmail: schoolInfos.Adresse_Email,
+          phoneNumber: schoolInfos.Numéro_de_Téléphone,
+          address: {
+            street: schoolInfos.rue,
+            city: schoolInfos.ville,
+            state: schoolInfos.région,
+            postalCode: schoolInfos.code_postal,
+            country: "Algeria",
+          },
+        },
+        employee: {
+          firstName: adminInfos.prénom,
+          lastName: adminInfos.nom,
+          phoneNumber: adminInfos.phone,
+          email: adminInfos.email,
+          password: adminInfos.pass,
+          permission: 0,
+        },
+      };
+        await signup(data);
+        
+    
+    };
+ 
 
   return (
     <div className="h-screen w-screen p-[50px] bg-[url('./assets/background.png')] bg-cover bg-center">
@@ -61,9 +93,15 @@ function Registration() {
                 {!displayed ? (
                   <SchoolInfoForm setDisplayed={setDisplayed} setSchoolInfos={setSchoolInfos} schoolInfos={schoolInfos} />
                 ) : (
-                  <AdminInfoForm setDisplayed={setDisplayed} adminInfos={adminInfos} setAdminInfos={setAdminInfos} schoolInfos={schoolInfos}  />
+                  <AdminInfoForm setDisplayed={setDisplayed} adminInfos={adminInfos} setAdminInfos={setAdminInfos}  handleSubmit={handleSubmit} />
                 )}
               </div>
+              <Link
+          className="hover:underline font-bold ml-auto"
+          to={"/login"}
+        >
+          Already have acount!
+        </Link> 
             </div>
           </div>
         </div>

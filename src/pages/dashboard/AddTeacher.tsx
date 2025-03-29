@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import uploadFileToCloudinary from "../../config/UploadCloudinary";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
+
+interface Subject {
+    subjectId : string,
+    name : string
+}
+
 
 const AddTeacher = () => {
-    const algerianCities = ["Alger", "Oran", "Constantine", "Annaba", "Blida", "Batna", "Sétif", "Tlemcen", "Béjaïa", "Mostaganem"];
-
-    const matieres = ["Langue Arabe", "Langue Française", "Mathématiques", "Éducation Islamique", "Éducation Civique", "Sciences de la Nature et de la Vie", "Histoire et Géographie", "Éducation Artistique", "Éducation Physique et Sportive", "Langue Amazighe"];
 
     const [selectedMatieres, setSelectedMatieres] = useState<string[]>([]);
     const [fileText , setFileText] = useState("")
+    const [subjects , setSubjects] = useState<Subject []>([])
+    const [error , setError] = useState("")
+    const [loading , setLoading] = useState(false)
+    const navigate = useNavigate()
 
     const [teacher, setTeacher] = useState({
         nom: "",
@@ -15,11 +25,8 @@ const AddTeacher = () => {
         addresse: "",
         email: "",
         phone: "",
-        date: "",
-        lieu: "",
-        diplome: "",
+        file :"",
         date_début: "",
-        salaire: "",
         matière: [] as string[],
     });
 
@@ -27,9 +34,7 @@ const AddTeacher = () => {
         setTeacher({ ...teacher, [e.target.name]: e.target.value });
     };
 
-    const selectionHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setTeacher({ ...teacher, [e.target.name]: e.target.value });
-    };
+   
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -43,25 +48,89 @@ const AddTeacher = () => {
     };
 
     const handleMatieresChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      const matière = e.target.value;
-  
-      setSelectedMatieres((prevMatieres) => {
-          if (prevMatieres.includes(matière)) {
-              // If the subject already exists, remove it
-              return prevMatieres.filter((m) => m !== matière);
-          } else {
-              // If the subject doesn't exist, add it
-              return [...prevMatieres, matière];
-          }
-      });
-  
-      setTeacher((prev) => ({
-          ...prev,
-          matière: selectedMatieres.includes(matière)
-              ? selectedMatieres.filter((m) => m !== matière)
-              : [...selectedMatieres, matière],
-      }));
-  };
+        const matière = e.target.value;
+        setSelectedMatieres((prevMatieres) => {
+            const newMatieres = prevMatieres.includes(matière)
+                ? prevMatieres.filter((m) => m !== matière)
+                : [...prevMatieres, matière];
+    
+            setTeacher((prev) => ({ ...prev, matière: newMatieres }));
+            return newMatieres;
+        });
+    };
+    
+  console.log(teacher)
+  useEffect(() => {
+    const fetchUserData = async () => {
+        setLoading(true);
+        const token = localStorage.getItem("token"); 
+        try {
+            const response = await fetch("http://localhost:5080/api/Subjects/BySchoolLevel", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`, 
+                },
+            });
+            if (!response.ok) throw new Error("Failed to fetch subjects");
+            
+            const data = await response.json();
+            setSubjects(data.subjects);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "Unknown error");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    fetchUserData();
+}, []);
+
+
+const handelSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    const token = localStorage.getItem("token"); 
+
+    try {
+        const response = await fetch("http://localhost:5080/api/teacher/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`, 
+            },
+            body: JSON.stringify({
+                email: teacher.email,
+                firstName: teacher.prénom,
+                lastName: teacher.nom,
+                phoneNumber: teacher.phone,
+                hireDate: teacher.date_début,
+                contractTypeId :0 ,
+                subjectIds: teacher.matière,
+                schoolId:"3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                photo: teacher.file,
+                address: { fullAddress: teacher.addresse }
+            })
+        });
+
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Failed to create teacher");
+        }
+
+        toast.success("Teacher created successfully");
+        navigate('/dashboard');
+
+    } catch (error) {
+        toast.error(error instanceof Error ? error.message : "An error occurred");
+    } finally {
+        setLoading(false);
+    }
+};
+
+
+console.log(subjects)
   
 
     return (
@@ -110,22 +179,9 @@ const AddTeacher = () => {
                             <input type="text" name="phone" className="w-full rounded-[5px] h-[45px] border-gray-400 border-[2px] focus:border-[var(--color-secondary)] focus:outline-none pl-10" onChange={ChangeHandler} />
                         </div>
 
-                        <div>
-                            <label>Date & Lieu De Naissance*</label>
-                            <input type="date" name="date" className="w-full rounded-[5px] h-[45px] border-gray-400 border-[2px] focus:border-[var(--color-secondary)] focus:outline-none pl-10" onChange={ChangeHandler} />
-                        </div>
+                        
 
-                        <div>
-                            <label>Lieu</label>
-                            <select name="lieu" className="w-full rounded-[5px] h-[45px] border-gray-400 border-[2px] focus:border-[var(--color-secondary)] focus:outline-none pl-10" onChange={selectionHandler}>
-                                <option>Sélectionner une ville</option>
-                                {algerianCities.map((city, index) => (
-                                    <option key={index} value={city}>
-                                        {city}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -137,10 +193,7 @@ const AddTeacher = () => {
 
                 <div className="grid grid-cols-5 bg-white px-4 gap-10 rounded-br-[6px] rounded-bl-[6px] pb-6 pt-4">
                     <div className="col-span-2 flex flex-col gap-4 mb-10">
-                        <div>
-                            <label>Diplôme*</label>
-                            <input type="text" name="diplome" className="w-full rounded-[5px] h-[45px] border-gray-400 border-[2px] focus:border-[var(--color-secondary)] focus:outline-none pl-10" onChange={ChangeHandler} />
-                        </div>
+                        
 
                         <div>
                             <label>Date Début*</label>
@@ -152,13 +205,14 @@ const AddTeacher = () => {
                         <div>
                             <label>Matières enseignées</label>
                             <select multiple className="p-2 w-full rounded h-[100px] border-gray-400 border-[2px]" value={selectedMatieres} onChange={handleMatieresChange}>
-                                {matieres.map((matière, index) => (
-                                    <option key={index} value={matière}>
-                                        {matière}
+                                {subjects?.map((subject) => (
+                                    <option key={subject.subjectId} value={subject.subjectId}>
+                                        {subject.name}
                                     </option>
                                 ))}
                             </select>
                         </div>
+                        <button onClick={handelSubmit}>{loading ? "Loading" : "Submit"}</button>
                     </div>
                 </div>
             </div>
