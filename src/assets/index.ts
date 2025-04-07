@@ -24,3 +24,11 @@ import Logo from "./DirasstiLogo.jpg"
 import Background from "./images/background.png"
 // logo && background
 export {Logo,Background}
+
+//  Eleve page 
+import Matiere from "./icons/syllabus-svgrepo-com 1.png";
+import calendar from "./icons/calendar.png"
+import preson from "./icons/class-management-svgrepo-com 1.png"
+export {Matiere , calendar , preson}
+
+

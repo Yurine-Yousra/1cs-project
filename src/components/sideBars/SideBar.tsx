@@ -47,7 +47,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
             <img 
               src={sidebarArray[7].icon} 
               alt={sidebarArray[7].title} 
-              className={`w-8 h-8 transition-all ${
+              className={`w-6 h-6 transition-all ${
                 location.pathname.startsWith(sidebarArray[7].path) ? "filter brightness-0 invert" : ""
               }`}
             />
@@ -122,7 +122,7 @@ const SideBar: React.FC<SidebarProps> = ({ minimized }) => {
                 key={index}
                 to={item.path}
                 className={() =>
-                  `w-full p-2 rounded-lg cursor-pointer transition-all  ${
+                  `w-10 p-2  rounded-lg cursor-pointer transition-all  ${
                     location.pathname.startsWith(item.path) ? "bg-[var(--color-yousra)] text-white" : "hover:bg-gray-200"
                   }`
                 }

@@ -5,11 +5,15 @@ import SearchBar from "../../components/ui/SearchBar";
 import { DataTable } from "../../components/ui/TableData";
 import AddEleve from "./AddEleve";
 import { Link, useSearchParams } from "react-router-dom";
+import { CiCalendar, CiUser } from "react-icons/ci";
+import { MdOutlineEventNote } from "react-icons/md";
+
+
 
 const Eleve = () => {
   const [searchParams] = useSearchParams();
-  const [isOpen, setIsOpen] = useState(false);
-  const [tab, setTab] = useState("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [tab, setTab] = useState<string>("");
 
   useEffect(() => {
     setTab(searchParams.get("tab") || "");
@@ -29,7 +33,7 @@ const Eleve = () => {
     );
   } else {
     return (
-      <main>
+      <main className="mt-2">
         <nav className="flex justify-between items-center px-10">
           <h1 className="text-yousra text-3xl font-semibold">Listes des élèves</h1>
           <div className="flex gap-4 items-center">
@@ -48,7 +52,8 @@ const Eleve = () => {
 
         <div className="mt-10 px-10 flex justify-between">
           <SearchBar />
-          <div className="flex items-center gap-4">
+          {(tab === "" || tab === "class" )&& (
+            <div className="flex items-center gap-4">
             <div className="relative w-48">
               <select
                 id="filter-Eleve"
@@ -75,8 +80,42 @@ const Eleve = () => {
               </button>
             </Link>
           </div>
+          )}
+          
         </div>
-        <DataTable />
+        
+        <div className="px-10    mt-16 text-[#777777]">
+                <div className="flex gap-10 w-80   border-b">
+                {[{  
+                  link:"class",
+                  icon:<CiUser size={20} />
+                }
+                ,{
+                  link:"matieres",
+                  icon:<MdOutlineEventNote size={20} />
+                }
+                ,{
+                  link:"temps",
+                  icon:<CiCalendar size={20} />
+
+                }
+              ].map((tabs) => (
+                  <Link to={`?tab=${tabs.link}`} 
+                  className={`flex items-center gap-1 hover:text-yousra  ${tab === tabs.link && "text-yousra font-semibold"} hover:shadow-2xl hover:cursor-pointer hover:scale-125 transition-all duration-200`}
+                  >
+                    {tabs.icon}
+                    <span>{tabs.link} </span>
+                  </Link>
+
+                ))}
+                 </div>
+        </div>
+
+
+          { (tab === "class" || tab ==="" ) &&  <DataTable /> }
+          { (tab === "matieres" &&  <h1> comming soone  </h1> )}
+          { (tab === "temps" &&  <h1> not yet  </h1> )}
+
       </main>
     );
   }
