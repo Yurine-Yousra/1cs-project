@@ -39,6 +39,7 @@ export const useSignup = () => {
   }) => {
     setIsLoading(true);
     setErr(null);
+    console.log(data)
 
     try {
       const response = await fetch(`${API_URL}/api/auth/register`, {
@@ -47,7 +48,7 @@ export const useSignup = () => {
         body: JSON.stringify({
           school: {
             schoolName: data.school.schoolName,
-            schoolType: data.school.schoolType,
+            schoolTypeId: 2,
             schoolEmail: data.school.schoolEmail,
             phoneNumber: data.school.phoneNumber,
             address: {
@@ -55,8 +56,9 @@ export const useSignup = () => {
               city: data.school.address.city,
               state: data.school.address.state,
               postalCode: data.school.address.postalCode,
-              country: data.school.address.country,
+              country: data.school.address.country
             },
+          specializationsId: []
           },
           employee: {
             firstName: data.employee.firstName,
@@ -70,7 +72,6 @@ export const useSignup = () => {
       });
 
       const json = await response.json();
-
       if (!response.ok) {
         throw new Error(json.error || "Something went wrong");
       }

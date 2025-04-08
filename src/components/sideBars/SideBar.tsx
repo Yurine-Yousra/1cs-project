@@ -40,7 +40,8 @@ export default function Sidebar() {
         {sidebarArray.map((item,index) => {
           const IconComponent = iconMap[item.icon as keyof typeof iconMap];
           const isActive = location.pathname === item.path;
-          const isEtablisment = index === 0;
+         // const isEtablisment = index === 0;
+//               ${  isEtablisment ? "font-bold h-20 text-xl bg-indigo-100 ":"" }
 
           return (
             <Link
@@ -49,7 +50,6 @@ export default function Sidebar() {
               className={`flex items-center w-[94%] rounded-md mx-auto px-4 py-3 text-gray-700  ${
                 isActive ? "text-white bg-yousra" : "hover:bg-indigo-100 "
               }
-               ${  isEtablisment ? "font-bold h-20 text-xl bg-indigo-100 ":"" }
               `}
             >
               <span className="w-6 h-6 mr-3">

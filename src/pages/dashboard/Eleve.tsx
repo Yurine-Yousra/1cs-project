@@ -7,7 +7,7 @@ import AddEleve from "./AddEleve";
 import { Link, useSearchParams } from "react-router-dom";
 import { CiCalendar, CiUser } from "react-icons/ci";
 import { MdOutlineEventNote } from "react-icons/md";
-import CoursesList from "../../components/CoursesList";
+import CoursesList from "../../components/AdminComponents/CoursesList";
 
 
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import SubjectCard from "./cards/subject-card";
-import NewSubjectForm, { Subject } from "./forms/new-sbuject-form";
+import SubjectCard from "../cards/subject-card";
+import NewSubjectForm, { Subject } from "../forms/new-sbuject-form";
 
 
 
