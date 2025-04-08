@@ -11,21 +11,14 @@ import  Eleves from "./Eleve";
 import Employees from "./Employees";
 import AddEmployee from "./AddEmployee";
 import GestionClass from "./GestionClass";
-
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
 import Etablisment from "./Etablisment";
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
-  const [minimized , setMinimized] = useState(false)
-  const [showArrow, setShowArrow] = useState(false);
 
-  // Check if we are in the "addTeacher" route
-  const isAddTeacherPage = ["addTeacher", "addEmployee"].some(substring =>
-    location.pathname.includes(substring)
-  );
+
+  
 
   const isAddTeacherPage1 = ["employes" , "enseignants"].some(substring =>
     location.pathname.includes(substring)
@@ -33,11 +26,8 @@ const Dashboard: React.FC = () => {
   
   return (
     <div
-      className={`grid grid-cols-1 h-max-content text-black overflow-x-hidden relative ${
-        (isAddTeacherPage || minimized) ? "lg:grid-cols-21" : "lg:grid-cols-5"
-      }`}
+      className={`flex  text-black  `}
     >
-      {/* Mobile Menu Button */}
       <button
         className="lg:hidden fixed top-4 right-4 z-50 bg-gray-800 p-2 rounded-md"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -45,57 +35,14 @@ const Dashboard: React.FC = () => {
         {isSidebarOpen ? <BiCloset size={24} /> : <BiMenu size={24} />}
       </button>
 
-      {/* Sidebar */}
+      <SideBar  />
+
+
       <div
-        className={`relative col-span-1 top-0 left-0 h-full flex flex-col items-start  transition-transform duration-300  z-50  
-        ${isSidebarOpen ? "translate-x-0  bg-white" : "-translate-x-full"} lg:translate-x-0`}
-        onMouseEnter={() => setShowArrow(true)} onMouseLeave={() => setShowArrow(false)}
+        className={` w-full   bg-sous `}
       >
-           
-           {showArrow && !minimized && (
-  <div
-    className="absolute -right-3 top-18 bg-white rounded-full cursor-pointer border border-gray-400 w-7 h-7 flex items-center justify-center shadow-2xl 
-               hover:bg-[var(--color-yousra)] transition duration-300 "
-    onClick={() => setMinimized(!minimized)}
-  >
-    <IoIosArrowBack
-      className="text-[var(--color-yousra)] font-bold hover:text-white transition duration-300" 
-      size={14} 
-    />
-  </div>
-)}
-
-
-{showArrow && minimized && (
-  <div
-    className="absolute -right-3 top-18 bg-white rounded-full cursor-pointer border border-gray-400 w-6 h-6 flex items-center justify-center shadow-2xl 
-               hover:bg-[var(--color-yousra)] transition duration-300"
-    onClick={() => setMinimized(!minimized)}
-  >
-    <IoIosArrowForward 
-      className="text-[var(--color-yousra)] font-bold hover:text-white transition duration-300" 
-      size={14} 
-    />
-  </div>
-)}
-
-
-
-        <div className="w-full   h-full overflow-hidden ">
-          <SideBar minimized={minimized} setMinimized={setMinimized} />
-        </div>
-      </div>
-
-      {/* Content Area */}
-      <div
-        className={`col-span-1 gap-10 mb-10  bg-[var(--color-sous)] ${
-          (isAddTeacherPage || minimized) ? "lg:col-span-20" : "lg:col-span-4"
-        }`}
-      >
-        {/* Search Bar for "Enseignants" */}
         {isAddTeacherPage1 && <DashboardUpper />}
-
-        <div className=" h-screen overflow-y-auto">
+        <div className=" ">
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
             <Route path="addTeacher" element={<AddTeacher />} />
@@ -105,7 +52,7 @@ const Dashboard: React.FC = () => {
             <Route path="employes" element={<Employees />} />
             <Route path="addEmployee" element={<AddEmployee />} />
             <Route path="gestion" element={<GestionClass />} />
-            <Route path="établisment" element={<Etablisment />} />
+            <Route path="etablisment" element={<Etablisment />} />
           </Routes>
         </div>
       </div>

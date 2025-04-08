@@ -36,8 +36,8 @@ const FormulaireStudent:React.FC<LabelsProps> = ({labels , type_E}) => {
   ]
 
   return (
-    <div className=" w-[90%] m-auto mb-10">
-      <h1 className="font-semibold text-[var(--color-yousra)] text-[18px] mb-6">Ajouter un {type_E}</h1>
+    <div className=" w-[90%] m-auto mb-10 mt-5">
+      <h1 className="font-semibold text-[var(--color-yousra)] text-[18px]  mb-6">Ajouter un {type_E}</h1>
       <div className="flex flex-col">
         {/* Header */}
         <div className="h-[60px] bg-[var(--color-yousra)] rounded-tl-[24px] rounded-tr-[24px]">

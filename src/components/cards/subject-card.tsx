@@ -16,7 +16,7 @@ export default function SubjectCard({ title, teacher, coefficient, hours, color 
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+    <div className="bg-white rounded-lg  shadow-sm overflow-hidden">
       <div className="flex items-stretch">
         <div className={`w-2 ${colorClasses[color]}`}></div>
         <div className="flex-1 p-4">

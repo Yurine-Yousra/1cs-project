@@ -53,5 +53,19 @@ export const users = Array(8).fill({
       average: "vide",
       averageType: "neutral",
       count: 9,
-    },
+    },{
+      name: "1ere Scientifique - S1",
+      teacher: "mohammed mohammed",
+      students: 17,
+      average: "14.20",
+      averageType: "success",
+      count: 14,
+    },{
+      name: "1ere Scientifique - S1",
+      teacher: "mohammed mohammed",
+      students: 17,
+      average: "14.20",
+      averageType: "success",
+      count: 14,
+    }
   ];

@@ -1,10 +1,21 @@
+import { useState } from "react";
 import {users} from "../../constants/users.constant"
+import Pagination from "./Pagination";
 
 
 export const DataTable = () => {
+  const [currentPage, setCurrentPage] = useState(3)
+  const totalPages = 12
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    console.log(`Navigated to page ${page}`)
+    // Here you would typically fetch data for the new page
+  }
+
   return (
-    <div className="p-4 px-10 mt-5">
-      <div className="overflow-x-auto">
+    <div className="py-2 px-10 mt-5">
+      <div className="">
         <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden ">
           <thead className="bg-blue-100 text-gray-600 text-sm uppercase">
             <tr>
@@ -37,7 +48,10 @@ export const DataTable = () => {
             ))}
           </tbody>
         </table>
-      </div>
+       
+        <div className="mt-5 flex items-center justify-center bg-gray-50">
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+    </div>          </div>
     </div>
   );
 };

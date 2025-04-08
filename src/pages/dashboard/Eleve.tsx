@@ -24,7 +24,7 @@ const Eleve = () => {
     return (
       <main className="">
         <Link to="" className="">
-          <button className=" ml-18 mt-1 flex items-center gap-2 bg-yousra text-white px-4 py-2 rounded-4xl shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200">
+          <button className=" ml-18 mt-5   flex items-center gap-2 bg-yousra text-white px-4 py-2 rounded-4xl shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200">
             <IoMdArrowBack size={20} />
             <span>Back </span>
           </button>
@@ -34,7 +34,7 @@ const Eleve = () => {
     );
   } else {
     return (
-      <main className="mt-2">
+      <main className="mt-2 h-screen  ">
         <nav className="flex justify-between items-center px-10">
           <h1 className="text-yousra text-3xl font-semibold">Listes des élèves</h1>
           <div className="flex gap-4 items-center">
@@ -85,7 +85,7 @@ const Eleve = () => {
           
         </div>
         
-        <div className="px-10    mt-16 text-[#777777]">
+        <div className="px-10    mt-12 text-[#777777]">
                 <div className="flex gap-10 w-80   border-b">
                 {[{  
                   link:"class",
@@ -115,7 +115,7 @@ const Eleve = () => {
 
           { (tab === "class" || tab === "" ) &&  <DataTable /> }
           { (tab === "matieres" &&  <CoursesList /> )}
-          { (tab === "temps" &&  <h1> not yet  </h1> )}
+          { (tab === "temps" &&  <h1 className="mt-5 px-10"> not yet  </h1> )}
 
       </main>
     );
