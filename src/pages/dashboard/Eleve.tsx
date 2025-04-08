@@ -7,6 +7,7 @@ import AddEleve from "./AddEleve";
 import { Link, useSearchParams } from "react-router-dom";
 import { CiCalendar, CiUser } from "react-icons/ci";
 import { MdOutlineEventNote } from "react-icons/md";
+import CoursesList from "../../components/CoursesList";
 
 
 
@@ -101,7 +102,7 @@ const Eleve = () => {
                 }
               ].map((tabs) => (
                   <Link to={`?tab=${tabs.link}`} 
-                  className={`flex items-center gap-1 hover:text-yousra  ${tab === tabs.link && "text-yousra font-semibold"} hover:shadow-2xl hover:cursor-pointer hover:scale-125 transition-all duration-200`}
+                  className={`flex items-center gap-1 hover:text-yousra  ${( tab === tabs.link  || (tab === "" && tabs.link==="class") ) && "text-yousra font-semibold"} hover:shadow-2xl hover:cursor-pointer hover:scale-125 transition-all duration-200`}
                   >
                     {tabs.icon}
                     <span>{tabs.link} </span>
@@ -112,8 +113,8 @@ const Eleve = () => {
         </div>
 
 
-          { (tab === "class" || tab ==="" ) &&  <DataTable /> }
-          { (tab === "matieres" &&  <h1> comming soone  </h1> )}
+          { (tab === "class" || tab === "" ) &&  <DataTable /> }
+          { (tab === "matieres" &&  <CoursesList /> )}
           { (tab === "temps" &&  <h1> not yet  </h1> )}
 
       </main>
