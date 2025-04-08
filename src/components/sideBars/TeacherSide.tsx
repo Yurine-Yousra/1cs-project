@@ -23,7 +23,7 @@ const TeacherSideBar: React.FC<SidebarProps> = ({ minimized }) => {
   );
 
   const sidebarArray = [
-    { path: "/Teacherdashboard/statistics", icon: Image2, title: "Statistiques" },
+    { path: "/Teacherdashboard/profile", icon: Image2, title: "profile" },
     { path: "/Teacherdashboard/enseignants", icon: Image5, title: "Enseignants" },
     { path: "/Teacherdashboard/eleves", icon: Image7, title: "Élèves" },
     { path: "/Teacherdashboard/employes", icon: Image3, title: "Employés" },
