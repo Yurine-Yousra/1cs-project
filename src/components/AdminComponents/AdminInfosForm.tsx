@@ -3,9 +3,10 @@ import { MdOutlineEmail } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import InputForm from "../ui/InputForm";
-import PostFunction from "../../LinkFunctions/Post";
-import { useState } from "react";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FormEvent, useState } from "react";
+import { FaRegEye, FaRegEyeSlash, FaSpinner } from "react-icons/fa";
+import { useSignup } from "../../hooks/useSignup";
+
 
 interface AdminProps {
   setDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,6 +20,7 @@ interface AdminProps {
         confirm_pass: string,
   }>
   >;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
 
   adminInfos : {
     prénom: string,
@@ -29,27 +31,71 @@ interface AdminProps {
     confirm_pass: string,
   }
 
-   content : {
-    Nom_détablissement : string,
-    Type_détablissement : string ,
-    Adress : string ,
-    Adresse_Email : string ,
-    Numéro_de_Téléphone :  string ,
-    prénom: string ,
-    nom:  string,
-    phone: string  ,
-    email: string ,
-    pass:  string,
-    confirm_pass: string  ,
-  }
-
 
 }
 
+<<<<<<< HEAD
 const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setAdminInfos , content}) => {
   // Password visibility state
   const [showPassword, setShowPassword] = useState(false);
 
+=======
+const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setAdminInfos , handleSubmit }) => {
+
+
+{/*
+   const [loading , setLoading] = useState<boolean>(false)
+const [error  ,  setError] = useState<boolean>(false)
+const navigate = useNavigate()
+const HandleRegistration = async(e :FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  setLoading(true)
+  setError(false)
+  if (!content) {
+    toast.error("Formulaire incomplet !");
+    return;
+  }
+  try{
+  const response = await fetch('http://localhost:5080/api/auth/register' , {
+    method:"POST",
+    body:JSON.stringify(content),
+    headers:{'Content-type' : "application/json"}
+  })
+
+  const json = await response.json()
+  if(!response.ok){
+    setLoading(false)
+    setError(json.error)
+  }
+
+  if(response.ok){
+    toast.success("school created succesfully")
+    navigate("/login")
+  }
+  }
+  catch(error){
+    if (error instanceof Error) {
+      toast.error(` ${error.message}`)
+      setError(true)
+  } else {
+      toast.error("An unknown error occurred")
+      setError(true)
+}   
+  }
+  finally{
+    setLoading(false);
+}
+
+return {loading,error}
+
+}*/}
+
+  // Password visibility state
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {isLoading} = useSignup();
+  
+>>>>>>> main
   const ChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAdminInfos((prev) => ({
       ...prev,
@@ -88,7 +134,7 @@ const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setA
   ];
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={() => PostFunction("url" , content)}>
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit} >
       <div>
         {labels.map((label, index) => (
           <InputForm
@@ -119,7 +165,10 @@ const AdminInfoForm: React.FC<AdminProps> = ({ setDisplayed  , adminInfos , setA
         <button
           className="flex items-center bg-[var(--color-secondary)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
         >
-          Créer
+           {isLoading ? <span className="flex items-center gap-2">
+                <FaSpinner className="animate-spin" /> Connexion en cours...
+              </span> : "CFréer"}
+          
         </button>
       </div>
     </form>

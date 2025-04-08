@@ -3,6 +3,9 @@
 @theme {
   --color-primary: hsla(233, 80%, 71%, 1);
   --color-secondary: hsla(232, 39%, 36%, 1);
+  --color-yousra  :hsla(245, 45%, 49%, 1);
+  --color-sous : hsla(235, 100%, 98%, 1);
+  --color-error:#DC2626;
   --font-body: 'Inter', sans-serif;
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
@@ -10,6 +13,7 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
   --font-primary: 'Poppins', sans-serif;
+ 
 }
 
 
@@ -55,3 +59,14 @@
     align-items: center;
   }
 }
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
