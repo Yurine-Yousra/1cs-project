@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { BiCloset } from "react-icons/bi";
-import { BiMenu } from "react-icons/bi";
+import { useState , useEffect} from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import SideBar from "../../components/sideBars/SideBar";
 import Enseignants from "./Enseignants";
@@ -12,18 +10,15 @@ import Employees from "./Employees";
 import AddEmployee from "./AddEmployee";
 import GestionClass from "./GestionClass";
 import Etablisment from "./Etablisment";
+import { BiCloset, BiMessageRoundedMinus } from "react-icons/bi";
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const location = useLocation();
+//  const location = useLocation();
 
 
   
 
-  const isAddTeacherPage1 = ["employes" , "enseignants"].some(substring =>
-    location.pathname.includes(substring)
-  );
-  
   return (
     <div
       className={`flex  text-black  `}
@@ -32,7 +27,7 @@ const Dashboard: React.FC = () => {
         className="lg:hidden fixed top-4 right-4 z-50 bg-gray-800 p-2 rounded-md"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        {isSidebarOpen ? <BiCloset size={24} /> : <BiMenu size={24} />}
+        {isSidebarOpen ? <BiCloset size={24} /> : <BiMessageRoundedMinus size={24} />}
       </button>
 
       <SideBar  />
@@ -41,7 +36,7 @@ const Dashboard: React.FC = () => {
       <div
         className={` w-full   bg-sous `}
       >
-        {isAddTeacherPage1 && <DashboardUpper />}
+        { <DashboardUpper />}
         <div className=" ">
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />

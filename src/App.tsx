@@ -14,6 +14,7 @@ import Etablisment from "./pages/dashboard/Etablisment";
 import Home from "./pages/home/Home";
 import GestionClass from "./pages/dashboard/GestionClass";
 import { Toaster } from "react-hot-toast";
+import Profil from "./pages/TeacherDashboard/Profil";
 
 const App = () => {
  
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="TeacherProfil" element={<TeacherProfil />} />
         <Route path="eleves" element={<Absence />} />
         <Route path="établisment" element={<Etablisment />} />
+        <Route path="profile" element={<Profil />} />
       </Route>
       
     </Routes>

@@ -347,12 +347,6 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
 
 </div>
 
-
-
-
-
-
-
 <div className="flex flex-col items-start gap-1" >
   <label htmlFor="" className="text-sm font-medium text-gray-700">
   Adresse Email
@@ -390,13 +384,6 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
     />
   </div>
 </div>
-
-
-
-
-
-
-
 
       </div>
 
