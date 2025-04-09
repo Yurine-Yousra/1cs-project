@@ -14,6 +14,7 @@ const TeacherDashboard: React.FC = () => {
   const [showArrow, setShowArrow] = useState(false);
   const location = useLocation();
 
+
   const isAddTeacherPage1 = ["employes", "enseignants"].some(substring =>
     location.pathname.includes(substring)
   );
