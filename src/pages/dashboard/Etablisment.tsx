@@ -1,5 +1,6 @@
 import Profile from "../../components/ui/profile"
-import Image1 from '../../assets/image copy 2.png'
+import Image1 from '../../assets/images/image copy 2.png'
+
 import { BiPlus } from "react-icons/bi"
 import { LuPhone } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";

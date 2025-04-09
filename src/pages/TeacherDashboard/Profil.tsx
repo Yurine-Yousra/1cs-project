@@ -1,4 +1,4 @@
-import Image1 from '../../assets/image copy 2.png';
+import Image1 from '../../assets/images/image copy 2.png';
 import React, { useState } from 'react';
 
 const Profil = () => {
