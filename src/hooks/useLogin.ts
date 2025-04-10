@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "../lib/config";
 
 import {jwtDecode} from 'jwt-decode';  // Correct import
+import { useRoleStore } from "../store/utls";
 
 export const Uselogin = () => {
     const [err, setErr] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const navigate = useNavigate();
+    const {role} = useRoleStore()
     
     // Define interface for the decoded token
     interface DecodedToken {
@@ -26,8 +28,10 @@ export const Uselogin = () => {
     const login = async (email: string, password: string): Promise<void> => {
         setIsLoading(true);
         setErr(false);
+
+        const endpoint = role === "admin" ? "api/auth/login" :"api/teacher/auth/login"
         try {
-            const response = await fetch(`${API_URL}/api/auth/login`, {
+            const response = await fetch(`${API_URL}/${endpoint}`, {
                 method: "POST",
                 body: JSON.stringify({ email, password }),
                 headers: { 'Content-type': "application/json" },

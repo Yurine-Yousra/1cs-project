@@ -14,10 +14,17 @@ import {
   Building,
   Menu,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react"
-import { IshakLogo } from "../../assets"
+import { IshakLogo, LogowithoutText } from "../../assets"
 
-export default function Sidebar() {
+interface SidebarProps {
+  isCollapsed: boolean;
+  setIsCollapsed: (value: boolean) => void;
+}
+
+export default function Sidebar({isCollapsed,setIsCollapsed}:SidebarProps) {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -43,6 +50,25 @@ export default function Sidebar() {
     }
   }, [isOpen])
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsCollapsed(true)
+      } 
+      else{
+        setIsCollapsed(false);
+      }
+    }
+  
+    // Call it once on mount
+    handleResize()
+  
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [setIsCollapsed])
+  
   // Close sidebar when route changes on mobile
   useEffect(() => {
     setIsOpen(false)
@@ -72,6 +98,10 @@ export default function Sidebar() {
     { path: "/dashboard/paiments", icon: "Image6", title: "Paiments" },
   ]
 
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed)
+  }
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -90,20 +120,28 @@ export default function Sidebar() {
       <aside
         id="sidebar"
         className={`
-          fixed xl:static bg-white border-r border-gray-200 h-screen z-30
-          w-[280px] md:w-[70px] xl:w-[280px] transition-all duration-300 ease-in-out
+          fixed bg-white border-r border-gray-200 h-screen z-30
+          transition-all duration-300 ease-in-out
           ${isOpen ? "left-0" : "-left-[280px]"} md:left-0
-          flex flex-col
+          flex flex-col overflow-hidden
+          ${isCollapsed ? "w-[85px]" : "w-[280px]"}
         `}
       >
-        <div className="p-4 md:p-2 xl:p-6 flex justify-center md:justify-center xl:justify-start">
-          <img src={IshakLogo} alt="Logo" className="w-36 md:w-36 xl:w-48" />
+        <div className="p-4 md:p-4  flex  justify-center md:justify-center xl:justify-start">
+          {isCollapsed ? (
+            <img src={LogowithoutText || "/placeholder.svg"} alt="Logo without text" className="w-24 " />
+          ) : (
+            <img src={IshakLogo || "/placeholder.svg"} alt="Logo with text" className="w-48" />
+          )}
         </div>
 
         <nav className="flex flex-col gap-1.5 overflow-y-auto flex-grow">
-          {sidebarArray.map((item) => {
+          {sidebarArray.map((item, index) => {
             const IconComponent = iconMap[item.icon as keyof typeof iconMap]
             const isActive = location.pathname === item.path
+            const isActiveAdd =
+              (location.pathname === "/dashboard/addTeacher" && index === 2) ||
+              (location.pathname === "/dashboard/addEmployee" && index === 4)
 
             return (
               <Link
@@ -111,30 +149,47 @@ export default function Sidebar() {
                 to={item.path}
                 className={`
                   flex items-center rounded-md mx-auto px-4 py-3 text-gray-700
-                  md:justify-center xl:justify-start
-                  w-[94%] md:w-[90%] xl:w-[94%]
-                  ${isActive ? "text-white bg-yousra" : "hover:bg-indigo-100"}
+                  ${isCollapsed ? "justify-center" : "justify-start w-[94%]"}
+                  
+                  ${isActive || isActiveAdd ? "text-white bg-yousra" : "hover:bg-indigo-100"}
                 `}
               >
-                <span className="w-6 h-6 mr-3 md:mr-0 xl:mr-3 flex-shrink-0">
-                  <IconComponent size={20} />
+                <span className={`w-6 h-6 ${isCollapsed ? "mr-0" : "mr-3"} flex-shrink-0`}>
+                  <IconComponent size={24} />
                 </span>
-                <span className="truncate md:hidden xl:inline">{item.title}</span>
+                {!isCollapsed && <span className="truncate">{item.title}</span>}
               </Link>
             )
           })}
         </nav>
 
-        <div className="p-4 mt-auto">
+        <Link 
+          to={"/"}
+        className="p-4 mt-auto">
           <button
-            className="flex items-center text-error hover:bg-red-50 rounded-md px-4 py-3 hover:text-red-700 transition-colors
-  md:justify-center xl:justify-start
-  w-[94%] md:w-[90%] xl:w-[94%] mx-auto"
+            className={`
+              flex items-center text-error hover:bg-red-50 rounded-md px-4 py-3 hover:text-red-700 transition-colors
+              ${isCollapsed ? "justify-center" : "justify-start"}
+              w-[94%] mx-auto
+            `}
           >
-            <LogOut className="w-5 h-5 mr-2 md:mr-0 xl:mr-2 flex-shrink-0" />
-            <span className="md:hidden xl:inline">Se deconnecter</span>
+            <LogOut className={`w-5 h-5 ${isCollapsed ? "mr-0" : "mr-2"} flex-shrink-0`} />
+            {!isCollapsed && <span>Se deconnecter</span>}
           </button>
-        </div>
+        </Link>
+
+        {/* Collapse Toggle Button */}
+        <button
+  onClick={toggleCollapse}
+  className="fixed top-15 left-[270px] z-40 hidden md:inline-block hover:bg-yousra hover:text-white bg-white border border-gray-200 rounded-full p-1 shadow-md transition-all duration-300"
+  style={{ left: isCollapsed ? "73px" : "266px" }}
+>
+  {isCollapsed ? (
+    <ChevronRight size={16} />
+  ) : (
+    <ChevronLeft size={16} />
+  )}
+</button>
       </aside>
     </>
   )

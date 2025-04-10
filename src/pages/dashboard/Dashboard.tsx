@@ -9,10 +9,12 @@ import Employees from "./Employees";
 import AddEmployee from "./AddEmployee";
 import GestionClass from "./GestionClass";
 import Etablisment from "./Etablisment";
+import { useState } from "react";
 
 const Dashboard: React.FC = () => {
 //  const location = useLocation();
 
+  const [isCollapsed, setIsCollapsed] = useState(false)
 
   
 
@@ -22,11 +24,11 @@ const Dashboard: React.FC = () => {
     >
      
 
-      <SideBar  />
+      <SideBar  isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
 
 
       <div
-        className={` w-full   bg-sous `}
+        className={` w-full  flex-1 md:ml-[86px] ${! isCollapsed ? "xl:ml-[280px]":"xl:ml-[85px]"}  h-screen bg-sous `}
       >
         {  /* <DashboardUpper /> */}
         <div className=" ">
@@ -35,7 +37,7 @@ const Dashboard: React.FC = () => {
             <Route path="addTeacher" element={<AddTeacher />} />
             <Route path="eleves"  element={<Eleves />} />
             <Route path="TeacherProfil" element={<TeacherProfil />} />
-            <Route path="*" element={<div>Page Not Found</div>} />
+            <Route path="*" element={<div className="">Page Not Found</div>} />
             <Route path="employes" element={<Employees />} />
             <Route path="addEmployee" element={<AddEmployee />} />
             <Route path="gestion" element={<GestionClass />} />

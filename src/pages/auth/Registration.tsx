@@ -1,10 +1,10 @@
 
-import { AuthImage1,AuthImage2 } from "../../assets";
+import { AuthImage1,AuthImage2, IshakLogo } from "../../assets";
 import AdminInfoForm from "../../components/AdminComponents/AdminInfosForm";
 import SchoolInfoForm from "../../components/auth/SchoolInfosForm";
 import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { SignupData } from "../../types/register.type";
+import { SchoolInfo, SignupData } from "../../types/register.type";
 import { useSignup } from "../../hooks/useSignup";
 
 
@@ -12,9 +12,9 @@ function Registration() {
   const [displayed, setDisplayed] = useState(false);
   
 
-  const [schoolInfos, setSchoolInfos] = useState({
+  const [schoolInfos, setSchoolInfos] = useState<SchoolInfo>({
     Nom_détablissement: "",
-    Type_détablissement: "",
+    Type_détablissement: "Primaire",
     rue:"",
     ville:"",
     région:"",
@@ -69,7 +69,7 @@ function Registration() {
     <div className="h-screen w-screen p-[50px] bg-[url('./assets/images/background.png')] bg-cover bg-center">
       <div className="container py-4 relative">
         <div className="absolute left-10 top-8">
-          <h1 className="font-bold">LOGO</h1>
+        <img src={IshakLogo} alt="logo" width={250} />
         </div>
         <div className="custom-container flex flex-col lg:flex-row items-center gap-10">
           <div className="hidden lg:block lg:w-[50%]">

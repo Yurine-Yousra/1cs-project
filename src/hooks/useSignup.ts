@@ -2,9 +2,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../lib/config";
-
-
-
+import { getSchoolLevelCode } from "../utils/schoolLevels";
+import { SchoolLevelName } from "../types/register.type";
 
 
 
@@ -17,7 +16,7 @@ export const useSignup = () => {
   const signup = async (data: { 
     school: {
       schoolName: string;
-      schoolType: string;
+      schoolType: SchoolLevelName;
       schoolEmail: string;
       phoneNumber: string;
       address: {
@@ -48,7 +47,7 @@ export const useSignup = () => {
         body: JSON.stringify({
           school: {
             schoolName: data.school.schoolName,
-            schoolTypeId: 2,
+            schoolTypeId: getSchoolLevelCode(data.school.schoolType),
             schoolEmail: data.school.schoolEmail,
             phoneNumber: data.school.phoneNumber,
             address: {

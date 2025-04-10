@@ -3,7 +3,6 @@ import FormulaireStudent from "../../components/ui/FormulaireStudent";
 const AddEleve = () => {
   const labels = [
     { text: "Noms", type: "text", name: "nom", select: false },
-    { text: "Adresse Email*", type: "email", name: "email", select: false },
     { text: "Adresse*", type: "text", name: "addresse", select: false },
     { text: "Année*", type: "number", name: "année", select: false },
     { text: "Prénom* ", type: "text", name: "prénom", select: false },

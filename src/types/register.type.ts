@@ -1,3 +1,18 @@
+
+export type SchoolLevelName = 'Primaire' | 'Moyenne' | 'Secondaire';
+export type SchoolLevelCode = 1 | 2 | 3;
+
+export interface SchoolInfo {
+  Nom_détablissement: string;
+  Type_détablissement: SchoolLevelName; // This is now strictly typed
+  rue: string;
+  ville: string;
+  région: string;
+  code_postal: string;
+  Adresse_Email: string;
+  Numéro_de_Téléphone: string;
+}
+
 interface Address {
     street: string;
     city: string;
@@ -8,7 +23,7 @@ interface Address {
   
   interface School {
     schoolName: string;
-    schoolType: string;
+    schoolType: SchoolLevelName;
     schoolEmail: string;
     phoneNumber: string;
     address: Address;

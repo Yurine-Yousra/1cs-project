@@ -6,13 +6,14 @@ import { RiSchoolLine, RiBookOpenLine } from "react-icons/ri";
 import { FaCity } from "react-icons/fa"; // Icône pour Ville
 import { MdOutlineMap } from "react-icons/md"; // Icône pour Région
 import { FaMapPin } from "react-icons/fa"; // Icône pour Code postal
+import { SchoolLevelName } from "../../types/register.type";
 
 interface SchoolProps {
   setDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
   setSchoolInfos: React.Dispatch<
     React.SetStateAction<{
       Nom_détablissement: string;
-      Type_détablissement: string;
+      Type_détablissement: SchoolLevelName;
       rue:string,
       ville:string,
       région:string,

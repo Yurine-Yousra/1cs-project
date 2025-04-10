@@ -7,9 +7,10 @@ import Image6 from './icons/image copy 11.png';
 import Image7 from './icons/image copy 12.png';
 import Image8 from './icons/image copy 13.png';
 import IshakLogo from './6028568452496737456.jpg'
+import LogowithoutText from "./6028507751723943309.jpg"
 // sidebar
 export {
-    Image1,Image2,Image3,Image4,Image5,Image6,Image7,Image8,IshakLogo
+    Image1,Image2,Image3,Image4,Image5,Image6,Image7,Image8,IshakLogo,LogowithoutText
 }
 
 import AuthImage1 from "./images/image copy 2.png";

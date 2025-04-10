@@ -8,8 +8,8 @@ import ClassCard from "../../components/ui/ClassTable";
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <main>
-            <nav className="flex justify-between items-center px-10">
+    <main className=" w-[90%] m-auto mt-5">
+            <nav className="flex justify-between items-center  px-10">
                 <h1 className="text-yousra text-3xl font-semibold"  >Listes des élèves</h1>
                 <div className="flex gap-4 items-center">
                     <span>
