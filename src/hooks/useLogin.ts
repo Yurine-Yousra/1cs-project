@@ -22,6 +22,7 @@ export const Uselogin = () => {
         SchoolId: string;
         exp: number;
         iat: number;
+        SchoolTypeId:string;
         Permission:string,
     }
 
@@ -57,12 +58,13 @@ export const Uselogin = () => {
                
                     localStorage.setItem('SchoolId' ,decoded.SchoolId)
                   localStorage.setItem('role' ,decoded.Permission)
+                  localStorage.setItem('shool',decoded.SchoolTypeId)
                 
 
                 toast.success("User logged in successfully");
 
                 // Redirect to the dashboard
-                navigate("/dashboard");
+                navigate("/dashboard/statistics");
             }
         } catch (error) {
             if (error instanceof Error) {

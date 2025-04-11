@@ -3,11 +3,11 @@ import { IoIosArrowDown, IoMdArrowBack } from "react-icons/io";
 import { GrAddCircle } from "react-icons/gr";
 import SearchBar from "../../components/ui/SearchBar";
 import { DataTable } from "../../components/ui/TableData";
-import AddEleve from "./AddEleve";
 import { Link, useSearchParams } from "react-router-dom";
 import { CiCalendar, CiUser } from "react-icons/ci";
 import { MdOutlineEventNote } from "react-icons/md";
 import CoursesList from "../../components/AdminComponents/CoursesList";
+import StudentForm from "../../components/forms/StudentForm";
 
 
 
@@ -29,7 +29,7 @@ const Eleve = () => {
             <span>Back </span>
           </button>
         </Link>
-        <AddEleve />
+        <StudentForm />
       </main>
     );
   } else {

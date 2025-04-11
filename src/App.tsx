@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Registration from "./pages/auth/Registration";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -25,7 +25,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Home />} />
       {/* Dashboard with subroutes */}
-      <Route path="/dashboard" element={<Dashboard />}>
+      <Route path="/dashboard" element={ <ProtectedRoute><Dashboard /></ProtectedRoute> }>
         <Route index element={<Etablisment />} /> {/* Default route */}
         <Route path="enseignants" element={<Enseignants />} />
         <Route path="addTeacher" element={<AddTeacher />} />
@@ -56,3 +56,19 @@ const App = () => {
 }
 
 export default App;
+
+
+
+
+
+
+const ProtectedRoute: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+  const token = localStorage.getItem("token");
+  if (token)
+  return children;
+  else 
+  return <Navigate to='/login' replace />;
+
+
+
+};

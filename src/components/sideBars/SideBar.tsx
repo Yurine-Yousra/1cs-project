@@ -165,7 +165,11 @@ export default function Sidebar({isCollapsed,setIsCollapsed}:SidebarProps) {
 
         <Link 
           to={"/"}
-        className="p-4 mt-auto">
+        className="p-4 mt-auto"
+          onClick={() => {
+            localStorage.clear();              
+          }}
+        >
           <button
             className={`
               flex items-center text-error hover:bg-red-50 rounded-md px-4 py-3 hover:text-red-700 transition-colors
