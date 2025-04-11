@@ -1,26 +1,21 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-//import { useUserStore } from "../store/userStore"; wiil use later
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../lib/config";
-
-import {jwtDecode} from 'jwt-decode';  // Correct import
+import { jwtDecode } from 'jwt-decode';
 
 export const Uselogin = () => {
     const [err, setErr] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const navigate = useNavigate();
     
-    // Define interface for the decoded token
     interface DecodedToken {
         sub: string;
         email: string;
-        firstName: string;
-        lastName: string;
         SchoolId: string;
+        role: string; // This will be "Teacher" or whatever role you set
         exp: number;
-        iat: number;
-        Permission:string,
+        // Add other claims you include in your token
     }
 
     const login = async (email: string, password: string): Promise<void> => {
@@ -30,48 +25,48 @@ export const Uselogin = () => {
             const response = await fetch(`${API_URL}/api/auth/login`, {
                 method: "POST",
                 body: JSON.stringify({ email, password }),
-                headers: { 'Content-type': "application/json" },
+                headers: { 'Content-Type': "application/json" },
             });
 
             const json = await response.json();
 
             if (!response.ok) {
                 setIsLoading(false);
-                setErr(json.error);
+                setErr(json.error || "Login failed");
+                toast.error(json.error || "Login failed");
                 return;
             }
 
-            if (response.ok) {
-                // Decode the JWT token after successful login
-                const decoded: DecodedToken = jwtDecode(json.token);
-                console.log(decoded)
-              
-                // Save the token in local storage
-                localStorage.setItem('token', json.token);
+            // Decode the JWT token
+            const decoded: DecodedToken = jwtDecode(json.token);
+            console.log("Decoded token:", decoded);
 
-                // Set the decoded user info to the store
-               
-                    localStorage.setItem('SchoolId' ,decoded.SchoolId)
-                  localStorage.setItem('role' ,decoded.Permission)
-                
+            // Save token and user data
+            localStorage.setItem('token', json.token);
+            localStorage.setItem('userRole', decoded.role);
+            localStorage.setItem('schoolId', decoded.SchoolId);
+            localStorage.setItem('userId', decoded.sub);
 
-                toast.success("User logged in successfully");
-
-                // Redirect to the dashboard
-                navigate("/dashboard");
-            }
-        } catch (error) {
-            if (error instanceof Error) {
-                toast.error(` ${error.message}`);
-                setErr(true);
+            // Redirect based on role
+            if (decoded.role === "Teacher") {
+                toast.success("Teacher logged in successfully");
+                navigate("/teacher-dashboard");
+            } else if (decoded.role === "Employee") {
+                toast.success("Employee logged in successfully");
+                navigate("/employee-dashboard");
             } else {
-                toast.error("An unknown error occurred");
-                setErr(true);
+                toast.error("Unknown user role");
+                navigate("/");
             }
+
+        } catch (error) {
+            console.error("Login error:", error);
+            toast.error(error instanceof Error ? error.message : "Login failed");
+            setErr(true);
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
-    return { login, isLoading, err }
-}
+    return { login, isLoading, err };
+};
