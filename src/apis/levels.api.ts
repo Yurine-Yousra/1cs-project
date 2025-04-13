@@ -13,6 +13,11 @@ export interface Relationship {
     name:string;
 }  
 
+export interface Specializations {
+     specializationId: number;
+    name: string
+}
+
 
 export const getLevels = async() => {
     try {
@@ -41,4 +46,17 @@ export const getRelationship = async () => {
 }
 
 
+export const getSpecializations = async () => {
+    try {
+        const res =  await fetch(`${API_URL}/api/Levels/specializations`);
+        const json:Specializations[] = await res.json();
+        return json;
+    } catch (error) {
+        toast.error("Failed to fetch Realtionship:")
+        return []
+    }
+
+
+
+}
 

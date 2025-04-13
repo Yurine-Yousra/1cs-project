@@ -2,8 +2,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../lib/config";
-import { getSchoolLevelCode } from "../utils/schoolLevels";
 import { SchoolLevelName } from "../types/register.type";
+import { getSchoolLevelCode } from "../utils/schoolLevels";
 
 
 
@@ -46,19 +46,26 @@ export const useSignup = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           school: {
-            schoolName: data.school.schoolName,
+            name: data.school.schoolName,
             schoolTypeId: getSchoolLevelCode(data.school.schoolType),
-            schoolEmail: data.school.schoolEmail,
+            email: data.school.schoolEmail,
             phoneNumber: data.school.phoneNumber,
-            address: {
+            Address: {
               street: data.school.address.street,
               city: data.school.address.city,
-              state: data.school.address.state,
+              State: data.school.address.state,
               postalCode: data.school.address.postalCode,
               country: data.school.address.country
             },
-          specializationsId: []
-          },
+          specializationsId: [],
+          logo: "",
+          websiteUrl: "",
+          academicYear: {
+      startDate: "2025-04-12",
+      endDate: "2025-04-12"
+    }
+        },
+          
           employee: {
             firstName: data.employee.firstName,
             lastName: data.employee.lastName,

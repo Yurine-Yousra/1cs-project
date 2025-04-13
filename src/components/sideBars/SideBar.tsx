@@ -87,7 +87,7 @@ export default function Sidebar({isCollapsed,setIsCollapsed}:SidebarProps) {
   // Sidebar links array
   const sidebarArray = [
     { path: "/dashboard/etablisment", icon: "Image1", title: "Etablissement" },
-    { path: "/dashboard/statistics", icon: "Image2", title: "Statistiques" },
+    { path: "/dashboard", icon: "Image2", title: "Statistiques" },
     { path: "/dashboard/enseignants", icon: "Image5", title: "Enseignants" },
     { path: "/dashboard/eleves", icon: "Image7", title: "Élèves" },
     { path: "/dashboard/employes", icon: "Image3", title: "Employés" },

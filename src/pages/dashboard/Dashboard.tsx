@@ -10,6 +10,7 @@ import AddEmployee from "./AddEmployee";
 import GestionClass from "./GestionClass";
 import Etablisment from "./Etablisment";
 import { useState } from "react";
+import Statistic from "./Statistic";
 
 const Dashboard: React.FC = () => {
 //  const location = useLocation();
@@ -42,6 +43,7 @@ const Dashboard: React.FC = () => {
             <Route path="addEmployee" element={<AddEmployee />} />
             <Route path="gestion" element={<GestionClass />} />
             <Route path="etablisment" element={<Etablisment />} />
+            <Route path="" element={<Statistic />} />
           </Routes>
         </div>
       </div>

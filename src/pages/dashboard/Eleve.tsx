@@ -22,7 +22,7 @@ const Eleve = () => {
 
   if (tab === "addEleve") {
     return (
-      <main className="">
+      <main className="bg-sous py-10">
         <Link to="" className="">
           <button className=" ml-18 mt-5    flex items-center gap-2 bg-yousra text-white px-4 py-2 rounded-4xl shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200">
             <IoMdArrowBack size={20} />
@@ -35,7 +35,7 @@ const Eleve = () => {
   } else {
     return (
       <main className="mt-2  w-[90%] m-auto ">
-        <nav className="flex justify-between items-center px-10">
+        <nav className="flex justify-between items-center px-10 ">
           <h1 className="text-yousra text-3xl font-semibold">Listes des élèves</h1>
           <div className="flex gap-4 items-center">
             <span>

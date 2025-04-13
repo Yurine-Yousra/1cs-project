@@ -64,7 +64,7 @@ export const Uselogin = () => {
                 toast.success("User logged in successfully");
 
                 // Redirect to the dashboard
-                navigate("/dashboard/statistics");
+                navigate("/dashboard");
             }
         } catch (error) {
             if (error instanceof Error) {

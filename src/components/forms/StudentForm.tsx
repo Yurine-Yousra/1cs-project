@@ -1,30 +1,10 @@
-"use client"
 
 import type React from "react"
 import { useState, useRef, type FormEvent, useEffect } from "react"
-import { getLevels, getRelationship, Levels, Relationship } from "../../hooks/levels.api"
+import { getLevels, getRelationship, getSpecializations, Levels, Relationship, Specializations } from "../../apis/levels.api"
+import { algerianCities } from "../../constants/information.constant"
+import { StudentFormData, useCreateStudent } from "../../hooks/useCreateStudent"
 
-interface StudentFormData {
-  studentInfosDTO: {
-    firstName: string
-    lastName: string
-    address: string
-    birthDate: string
-    birthPlace: string
-    emergencyContact: string
-    schoolLevelId: number
-    specializationId: number
-  }
-  parentInfosDTO: {
-    nationalIdentityNumber: string
-    firstName: string
-    lastName: string
-    email: string
-    relationshipToStudentId: number
-    occupation: string
-    phoneNumber: string
-  }
-}
 
 
 
@@ -34,7 +14,7 @@ const StudentForm: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [levels,setLevel] = useState<Levels[]>([]);
   const [relation,setReltion] = useState<Relationship[]>([]);
-
+  const [schoolLevels,setSchoolLevel] = useState<Specializations[]>([]);
   const [formData, setFormData] = useState<StudentFormData>({
     studentInfosDTO: {
       firstName: "",
@@ -43,7 +23,7 @@ const StudentForm: React.FC = () => {
       birthDate: "",
       birthPlace: "",
       emergencyContact: "",
-      schoolLevelId: 10,
+      schoolLevelId: 12,
       specializationId: 1,
     },
     parentInfosDTO: {
@@ -56,6 +36,7 @@ const StudentForm: React.FC = () => {
       phoneNumber: "",
     },
   })
+  const {createStudent, loading} = useCreateStudent();
 
   useEffect(() => {
     const fetchData = async () => { 
@@ -73,10 +54,17 @@ const StudentForm: React.FC = () => {
     fetchData()
   },[])
   
+  useEffect(() => {
+    const fetchData = async () => {
+        const data = await getSpecializations();
+       
+          setSchoolLevel(data);
+      } 
+    if (Number(localStorage.getItem("shool")) === 3){
+        fetchData()
+    }
 
-
-
-
+  },[])
 
 
 
@@ -98,7 +86,7 @@ const StudentForm: React.FC = () => {
         ...formData.studentInfosDTO,
         [name]: name === "schoolLevelId" || name === "specializationId" ? Number.parseInt(value) : value,
       },
-    })
+    })     
   }
 
   const handleParentChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -110,25 +98,23 @@ const StudentForm: React.FC = () => {
         [name]: name === "relationshipToStudentId" ? Number.parseInt(value) : value,
       },
     })
+    
   }
 
-  const handleSubmit =  (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-  
-  
+    
+    await createStudent(formData);
     console.log(JSON.stringify(formData, null, 2))
   
-    // Here you would send the data to your backend
-    alert("Form submitted successfully!")
   }
 
-
   return (
-    <div className="w-full max-w-6xl mx-auto ">
+    <div className="w-full max-w-7xl bg-sous h-full mx-auto ">
    
       <h1 className="text-2xl font-bold mb-6">Ajouter un Eleve</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         {/* Student Information Section */}
         <div className="bg-white rounded-lg shadow-md mb-6 overflow-hidden">
           <div className="bg-yousra text-white px-6 py-4">
@@ -254,41 +240,30 @@ const StudentForm: React.FC = () => {
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yousra"
                       required
                     />
-                    <svg
-                      className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
+                  
                   </div>
                 </div>
 
-                {/* Birth Place */}
-                <div>
-                  <label htmlFor="birthPlace" className="block text-gray-700 text-sm font-bold mb-2">
-                    Lieu De Naissance*
-                  </label>
-                  <input
-                    id="birthPlace"
-                    name="birthPlace"
-                    type="text"
-                    value={formData.studentInfosDTO.birthPlace}
-                    onChange={handleStudentChange}
-                    placeholder="Enter value..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yousra"
-                    required
-                  />
-                </div>
-
-                {/* Emergency Contact */}
+        {/* Birth Place */}
+<div>
+  <label htmlFor="birthPlace" className="block text-gray-700 text-sm font-bold mb-2">
+    Lieu De Naissance*
+  </label>
+  <select
+    id="birthPlace"
+    name="birthPlace"
+    value={formData.studentInfosDTO.birthPlace}
+    onChange={handleStudentChange}
+    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yousra"
+    required
+  >
+    <option value="" disabled>Choisir une ville</option>
+    {algerianCities.map((city, index) => (
+      <option key={index} value={city}>{city}</option>
+    ))}
+  </select>
+</div>
+      {/* Emergency Contact */}
                 <div>
                   <label htmlFor="emergencyContact" className="block text-gray-700 text-sm font-bold mb-2">
                     Numéro De Téléphone*
@@ -305,31 +280,11 @@ const StudentForm: React.FC = () => {
                   />
                 </div>
 
-                {/* School Level */}
-                {/* <div>
-                  <label htmlFor="schoolLevelId" className="block text-gray-700 text-sm font-bold mb-2">
-                    Classe*
-                  </label>
-                  <select
-                    id="schoolLevelId"
-                    name="schoolLevelId"
-                    value={formData.studentInfosDTO.schoolLevelId}
-                    onChange={handleStudentChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yousra"
-                    required
-                  >
-                    {schoolLevels.map((level) => (
-                      <option key={level.id} value={level.id}>
-                        {level.name}
-                      </option>
-                    ))}
-                  </select>
-                </div> */}
-
-                {/* Specialization */}
+              
+                {/* Level */}
                 <div>
                   <label htmlFor="specializationId" className="block text-gray-700 text-sm font-bold mb-2">
-                    Spécialisation*
+                    Année*
                   </label>
                   <select
                     id="specializationId"
@@ -342,10 +297,39 @@ const StudentForm: React.FC = () => {
                     {levels.map((spec) => (
                       <option key={spec.levelId} value={spec.levelId}>
                         {spec.levelYear} {spec.levelYear === 1 ? "ére":"éme"} 
+                        
                       </option>
                     ))}
                   </select>
                 </div>
+                  {/* Specialization */}
+                  { Number(localStorage.getItem("shool")) ===3 && <div>
+                  <label htmlFor="schoolLevelId" className="block text-gray-700 text-sm font-bold mb-2">
+                    Classe*
+                  </label>
+                  <select
+                    id="schoolLevelId"
+                    name="schoolLevelId"
+                    value={formData.studentInfosDTO.schoolLevelId}
+                    onChange={handleStudentChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yousra"
+                    required
+                  >
+                    {
+  (
+    formData.studentInfosDTO.specializationId === 10
+      ? schoolLevels.slice(0, 2)
+      : schoolLevels.slice(2)
+  ).map((level) => (
+    <option key={level.specializationId} value={level.specializationId}>
+      {level.name}
+    </option>
+  ))
+}
+
+                  </select>
+                </div> }
+
               </div>
             </div>
           </div>
@@ -491,12 +475,13 @@ const StudentForm: React.FC = () => {
 
         {/* Submit Button */}
         <div className="flex justify-end">
-          <button
-            type="submit"
-            className="px-6 py-2 bg-yousra text-white font-medium rounded-md hover:bg-yousra focus:outline-none focus:ring-2 focus:ring-yousra focus:ring-offset-2"
-          >
-            Submit
-          </button>
+        <button
+        type="submit"
+        className="px-6 py-2 bg-yousra text-white font-medium rounded-md hover:bg-yousra focus:outline-none focus:ring-2 focus:ring-yousra focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled={loading}
+      >
+        {loading ? "Loading..." : "Submit"}
+      </button>
         </div>
       </form>
     </div>
