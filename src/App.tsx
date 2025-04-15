@@ -21,8 +21,8 @@ const App = () => {
   return (
     <>
     <Routes>
-      <Route path="/register" element={<Registration />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<UnProtectedRoute><Registration /></UnProtectedRoute>} />
+      <Route path="/login" element={<UnProtectedRoute><Login /></UnProtectedRoute>} />
       <Route path="/" element={<Home />} />
       {/* Dashboard with subroutes */}
       <Route path="/dashboard" element={ <ProtectedRoute><Dashboard /></ProtectedRoute> }>
@@ -68,7 +68,12 @@ const ProtectedRoute: React.FC<React.PropsWithChildren<{}>> = ({ children }) => 
   return children;
   else 
   return <Navigate to='/login' replace />;
+};
 
-
-
+const UnProtectedRoute: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+  const token = localStorage.getItem("token");
+  if (!token)
+  return children;
+  else 
+  return <Navigate to='/dashboard' replace />;
 };

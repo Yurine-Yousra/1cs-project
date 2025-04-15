@@ -16,13 +16,15 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { IshakLogo, LogowithoutText } from "../../assets"
+import { SidebarItem } from "../../constants/sidebar.constant";
 
 interface SidebarProps {
   isCollapsed: boolean;
   setIsCollapsed: (value: boolean) => void;
+  sidebarArray:SidebarItem[];
 }
 
-export default function Sidebar({isCollapsed,setIsCollapsed}:SidebarProps) {
+export default function Sidebar({isCollapsed,setIsCollapsed,sidebarArray}:SidebarProps) {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -85,17 +87,7 @@ export default function Sidebar({isCollapsed,setIsCollapsed}:SidebarProps) {
   }
 
   // Sidebar links array
-  const sidebarArray = [
-    { path: "/dashboard/etablisment", icon: "Image1", title: "Etablissement" },
-    { path: "/dashboard", icon: "Image2", title: "Statistiques" },
-    { path: "/dashboard/enseignants", icon: "Image5", title: "Enseignants" },
-    { path: "/dashboard/eleves", icon: "Image7", title: "Élèves" },
-    { path: "/dashboard/employes", icon: "Image3", title: "Employés" },
-    { path: "/dashboard/gestion", icon: "Image4", title: "Gestion des classes" },
-    { path: "/dashboard/examens", icon: "Image8", title: "Planification" },
-    { path: "/dashboard/paiments", icon: "Image6", title: "Paiments" },
-  ]
-
+ 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed)
   }

@@ -11,6 +11,8 @@ import GestionClass from "./GestionClass";
 import Etablisment from "./Etablisment";
 import { useState } from "react";
 import Statistic from "./Statistic";
+import { sidebarArray } from "../../constants/sidebar.constant";
+
 
 const Dashboard: React.FC = () => {
 //  const location = useLocation();
@@ -25,7 +27,7 @@ const Dashboard: React.FC = () => {
     >
      
 
-      <SideBar  isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+      <SideBar  isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} sidebarArray={sidebarArray} />
 
 
       <div

@@ -14,10 +14,11 @@ import {
 } from "recharts"
 import { Users, GraduationCap, BookOpen, TrendingUp, Calendar } from "lucide-react"
 import { StatsCard } from "../../components/cards/StatsCard"
+import { CustomAreaChart } from "../../components/charts/AreaCharts"
 
 const  Statistic = () => {
   return (
-    <div className="space-y-6 px-10 h-full bg-sous">
+    <div className="space-y-6 px-10 h-full py-4 bg-sous">
       <h1 className="text-3xl font-bold tracking-tight">Dashboard Overview</h1>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -29,52 +30,53 @@ const  Statistic = () => {
 
       
 
-      <div className="grid gap-6 md:grid-cols-2 mt-6">
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h3 className="text-lg font-semibold">Enrollment by Grade</h3>
-          <p className="text-sm text-gray-500 mb-4">Student distribution across grades</p>
-          <div className="h-80">
-          <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={visitorStats}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="groupA" fill="#3b82f6" name="Group A" radius={[8, 8, 0, 0]} barSize={40} />
-            <Bar dataKey="groupB" fill="#ec4899" name="Group B" radius={[8, 8, 0, 0]} barSize={40} />
-          </BarChart>
-        </ResponsiveContainer>
-          </div>
-        </div>
+      <div className="grid gap-6 lg:grid-cols-3 md:grid-cols-2 mt-6">
+  <div className="bg-white rounded-xl shadow-md p-6 lg:col-span-2">
+    <h3 className="text-lg font-semibold">Enrollment by Grade</h3>
+    <p className="text-sm text-gray-500 mb-4">Student distribution across grades</p>
+    <div className="h-80">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={visitorStats}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="groupA" fill="#3b82f6" name="Group A" radius={[8, 8, 0, 0]} barSize={40} />
+          <Bar dataKey="groupB" fill="#ec4899" name="Group B" radius={[8, 8, 0, 0]} barSize={40} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
 
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h3 className="text-lg font-semibold">Gender Distribution</h3>
-          <p className="text-sm text-gray-500 mb-4">Student gender breakdown</p>
-          <div className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={genderData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  outerRadius={80}
-                  dataKey="value"
-                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                >
-                  {genderData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </div>
+  <div className="bg-white rounded-xl shadow-md p-6 col-span-1">
+    <h3 className="text-lg font-semibold">Gender Distribution</h3>
+    <p className="text-sm text-gray-500 mb-4">Student gender breakdown</p>
+    <div className="h-80">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={genderData}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            outerRadius={80}
+            dataKey="value"
+            label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+          >
+            {genderData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+</div>
 
-      <div className="bg-white rounded-xl shadow-md p-6 mt-6">
+
+      {/* <div className="bg-white rounded-xl shadow-md p-6 mt-6">
         <h3 className="text-lg font-semibold">Monthly Attendance Rate</h3>
         <p className="text-sm text-gray-500 mb-4">Attendance trends over the past 6 months</p>
         <div className="h-80">
@@ -102,7 +104,8 @@ const  Statistic = () => {
             </BarChart>
           </ResponsiveContainer>
         </div>
-      </div>
+      </div> */}
+      <CustomAreaChart />
 
       <div className="grid gap-6 md:grid-cols-2 mt-6">
         <div className="bg-white rounded-xl shadow-md p-6">
@@ -159,8 +162,11 @@ const visitorStats = [
 ];
 
 const genderData = [
-  { name: "Male", value: 650 },
-  { name: "Female", value: 595 },
+
+  {name:"ilyes",value:500},
+  {name:"islam",value:600},
+  {name:"ishaq",value:400},
+  {name:"hatem",value:700}
 ]
 
 const attendanceData = [
@@ -170,6 +176,7 @@ const attendanceData = [
   { month: "Apr", rate: 94 },
   { month: "May", rate: 95 },
   { month: "Jun", rate: 94 },
+
 ]
 
 const performanceData = [
