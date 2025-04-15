@@ -15,7 +15,7 @@ const Absence = () => {
   };
 
   return (
-    <div className="w-[90%] m-auto">
+    <div className="w-[90%]  mx-auto">
       {/* Header */}
       <div className="w-full flex items-center justify-between mb-10 mt-4">
         <h1 className="text-[var(--color-yousra)] text-[25px] font-semibold">Liste des Élèves</h1>
@@ -51,8 +51,8 @@ const Absence = () => {
 
 
 
-          <div className="max-h-[400px] overflow-y-auto w-full">
-            <table className="w-full border-collapse bg-white">
+          <div className="  w-full">
+            <table className=" w-full border-collapse bg-white">
               <tbody>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((index) => (
                   <tr

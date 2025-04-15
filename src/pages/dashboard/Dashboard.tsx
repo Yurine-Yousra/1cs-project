@@ -15,8 +15,6 @@ import { sidebarArray } from "../../constants/sidebar.constant";
 
 
 const Dashboard: React.FC = () => {
-//  const location = useLocation();
-
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   

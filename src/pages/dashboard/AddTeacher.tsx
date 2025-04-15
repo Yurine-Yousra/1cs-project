@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import uploadFileToCloudinary from "../../config/UploadCloudinary";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { IoMdArrowBack } from "react-icons/io";
 
 // Helper: image URL to Uint8Array
 const imageUrlToBytes = async (url: string): Promise<Uint8Array> => {
@@ -183,7 +184,18 @@ const AddTeacher = () => {
 
     return (
         <div className="w-full max-w-6xl mx-auto p-6">
-            <h1 className="text-2xl font-bold text-gray-800 mb-8">Ajouter un Enseignant</h1>
+          
+
+          <Link to="/dashboard/enseignants" className="">
+          <button className="  mt-5    flex items-center gap-2 bg-yousra text-white px-4 py-2 rounded-4xl shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200">
+            <IoMdArrowBack size={20} />
+            <span>Back </span>
+          </button>
+        </Link>
+            <h1 className="text-2xl mt-2 font-bold text-gray-800 mb-8">
+                    
+                Ajouter un Enseignant</h1>
+                
 
             {/* Personal Information Section */}
             <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">

@@ -30,8 +30,8 @@ const  Statistic = () => {
 
       
 
-      <div className="grid gap-6 lg:grid-cols-3 md:grid-cols-2 mt-6">
-  <div className="bg-white rounded-xl shadow-md p-6 lg:col-span-2">
+      <div className="grid gap-6 xl:grid-cols-3 md:grid-cols-2 mt-6">
+  <div className="bg-white rounded-xl shadow-md p-6 xl:col-span-2">
     <h3 className="text-lg font-semibold">Enrollment by Grade</h3>
     <p className="text-sm text-gray-500 mb-4">Student distribution across grades</p>
     <div className="h-80">

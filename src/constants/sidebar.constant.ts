@@ -5,9 +5,9 @@ export interface SidebarItem {
   }
   
  export const sidebarArray: SidebarItem[] = [
-    { path: "/dashboard/etablisment", icon: "Image1", title: "Etablissement" },
+    { path: "/dashboard/etablisment", icon: "Image9", title: "Etablissement" },
     { path: "/dashboard", icon: "Image2", title: "Statistiques" },
-    { path: "/dashboard/enseignants", icon: "Image5", title: "Enseignants" },
+    { path: "/dashboard/enseignants", icon: "Image11", title: "Enseignants" },
     { path: "/dashboard/eleves", icon: "Image7", title: "Élèves" },
     { path: "/dashboard/employes", icon: "Image3", title: "Employés" },
     { path: "/dashboard/gestion", icon: "Image4", title: "Gestion des classes" },
