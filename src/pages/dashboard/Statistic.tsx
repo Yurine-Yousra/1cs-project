@@ -163,11 +163,9 @@ const visitorStats = [
 
 const genderData = [
 
-  {name:"ilyes",value:500},
-  {name:"islam",value:600},
-  {name:"ishaq",value:400},
-  {name:"hatem",value:700}
-]
+  {name:"female",value:500},
+  {name:"Male",value:600},
+  ]
 
 const attendanceData = [
   { month: "Jan", rate: 92 },

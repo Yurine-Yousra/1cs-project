@@ -15,7 +15,8 @@ import {
   ChevronLeft,
   ChevronRight,
   School,
-  GraduationCap
+  GraduationCap,
+  Presentation
 } from "lucide-react"
 import { GiTeacher } from "react-icons/gi";
 import { IshakLogo, LogowithoutText } from "../../assets"
@@ -89,7 +90,7 @@ export default function Sidebar({isCollapsed,setIsCollapsed,sidebarArray}:Sideba
     Image8: Calendar,
     Image9:School,
     Image10:GraduationCap,
-    Image11:GiTeacher
+    Image11:Presentation
   }
 
   // Sidebar links array
