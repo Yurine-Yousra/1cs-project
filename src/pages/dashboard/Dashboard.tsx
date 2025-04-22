@@ -12,13 +12,13 @@ import Etablisment from "./Etablisment";
 import { useState } from "react";
 import Statistic from "./Statistic";
 import { sidebarArray } from "../../constants/sidebar.constant";
+import ClassroomList from "./ClassroomList";
 
 
 const Dashboard: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false)
 
-  
-
+ 
   return (
     <div
       className={`flex  text-black  `}
@@ -43,6 +43,7 @@ const Dashboard: React.FC = () => {
             <Route path="addEmployee" element={<AddEmployee />} />
             <Route path="gestion" element={<GestionClass />} />
             <Route path="etablisment" element={<Etablisment />} />
+            <Route path="classroom" element={<ClassroomList  isCollapsed={isCollapsed} />} />
             <Route path="" element={<Statistic />} />
           </Routes>
         </div>

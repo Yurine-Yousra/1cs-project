@@ -19,7 +19,8 @@ import {
   Presentation,
   CircleUserIcon,
   KeyRound,
-  NotebookPen
+  NotebookPen,
+  Component 
 } from "lucide-react"
 import { IshakLogo, LogowithoutText } from "../../assets"
 import { SidebarItem } from "../../constants/sidebar.constant";
@@ -95,7 +96,8 @@ export default function Sidebar({isCollapsed,setIsCollapsed,sidebarArray}:Sideba
     Image11:Presentation,
     Image12:CircleUserIcon,
     Image13:KeyRound,
-    Image14:NotebookPen
+    Image14:NotebookPen,
+    Image15:Component
   }
 
   // Sidebar links array

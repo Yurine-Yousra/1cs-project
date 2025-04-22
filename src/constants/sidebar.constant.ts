@@ -11,6 +11,7 @@ export interface SidebarItem {
     { path: "/dashboard/eleves", icon: "Image7", title: "Élèves" },
     { path: "/dashboard/employes", icon: "Image3", title: "Employés" },
     { path: "/dashboard/gestion", icon: "Image4", title: "Gestion des classes" },
+    { path: "/dashboard/classroom", icon: "Image15", title: "Class rooms" },
     { path: "/dashboard/examens", icon: "Image8", title: "Planification" },
     { path: "/dashboard/paiments", icon: "Image6", title: "Paiments" },
   ];
