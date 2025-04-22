@@ -4,10 +4,9 @@ import { GrAddCircle } from "react-icons/gr";
 import SearchBar from "../../components/ui/SearchBar";
 import { DataTable } from "../../components/ui/TableData";
 import { Link, useSearchParams } from "react-router-dom";
-import { CiCalendar, CiUser } from "react-icons/ci";
-import { MdOutlineEventNote } from "react-icons/md";
-import CoursesList from "../../components/AdminComponents/CoursesList";
+
 import StudentForm from "../../components/forms/StudentForm";
+import { StudentProfile } from "../../components/profile/StudentProfile";
 
 
 
@@ -15,6 +14,13 @@ const Eleve = () => {
   const [searchParams] = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [tab, setTab] = useState<string>("");
+
+
+  
+
+
+
+
 
   useEffect(() => {
     setTab(searchParams.get("tab") || "");
@@ -32,9 +38,23 @@ const Eleve = () => {
         <StudentForm />
       </main>
     );
-  } else {
+  } 
+  if ( tab === "student-details"){
+    return( 
+    <main className="" >
+       <Link to="" className="">
+          <button className=" ml-18 mt-5    flex items-center gap-2 bg-yousra text-white px-4 py-2 rounded-4xl shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200">
+            <IoMdArrowBack size={20} />
+            <span>Back </span>
+          </button>
+        </Link>
+      <StudentProfile /> 
+    </main>
+    )
+  }
+  else {
     return (
-      <main className="mt-2  w-[90%] m-auto ">
+      <main className="mt-2  w-[90%] m-auto h-full">
         <nav className="flex justify-between items-center px-10 ">
           <h1 className="text-yousra text-3xl font-semibold">Listes des élèves</h1>
           <div className="flex gap-4 items-center">
@@ -85,38 +105,9 @@ const Eleve = () => {
           
         </div>
         
-        <div className=" px-10  mt-12 text-[#777777]">
-                <div className="flex gap-10 w-80   border-b">
-                {[{  
-                  link:"class",
-                  icon:<CiUser size={20} />
-                }
-                ,{
-                  link:"matieres",
-                  icon:<MdOutlineEventNote size={20} />
-                }
-                ,{
-                  link:"temps",
-                  icon:<CiCalendar size={20} />
+        
 
-                }
-              ].map((tabs) => (
-                  <Link to={`?tab=${tabs.link}`} 
-                  className={`flex items-center gap-1 hover:text-yousra  ${( tab === tabs.link  || (tab === "" && tabs.link==="class") ) && "text-yousra font-semibold"} hover:shadow-2xl hover:cursor-pointer hover:scale-125 transition-all duration-200`}
-                  >
-                    {tabs.icon}
-                    <span>{tabs.link} </span>
-                  </Link>
-
-                ))}
-                 </div>
-        </div>
-
-
-          { (tab === "class" || tab === "" ) &&  <DataTable /> }
-          { (tab === "matieres" &&  <CoursesList /> )}
-          { (tab === "temps" &&  <h1 className="mt-5 px-10"> not yet  </h1> )}
-
+           <DataTable />       
       </main>
     );
   }

@@ -61,8 +61,8 @@ export function useCreateStudent() {
       birthDate: data.studentInfosDTO.birthDate,
       birthPlace: data.studentInfosDTO.birthPlace,
       emergencyContact: data.studentInfosDTO.emergencyContact,
-      schoolLevelId: data.studentInfosDTO.specializationId,
-      specializationId: Number(localStorage.getItem("shool")) === 3 ? data.studentInfosDTO.schoolLevelId:null,
+      schoolLevelId: data.studentInfosDTO.schoolLevelId,
+      specializationId: Number(localStorage.getItem("shool")) === 3 ? data.studentInfosDTO.specializationId:null
     },
     parentInfosDTO: {
       nationalIdentityNumber: data.parentInfosDTO.nationalIdentityNumber,
@@ -71,8 +71,8 @@ export function useCreateStudent() {
       email: data.parentInfosDTO.email,
       relationshipToStudentId: data.parentInfosDTO.relationshipToStudentId,
       occupation: data.parentInfosDTO.occupation,
-      phoneNumber: data.parentInfosDTO.phoneNumber,
-    },
+      phoneNumber: data.parentInfosDTO.phoneNumber
+    }
     }
 
 

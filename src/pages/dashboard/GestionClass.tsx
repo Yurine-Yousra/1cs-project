@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { GrAddCircle } from "react-icons/gr"
 import SearchBar from "../../components/ui/SearchBar"
 import ClassCard from "../../components/ui/ClassTable";
+import { CiCalendar, CiUser } from "react-icons/ci";
+import { MdOutlineEventNote } from "react-icons/md";
+import { Link,  useSearchParams } from "react-router-dom";
 
  const GestionClass = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [searchParams] = useSearchParams();
+    const [tab, setTab] = useState<string>("");
+  
+    useEffect(() => {
+      setTab(searchParams.get("tab") || "");
+    }, [searchParams]);
 
   return (
     <main className=" w-[90%] m-auto mt-5">
@@ -44,13 +53,13 @@ import ClassCard from "../../components/ui/ClassTable";
                                         />
                             </div>
 
-                        <button
+                        <Link
                             className="flex items-center gap-2 bg-yousra text-white px-4 py-2 rounded-4xl shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200"
-    //                        onClick={() => navigate("/dashboard/addTeacher")}
+                            to={"?tab=addGroup"}
                           >
                                 <span>Ajouter une classe</span>
                             <GrAddCircle /> 
-                          </button>
+                          </Link>
                     
                     </div>
                         
@@ -63,7 +72,39 @@ import ClassCard from "../../components/ui/ClassTable";
             
             </div>  
 
-            <ClassCard />
+
+            {/* <div className=" px-10  mt-12 text-[#777777]">
+                <div className="flex gap-10 w-80   border-b">
+                {[{  
+                  link:"class",
+                  icon:<CiUser size={20} />
+                }
+                ,{
+                  link:"matieres",
+                  icon:<MdOutlineEventNote size={20} />
+                }
+                ,{
+                  link:"temps",
+                  icon:<CiCalendar size={20} />
+
+                }
+              ].map((tabs) => (
+                  <Link to={`?tab=${tabs.link}`} 
+                  className={`flex items-center gap-1 hover:text-yousra  ${( tab === tabs.link  || (tab === "" && tabs.link==="class") ) && "text-yousra font-semibold"} hover:shadow-2xl hover:cursor-pointer hover:scale-125 transition-all duration-200`}
+                  >
+                    {tabs.icon}
+                    <span>{tabs.link} </span>
+                  </Link>
+
+                ))}
+                 </div>
+        </div> */}
+
+
+              
+                        { (tab === "" ) &&  <ClassCard /> }       
+                        { tab === "addGroup" &&  "fuck you"   }
+            
                                         
                                     
 

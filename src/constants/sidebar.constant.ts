@@ -18,9 +18,9 @@ export interface SidebarItem {
 
 
 export  const sidebarArrayTeacher:SidebarItem[] = [
-    { path: "/Teacherdashboard/TeacherProfil", icon: "Image1", title: "Etablissement" },
-    { path: "/Teacherdashboard/profile", icon: "Image2", title: "Statistiques" },
-    { path: "/Teacherdashboard/enseignants", icon: "Image5", title: "Enseignants" },
-    { path: "/Teacherdashboard/eleves", icon: "Image7", title: "Élèves" },
+    { path: "/Teacherdashboard/TeacherProfil", icon: "Image12", title: "Profile" },
+    { path: "/Teacherdashboard/profile", icon: "Image13", title: "Statistiques" },
+    { path: "/Teacherdashboard/eleves", icon: "Image7", title: "Absence" },
+   { path: "/Teacherdashboard/notes", icon: "Image14", title: "Notes" },
     { path: "/Teacherdashboard/examens", icon: "Image8", title: "Planification" },
   ]

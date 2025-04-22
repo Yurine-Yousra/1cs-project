@@ -173,7 +173,7 @@ const AddTeacher = () => {
             }
     
             toast.success("Teacher created successfully");
-            navigate("/dashboard");
+            navigate("/dashboard/enseignants");
         } catch (error) {
             toast.error(error instanceof Error ? error.message : "An error occurred");
         } finally {

@@ -1,6 +1,6 @@
 import { GrAddCircle } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
-import Card from "../../components/cards/TeacherCard";
+// import Card from "../../components/cards/TeacherCard";
 import { Globe, Mail, Phone } from "lucide-react";
 
 const Enseignants: React.FC = () => {

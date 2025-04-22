@@ -23,7 +23,7 @@ const StudentForm: React.FC = () => {
       birthDate: "",
       birthPlace: "",
       emergencyContact: "",
-      schoolLevelId: 12,
+      schoolLevelId: Number(localStorage.getItem("shool")) === 3 ? 10:6,
       specializationId: 1,
     },
     parentInfosDTO: {
@@ -66,8 +66,8 @@ const StudentForm: React.FC = () => {
 
   },[])
 
-
-
+ 
+  
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader()
@@ -108,6 +108,8 @@ const StudentForm: React.FC = () => {
     console.log(JSON.stringify(formData, null, 2))
   
   }
+
+
 
   return (
     <div className="w-full max-w-7xl bg-sous h-full mx-auto ">
@@ -283,13 +285,13 @@ const StudentForm: React.FC = () => {
               
                 {/* Level */}
                 <div>
-                  <label htmlFor="specializationId" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label htmlFor="schoolLevelId" className="block text-gray-700 text-sm font-bold mb-2">
                     Année*
                   </label>
                   <select
-                    id="specializationId"
-                    name="specializationId"
-                    value={formData.studentInfosDTO.specializationId}
+                    id="schoolLevelId"
+                    name="schoolLevelId"
+                    value={formData.studentInfosDTO.schoolLevelId}
                     onChange={handleStudentChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yousra"
                     required
@@ -304,25 +306,25 @@ const StudentForm: React.FC = () => {
                 </div>
                   {/* Specialization */}
                   { Number(localStorage.getItem("shool")) ===3 && <div>
-                  <label htmlFor="schoolLevelId" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label htmlFor="specializationId" className="block text-gray-700 text-sm font-bold mb-2">
                     Classe*
                   </label>
                   <select
-                    id="schoolLevelId"
-                    name="schoolLevelId"
-                    value={formData.studentInfosDTO.schoolLevelId}
+                    id="specializationId"
+                    name="specializationId"
+                    value={formData.studentInfosDTO.specializationId}
                     onChange={handleStudentChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yousra"
                     required
                   >
                     {
   (
-    formData.studentInfosDTO.specializationId === 10
+    formData.studentInfosDTO.schoolLevelId === 10
       ? schoolLevels.slice(0, 2)
       : schoolLevels.slice(2)
   ).map((level) => (
     <option key={level.specializationId} value={level.specializationId}>
-      {level.name}
+      {level.name} 
     </option>
   ))
 }

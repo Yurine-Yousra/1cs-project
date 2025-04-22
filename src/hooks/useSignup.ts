@@ -50,10 +50,10 @@ export const useSignup = () => {
             schoolTypeId: getSchoolLevelCode(data.school.schoolType),
             email: data.school.schoolEmail,
             phoneNumber: data.school.phoneNumber,
-            Address: {
+            address: {
               street: data.school.address.street,
               city: data.school.address.city,
-              State: data.school.address.state,
+              state: data.school.address.state,
               postalCode: data.school.address.postalCode,
               country: data.school.address.country
             },

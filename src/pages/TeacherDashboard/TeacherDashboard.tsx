@@ -36,7 +36,9 @@ const TeacherDashboard: React.FC = () => {
             <Route path="TeacherProfil" element={<TeacherProfil />} />
             <Route path="eleves" element={<Absence />} />
             {/* <Route path="employees" element={<Employees />} /> */}
+            <Route path="notes" element={ <h1>  sssssssss  </h1> } />
             <Route path="profile" element={<Profil />} />
+
           </Routes>
         </div>
       </div>
