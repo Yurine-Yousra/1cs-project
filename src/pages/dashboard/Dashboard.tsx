@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
             <Route path="addEmployee" element={<AddEmployee />} />
             <Route path="gestion" element={<GestionClass />} />
             <Route path="etablisment" element={<Etablisment />} />
-            <Route path="classroom" element={<ClassroomList  isCollapsed={isCollapsed} />} />
+            <Route path="classroom" element={<ClassroomList   />} />
             <Route path="" element={<Statistic />} />
           </Routes>
         </div>
