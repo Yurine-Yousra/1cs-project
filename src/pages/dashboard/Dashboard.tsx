@@ -13,6 +13,7 @@ import { useState } from "react";
 import Statistic from "./Statistic";
 import { sidebarArray } from "../../constants/sidebar.constant";
 import ClassroomList from "./ClassroomList";
+import Planifcation from "./Planifcation";
 
 
 const Dashboard: React.FC = () => {
@@ -45,6 +46,7 @@ const Dashboard: React.FC = () => {
             <Route path="etablisment" element={<Etablisment />} />
             <Route path="classroom" element={<ClassroomList   />} />
             <Route path="" element={<Statistic />} />
+            <Route path="planification" element={<Planifcation />} />
           </Routes>
         </div>
       </div>
