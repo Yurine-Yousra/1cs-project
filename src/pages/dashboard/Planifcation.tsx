@@ -10,7 +10,7 @@ const Planifcation: React.FC = () => {
   useEffect(() => {
     const fetchPhotos = async () => {
         try {
-            const data = await fetchNaturePhotos(1, 30);
+            const data = await fetchNaturePhotos(1, 2);
             setPhotos(data);
 
         } catch (error) {

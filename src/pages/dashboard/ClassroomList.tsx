@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Search, Filter, MoreVertical, Edit, Trash } from "lucide-react";
 import { getLevels, getSpecializations, Levels, Specializations } from "../../apis/levels.api";
+import { createClassroom, CreateClassroomRequest, updateClassroom } from "../../hooks/useClassRoom";
+import { Classroom, getClassrooms } from "../../apis/classroom.api";
+import toast from "react-hot-toast";
 
-interface Classroom {
-  classroomId: string;
-  className: string;
-  schoolLevelId: number;
-  specializationId: number;
-  levelName: string;
-  specializationName: string;
-  schoolType: string;
-}
 
 interface ClassroomListProps {
 }
@@ -62,7 +56,7 @@ const ClassroomList: React.FC<ClassroomListProps> = ({  }) => {
   const [levels,setLevel] = useState<Levels[]>([]); 
   const [specialization,setSpecialization] = useState<Specializations[]>([]);
 
-  const [newClass, setNewClass] = useState({
+  const [newClass, setNewClass] = useState<CreateClassroomRequest>({
     className: "",
     levelName: "",
     specializationName: "",
@@ -138,37 +132,39 @@ fetchLevels();
     setFilteredClassrooms(result);
   }, [searchTerm, filters, classrooms]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data:Classroom[]|string = await getClassrooms(); // ✅ use await here
+        if (typeof data === 'string') {
+          
+        } else {
+          setClassrooms(data); 
+        }
+      } catch (err: any) {
+        toast.error(err.message,{  position: 'top-right'});
+      }
+    };
+
+    fetchData();
+  }, [classrooms]);
+
   // Get unique values for filter options
   const schoolTypes = [...new Set(classrooms.map(item => item.schoolType))];
   const levelNames = [...new Set(classrooms.map(item => item.levelName))];
 
-  const handleAddClassroom = () => {
+  const handleAddClassroom = async () => {
     if (isEditMode && selectedClassroom) {
-      // Update existing classroom
-      const updatedClassrooms = classrooms.map(c => 
-        c.classroomId === selectedClassroom.classroomId 
-          ? {
-              ...c,
-              className: newClass.className,
-              levelName: newClass.levelName,
-              specializationName: newClass.specializationName,
-              schoolType: newClass.schoolType
-            } 
-          : c
+      
+      const data = await updateClassroom(
+        selectedClassroom.classroomId,
+        newClass
       );
-      setClassrooms(updatedClassrooms);
+      toast.success("Class update succefully",{  position: 'bottom-right'});
+      //setClassrooms(updatedClassrooms);
     } else {
       // Add new classroom
-      const newClassroom = {
-        classroomId: crypto.randomUUID(),
-        className: newClass.className,
-        schoolLevelId: 0,
-        specializationId: 0,
-        levelName: newClass.levelName,
-        specializationName: newClass.specializationName,
-        schoolType: newClass.schoolType
-      };
-      setClassrooms([...classrooms, newClassroom]);
+      await createClassroom(newClass);
     }
     
     // Reset states
@@ -334,11 +330,11 @@ fetchLevels();
               <div className="relative">
                 <span
                   className={`text-xs px-3 py-1 rounded-full ${
-                    classroom.schoolType === "Public"
+                    classroom.schoolLevelId === 10
                       ? "bg-green-100 text-green-700"
-                      : classroom.schoolType === "Private"
+                      : classroom.schoolLevelId === 11
                       ? "bg-blue-100 text-blue-700"
-                      : "bg-yellow-100 text-yellow-700"
+                      : "bg-red-100 text-red-700"
                   }`}
                 >
                   {classroom.schoolType}
