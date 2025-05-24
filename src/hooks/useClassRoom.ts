@@ -52,3 +52,17 @@ export async function createClassroom(newClass: CreateClassroomRequest): Promise
 
   return await response.text(); // assuming the API returns plain text
 } 
+
+export async function deleteClassroom(classroomId: string): Promise<void> {
+  const response = await fetch(`${API_URL}/api/classrooms/${classroomId}`, {
+    method: 'DELETE',
+    headers: {
+      'Accept': '*/*',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to delete classroom. Status: ${response.status}`);
+  }
+} 

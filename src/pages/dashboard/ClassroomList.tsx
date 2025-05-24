@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Search, Filter, MoreVertical, Edit, Trash } from "lucide-react";
 import { getLevels, getSpecializations, Levels, Specializations } from "../../apis/levels.api";
-import { createClassroom, CreateClassroomRequest, updateClassroom } from "../../hooks/useClassRoom";
+import { createClassroom, CreateClassroomRequest, deleteClassroom, updateClassroom } from "../../hooks/useClassRoom";
 import { Classroom, getClassrooms } from "../../apis/classroom.api";
 import toast from "react-hot-toast";
 
@@ -156,12 +156,11 @@ fetchLevels();
   const handleAddClassroom = async () => {
     if (isEditMode && selectedClassroom) {
       
-      const data = await updateClassroom(
+     await updateClassroom(
         selectedClassroom.classroomId,
         newClass
       );
-      toast.success("Class update succefully",{  position: 'bottom-right'});
-      //setClassrooms(updatedClassrooms);
+      toast.success(`Class update succefully `,{  position: 'bottom-right'});
     } else {
       // Add new classroom
       await createClassroom(newClass);
@@ -190,11 +189,13 @@ fetchLevels();
     setOpenMenuId(null);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (selectedClassroom) {
       setClassrooms(classrooms.filter(c => c.classroomId !== selectedClassroom.classroomId));
       setIsDeleteDialogOpen(false);
       setSelectedClassroom(null);
+      await deleteClassroom(selectedClassroom.classroomId)
+      toast.success("Classroom deleted successfully",{  position: 'bottom-right'});
     }
   };
 
