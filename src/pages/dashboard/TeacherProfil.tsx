@@ -1,187 +1,143 @@
 import imageSrc from '../../assets/image copy 5.png';
 import ImageProfil from '../../assets/image copy 4.png';
-import { BiPhone  } from 'react-icons/bi';
+import { BiPhone } from 'react-icons/bi';
 import { TfiEmail } from 'react-icons/tfi';
-import { BiDotsHorizontalRounded } from "react-icons/bi"
-import { PiNotePencil } from "react-icons/pi";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { Teacher } from '../../apis/getTeacher';
-import { useState , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getTeacher } from '../../apis/getTeacher';
 import { useParams } from 'react-router-dom';
 
 const TeacherProfil = () => {
-  const {id} = useParams()
+  const { id } = useParams()
   const [teacher, setTeacher] = useState<Teacher | null>(null);
+  
   useEffect(() => {
-      const fetchTeacher = async () => {
-        const teacherData = await getTeacher(id as string);
-        setTeacher(teacherData ?? null);
-      };
-     
-      fetchTeacher();
-    }, [id]);
+    const fetchTeacher = async () => {
+      const teacherData = await getTeacher(id as string);
+      setTeacher(teacherData ?? null);
+    };
+   
+    fetchTeacher();
+  }, [id]);
+
+ 
+
   return (
-    <div className=" px-8">
-      <div >
-        <h1 className='text-[20px] font-semibold text-[var(--color-yousra)] mb-4'>{`Détails D'enseigant`}</h1>
+    <div className="px-8 w-[70%] m-auto mt-5">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className='text-[20px] font-semibold text-[var(--color-yousra)]'>{`Détails D'enseignant`}</h1>
+       
       </div>
 
-      <div className=" grid grid-cols-4 gap-4 ">
-        <div className=" col-span-3 rounded-[10px] relative bg-white ">
-          <div
-            className="h-[150px] bg-cover bg-center rounded-[10px]"
-            style={{ backgroundImage: `url(${imageSrc})` }}
-          ></div>
+      <div className="rounded-[10px] relative bg-white shadow-lg">
+        {/* Banner with profile picture */}
+        <div
+          className="h-[150px] bg-cover bg-center rounded-t-[10px]"
+          style={{ backgroundImage: `url(${imageSrc})` }}
+        ></div>
 
-          <div className="absolute rounded-[50%] top-6 left-12 ">
-          <img src={ImageProfil} alt="profil Image" />
-          </div>
-
-          <div className='flex flex-col items-start gap-4 pl-6 pb-6 pr-6 -mt-6'>
-          <div>
-            <h1 className='font-bold text-[20px]'>Meddah Soundous</h1>
-            <p className='text-gray-500 '>Langue Arabe</p>
-          </div>
-
-          <div className='flex items-center justify-start gap-30'>
-            <div className='flex items-center justify-center gap-2'>
-            <div className='bg-orange-500 rounded-[50%] w-[30px] h-[30px] flex items-center justify-center '> <BiPhone size={20}  className='text-white '/></div>
-             <h3>066666666</h3>
-            </div>
-            <div className='flex items-center justify-center gap-2'>
-            <div className='bg-orange-500 rounded-[50%] w-[30px] h-[30px] flex items-center justify-center '> <TfiEmail size={20}  className='text-white '/></div>
-             <h3>{teacher?.email}</h3>
-            </div>
-
-
-          </div>
-          </div>
-
-          <div className='mt-12  pl-6 pb-6 pr-6'>
-            <h1 className='font-bold text-[20px] mb-4'>
-                Matières & Classes
-            </h1>
-
-            <div className="flex h-[130px] w-full shadow-lg rounded-lg overflow-hidden mb-4">
-  <div className="bg-orange-500 w-[5%]"></div>
-  <div className="bg-white w-[95%] pt-4 pl-4  relative">
-    <BiDotsHorizontalRounded className='absolute top-2 right-2' size={24} />
-    <h1 className='font-semibold text-[18px] mb-4 '>Langue Arabe -1ere année</h1>
-    <div className='w-[90%] flex items-center justify-between' >
-
-    
-    <div >
-    <p className='text-gray-500 '>Classes</p>
-    <span className='font-[400]'>M1 , M2 , M4</span>
-    </div>
-
-    <div>
-    <p className='text-gray-500 '>Coefficient</p>
-    <span className='font-[400]'>4</span>
-    </div>
-
-    <div>
-    <p className='text-gray-500 '>Heures par semaine</p>
-    <span className='font-[400]'>4 Heures</span>
-    </div>
-    </div>
-  </div>
-</div>
-
-<div className="flex h-[130px] w-full shadow-lg rounded-lg overflow-hidden mb-4">
-  <div className="bg-purple-800 w-[5%]"></div>
-  <div className="bg-white w-[95%] pt-4 pl-4  relative">
-    <BiDotsHorizontalRounded className='absolute top-2 right-2' size={24} />
-    <h1 className='font-[400] text-[18px] mb-4 '>Langue Arabe -1ere année</h1>
-    <div className='w-[90%] flex items-center justify-between' >
-
-    
-    <div >
-    <p className='text-gray-500 '>Classes</p>
-    <span className='font-[400]'>M1 , M2 , M4</span>
-    </div>
-
-    <div>
-    <p className='text-gray-500 '>Coefficient</p>
-    <span className='font-[400]'>4</span>
-    </div>
-
-    <div>
-    <p className='text-gray-500 '>Heures par semaine</p>
-    <span className='font-[400]'>4 Heures</span>
-    </div>
-    </div>
-
-
-  </div>
-
-
-</div>
-
-
-<div className="flex h-[130px] w-full shadow-lg rounded-lg overflow-hidden mb-4">
-  <div className="bg-yellow-500 w-[5%]"></div>
-  <div className="bg-white w-[95%] pt-4 pl-4  relative">
-    <BiDotsHorizontalRounded className='absolute top-2 right-2' size={24} />
-    <h1 className='font-semibold text-[18px] mb-4 '>Langue Arabe -1ere année</h1>
-    <div className='w-[90%] flex items-center justify-between' >
-
-    
-    <div >
-    <p className='text-gray-500 '>Classes</p>
-    <span className='font-[400]'>M1 , M2 , M4</span>
-    </div>
-
-    <div>
-    <p className='text-gray-500 '>Coefficient</p>
-    <span className='font-[400]'>4</span>
-    </div>
-
-    <div>
-    <p className='text-gray-500 '>Heures par semaine</p>
-    <span className='font-[400]'>4 Heures</span>
-    </div>
-    </div>
-
-
-  </div>
-
-
-</div>
-
-          </div>
+        <div className="absolute rounded-[50%] top-6 left-12">
+          {teacher?.photo ? (
+            <img src={teacher.photo} alt="profile" className="w-24 h-24 rounded-full object-cover border-4 border-white" />
+          ) : (
+            <img src={ImageProfil} alt="default profile" className="w-24 h-24 rounded-full border-4 border-white" />
+          )}
         </div>
 
-        <div className="col-span-1 rounded-[10px] bg-white shadow-2xl p-6 relative">
-            <PiNotePencil  size={24} className='absolute top-2 right-2'/>
-  <h1 className="text-[20px] font-semibold text-[var(--color-yousra)]">Informations</h1>
-  <h1 className="text-[18px] font-semibold mt-4 mb-10">Meddah Soundous Leila Saadia</h1>
+        {/* Main content */}
+        <div className="p-6 pt-12">
+          {/* Teacher name and basic info */}
+          <div className="flex justify-between items-start mb-6">
+            <div>
+              <h1 className='font-bold text-2xl'>{teacher?.firstName} {teacher?.lastName}</h1>
+              <p className='text-gray-500'>Enseignant</p>
+            </div>
+            
+          </div>
 
-  {/* First Section */}
-  <div className="flex flex-col gap-8 border-b border-gray-300 pb-4">
-    {[...Array(5)].map((_, index) => (
-      <div key={index}>
-        <p className="text-sm text-gray-500">Adresse</p>
-        <h3 className="font-medium ">
-          742 Evergreen Terrace, Springfield
-        </h3>
-      </div>
-    ))}
-  </div>
+          {/* Contact information */}
+          <div className='flex items-center gap-6 mb-8'>
+            {teacher?.phoneNumber && (
+              <div className='flex items-center gap-2'>
+                <div className='bg-orange-500 rounded-[50%] w-[30px] h-[30px] flex items-center justify-center'>
+                  <BiPhone size={20} className='text-white'/>
+                </div>
+                <h3>{teacher.phoneNumber}</h3>
+              </div>
+            )}
+            
+            <div className='flex items-center gap-2'>
+              <div className='bg-orange-500 rounded-[50%] w-[30px] h-[30px] flex items-center justify-center'>
+                <TfiEmail size={20} className='text-white'/>
+              </div>
+              <h3>{teacher?.email}</h3>
+            </div>
+          </div>
 
-  {/* Second Section */}
-  <div className="flex flex-col gap-4  pt-4 pb-4">
-    {[...Array(4)].map((_, index) => (
-      <div key={index}>
-        <p className="text-sm text-gray-500">Adresse</p>
-        <h3 className="font-medium ">
-          742 Evergreen Terrace, Springfield
-        </h3>
-      </div>
-    ))}
-  </div>
-</div>
+          {/* Detailed information sections */}
+          <div className="grid grid-cols-2 gap-6 mb-8">
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm text-gray-500">Date d'embauche</p>
+                <h3 className="font-medium">
+                  {teacher?.hireDate ? new Date(teacher.hireDate).toLocaleDateString() : 'Non spécifié'}
+                </h3>
+              </div>
+              
+              <div>
+                <p className="text-sm text-gray-500">Type de contrat</p>
+                <h3 className="font-medium">{teacher?.contractType || 'Non spécifié'}</h3>
+              </div>
+            </div>
 
+            <div className="space-y-4">
+              {teacher?.address && (
+                <div>
+                  <p className="text-sm text-gray-500">Adresse</p>
+                  <h3 className="font-medium">{teacher.address}</h3>
+                </div>
+              )}
+              
+              <div>
+                <p className="text-sm text-gray-500">ID Enseignant</p>
+                <h3 className="font-medium">{teacher?.teacherId}</h3>
+              </div>
+            </div>
+            
+          </div>
+
+          {/* Subjects section */}
+          {teacher?.subjectIds && teacher.subjectIds.length > 0 && (
+            <div>
+              <h2 className='font-bold text-xl mb-4'>Matières enseignées</h2>
+              
+              <div className="space-y-4">
+                <div className="flex h-[130px] w-full shadow rounded-lg overflow-hidden">
+                  <div className="bg-orange-500 w-[5%]"></div>
+                  <div className="bg-white w-[95%] p-4 relative">
+                    <BiDotsHorizontalRounded className='absolute top-2 right-2' size={24} />
+                    <h1 className='font-semibold text-[18px] mb-4'>Matière à définir</h1>
+                    <div className='grid grid-cols-3 gap-4'>
+                      <div>
+                        <p className='text-gray-500'>Classes</p>
+                        <span className='font-[400]'>Non spécifié</span>
+                      </div>
+                      <div>
+                        <p className='text-gray-500'>Coefficient</p>
+                        <span className='font-[400]'>-</span>
+                      </div>
+                      <div>
+                        <p className='text-gray-500'>Heures/semaine</p>
+                        <span className='font-[400]'>-</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { RiSchoolLine, RiBookOpenLine } from "react-icons/ri";
 import { FaCity } from "react-icons/fa"; // Icône pour Ville
 import { MdOutlineMap } from "react-icons/md"; // Icône pour Région
 import { FaMapPin } from "react-icons/fa"; // Icône pour Code postal
+import { Link } from "react-router-dom";
 import { SchoolLevelName } from "../../types/register.type";
 
 interface SchoolProps {
@@ -226,7 +227,7 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
       onChange={handleChange}
       placeholder="Entez le nom de votre établissement"
       required
-      className="w-full rounded-md h-[45px] border-2 border-gray-400 focus:border-[var(--color-secondary)] focus:outline-none pl-10"
+      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-yousra)] transition pl-10"
     />
   </div>
 </div>
@@ -238,7 +239,7 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
       <RiBookOpenLine className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
     <select
       onChange={handleSelect}
-      className="w-full rounded-md h-[45px] border-2 border-gray-400 focus:border-[var(--color-secondary)] focus:outline-none pl-10"
+      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-yousra)] transition pl-10"
       name="Type_détablissement"
       required
       id="Type_détablissement"
@@ -264,7 +265,7 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
       onChange={handleChange}
       placeholder="Enter value..."
       required
-      className="w-full rounded-md h-[45px] border-2 border-gray-400 focus:border-[var(--color-secondary)] focus:outline-none pl-10"
+      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-yousra)] transition pl-10"
     />
   </div>
 </div>
@@ -361,7 +362,7 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
       onChange={handleChange}
       placeholder="Enter value..."
       required
-      className="w-full rounded-md h-[45px] border-2 border-gray-400 focus:border-[var(--color-secondary)] focus:outline-none pl-10"
+      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-yousra)] transition pl-10"
     />
   </div>
 </div>
@@ -381,23 +382,46 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
       onChange={handleChange}
       placeholder="Enter value..."
       required
-      className="w-full rounded-md h-[45px] border-2 border-gray-400 focus:border-[var(--color-secondary)] focus:outline-none pl-10"
+      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-yousra)] transition pl-10"
     />
   </div>
 </div>
 
       </div>
+<div className="flex flex-col items-center gap-4 ">
+  <button
+    type="button"
+    className="flex items-center justify-center bg-[var(--color-secondary)] hover:cursor-pointer text-white font-medium py-2 px-8 rounded-full transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary-light)] focus:ring-opacity-50 min-w-[180px]"
+    onClick={() => setDisplayed(true)}
+  >
+    Suivant
+    <svg 
+      className="ml-2 -mr-1 w-4 h-4" 
+      fill="none" 
+      stroke="currentColor" 
+      viewBox="0 0 24 24"
+    >
+      <path 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        strokeWidth={2} 
+        d="M14 5l7 7m0 0l-7 7m7-7H3" 
+      />
+    </svg>
+  </button>
 
-      <div>
-      
-        <button
-          type="button"
-          className="flex items-center bg-[var(--color-secondary)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
-          onClick={() => setDisplayed(true)}
-        >
-          Suivant
-        </button>
-      </div>
+  <div className="text-center">
+    <p className="text-sm text-gray-600 inline mr-1">
+      Vous avez déjà un compte?
+    </p>
+    <Link
+      to="/login"
+      className="text-sm font-medium text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors underline underline-offset-2 decoration-from-font"
+    >
+      Se connecter
+    </Link>
+  </div>
+</div>
 
     </form>
     

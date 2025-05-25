@@ -160,7 +160,7 @@ return {loading,error}
         >
            {isLoading ? <span className="flex items-center gap-2">
                 <FaSpinner className="animate-spin" /> Connexion en cours...
-              </span> : "CFréer"}
+              </span> : "Créer"}
           
         </button>
       </div>

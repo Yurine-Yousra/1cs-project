@@ -38,7 +38,7 @@ const StudentProfile = () => {
     new Date(dateStr).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
 
   return (
-    <div className="px-8 py-6 bg-gray-100 min-h-screen w-[80%] m-auto">
+    <div className="px-8 py-6  min-h-screen w-[80%] m-auto">
       <h1 className="text-3xl font-bold text-[var(--color-yousra)] mb-8">Profil de l'Étudiant</h1>
 
       <div className="space-y-6">
@@ -67,7 +67,7 @@ const StudentProfile = () => {
                   <span>{parent?.email}</span>
                 </div>
                 <button
-          className="bg-[var(--color-yousra)] text-white px-4 py-2 rounded-lg hover:bg-[#155e75] transition"
+          className="bg-[var(--color-yousra)] text-white px-4 py-2 rounded-lg hover:cursor-pointer transition"
           onClick={() => navigate(`/dashboard/students/${id}/convocation`)}
             // Action à personnaliser
 

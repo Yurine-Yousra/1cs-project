@@ -33,6 +33,7 @@ const AddTeacher = () => {
     const [selectedMatieres, setSelectedMatieres] = useState<number[]>([]);
     const [fileText, setFileText] = useState("");
     const [subjects, setSubjects] = useState<Subject[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
     const [contracts, setContracts] = useState<Contract[]>([]);

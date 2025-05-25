@@ -23,7 +23,7 @@ const Dashboard: React.FC = () => {
  
   return (
     <div
-      className={`flex  text-black  `}
+      className={`flex  text-black   min-h-screen `}
     >
      
 
@@ -31,8 +31,7 @@ const Dashboard: React.FC = () => {
 
 
       <div
-        className={` w-full  flex-1 md:ml-[86px] ${! isCollapsed ? "xl:ml-[280px]":"xl:ml-[85px]"}  h-screen bg-sous `}
-      >
+className={`w-full flex flex-col flex-1 md:ml-[86px] ${!isCollapsed ? "xl:ml-[280px]" : "xl:ml-[85px]"} bg-sous`}      >
         {  /* <DashboardUpper /> */}
         <div className="">
           <Routes>

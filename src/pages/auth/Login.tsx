@@ -24,7 +24,7 @@ function Login() {
           </div>
           <div className="lg:w-1/2 pl-10 h-[500px] flex flex-col gap-20 ">
             <div className="w-full">
-            <h1 className="font-semibold flex gap-16 text-[24px]">Bienvenu dans Dirassati
+            <h1 className="text-3xl font-bold text-[var(--color-primary)] mb-2">Bienvenu dans Dirassati
             </h1>
                <p className="text-gray-600">connecter à votre compte</p>
                 <p className='flex items-center justify-between w-[80%]'>login as<RoleSwitcher currentRole={role}  onRoleChange={handleRoleChange} /> </p>
@@ -38,16 +38,17 @@ function Login() {
                 <LoginForm />
 
               </div>
-              <p className="text-gray-700 mt-4">
-      Don't have an account?{" "}
-      <Link
-        to="/register"
-        className="text-blue-600 hover:underline hover:text-blue-800 transition duration-300"
-      >
-        Register here
-      </Link>
-      .
+              <div className="text-center">
+    <p className="text-sm text-gray-600 inline mr-1">
+      Vous n'avez pas un compte?
     </p>
+    <Link
+      to="/register"
+      className="text-sm font-medium text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors underline underline-offset-2 decoration-from-font"
+    >
+      Créer un  compte
+    </Link>
+  </div>
             </div>
           </div>
         </div>

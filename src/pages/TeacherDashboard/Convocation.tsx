@@ -5,6 +5,7 @@ import { getStudent } from '../../apis/students.api';
 import { sendConvocation } from '../../apis/convocation';
 import { useNavigate } from 'react-router-dom';
 
+
 const Convocation = () => {
   const { id } = useParams<{ id: string }>();
   const [motif, setMotif] = useState<string>("");
@@ -39,7 +40,7 @@ await sendConvocation({
   motif,
   date,
 });
-      navigate('/dashboard'); // ✅ Navigation ici
+      navigate('/Teacherdashboard/convocation-success'); // ✅ Navigation ici
 
     // You can send `data` to your backend API using fetch or axios here.
   };
@@ -131,7 +132,7 @@ await sendConvocation({
         <div className="text-right">
           <button
             onClick={handleSubmit}
-            className="bg-[var(--color-yousra)] text-white px-6 py-2 rounded-md font-medium hover:bg-opacity-90 transition-all duration-200 shadow-sm"
+            className="hover:bg-[var(--color-yousra)] text-white px-6 py-2 rounded-md font-medium hover:bg-opacity-90 transition-all duration-200 shadow-sm hover:pointer-cursor bg-[var(--color-primary)]"
           >
             Envoyer
           </button>

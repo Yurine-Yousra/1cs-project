@@ -67,6 +67,7 @@ interface School1 {
 
 const Etablisment = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [err, setErr] = useState<string>("");
   const [state, setState] = useState<string[]>([]);
   const [wilaya, setWilaya] = useState<string>("Oran");

@@ -10,6 +10,7 @@ import Sidebar from "../../components/sideBars/SideBar";
 import StudentProfile from "../../components/profile/StudentProfile";
 import { sidebarArrayTeacher } from "../../constants/sidebar.constant";
 import Convocation from "./Convocation";
+import ConvocationSuccess from "../SuccessPages/ConvocationSuccess";
 
 const TeacherDashboard: React.FC = () => {
   const location = useLocation();
@@ -42,6 +43,7 @@ const TeacherDashboard: React.FC = () => {
             <Route path="profile" element={<Profil />} />
               <Route path="students/:id" element={<StudentProfile />} />
             <Route path="students/:id/convocation" element={<Convocation />} />
+             <Route path="convocation-success" element={<ConvocationSuccess />} />
 
           </Routes>
         </div>
