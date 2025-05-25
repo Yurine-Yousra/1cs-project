@@ -82,7 +82,7 @@ function Registration() {
            <div className="w-full mt-4 text-start ">
   {!displayed ? (
     <>
-      <h1 className="text-3xl font-bold text-[var(--color-primary)] mb-2">
+      <h1 className="text-3xl font-bold text-[var(--color-yousra)] mb-2">
         Bienvenue dans Dirassati
       </h1>
       <p className="text-lg text-gray-600">

@@ -227,7 +227,7 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
       onChange={handleChange}
       placeholder="Entez le nom de votre établissement"
       required
-      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-yousra)] transition pl-10"
+      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-secondary)] transition pl-10"
     />
   </div>
 </div>
@@ -265,7 +265,7 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
       onChange={handleChange}
       placeholder="Enter value..."
       required
-      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-yousra)] transition pl-10"
+      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-secondary)] transition pl-10"
     />
   </div>
 </div>
@@ -333,7 +333,7 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
   
       <select
       onChange={handleSelect}
-      className="w-full text-[14px]  rounded-md h-[45px] border-2 border-gray-400 focus:border-[var(--color-secondary)] focus:outline-none pl-10"
+      className="w-full text-[14px]  rounded-md h-[45px] border-2 border-gray-400 focus:border-[var(--color-yousra)] focus:outline-none pl-10"
       name="code_postal"
       required
       id="code_postal"
@@ -391,7 +391,7 @@ const SchoolInfoForm: React.FC<SchoolProps> = ({ setDisplayed, setSchoolInfos, s
 <div className="flex flex-col items-center gap-4 ">
   <button
     type="button"
-    className="flex items-center justify-center bg-[var(--color-secondary)] hover:cursor-pointer text-white font-medium py-2 px-8 rounded-full transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary-light)] focus:ring-opacity-50 min-w-[180px]"
+    className="flex items-center justify-center bg-[var(--color-yousra)] hover:cursor-pointer text-white font-medium py-2 px-8 rounded-full transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary-light)] focus:ring-opacity-50 min-w-[180px]"
     onClick={() => setDisplayed(true)}
   >
     Suivant
