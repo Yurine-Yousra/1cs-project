@@ -50,7 +50,7 @@ const HandleRegistration = async(e :FormEvent<HTMLFormElement>) => {
     return;
   }
   try{
-  const response = await fetch('http://localhost:5080/api/auth/register' , {
+  const response = await fetch('${API_URL}/api/auth/register' , {
     method:"POST",
     body:JSON.stringify(content),
     headers:{'Content-type' : "application/json"}
