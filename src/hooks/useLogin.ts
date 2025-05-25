@@ -32,7 +32,7 @@ export const Uselogin = () => {
 
         const endpoint = role === "admin" ? "api/auth/login" :"api/teacher/auth/login"
         try {
-            const response = await fetch(`${API_URL}/${endpoint}`, {
+            const response = await fetch(`http://localhost:5080/${endpoint}`, {
                 method: "POST",
                 body: JSON.stringify({ email, password }),
                 headers: { 'Content-type': "application/json" },

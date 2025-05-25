@@ -4,7 +4,22 @@ import { BiPhone  } from 'react-icons/bi';
 import { TfiEmail } from 'react-icons/tfi';
 import { BiDotsHorizontalRounded } from "react-icons/bi"
 import { PiNotePencil } from "react-icons/pi";
+import { Teacher } from '../../apis/getTeacher';
+import { useState , useEffect } from 'react';
+import { getTeacher } from '../../apis/getTeacher';
+import { useParams } from 'react-router-dom';
+
 const TeacherProfil = () => {
+  const {id} = useParams()
+  const [teacher, setTeacher] = useState<Teacher | null>(null);
+  useEffect(() => {
+      const fetchTeacher = async () => {
+        const teacherData = await getTeacher(id as string);
+        setTeacher(teacherData ?? null);
+      };
+     
+      fetchTeacher();
+    }, [id]);
   return (
     <div className=" px-8">
       <div >
@@ -35,7 +50,7 @@ const TeacherProfil = () => {
             </div>
             <div className='flex items-center justify-center gap-2'>
             <div className='bg-orange-500 rounded-[50%] w-[30px] h-[30px] flex items-center justify-center '> <TfiEmail size={20}  className='text-white '/></div>
-             <h3>sl.meddah@esi-sba.dz</h3>
+             <h3>{teacher?.email}</h3>
             </div>
 
 

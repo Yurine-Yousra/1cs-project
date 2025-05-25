@@ -6,7 +6,7 @@ import { DataTable } from "../../components/ui/TableData";
 import { Link, useSearchParams } from "react-router-dom";
 
 import StudentForm from "../../components/forms/StudentForm";
-import { StudentProfile } from "../../components/profile/StudentProfile";
+import  StudentProfile  from "../../components/profile/StudentProfile";
 
 
 

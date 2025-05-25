@@ -14,7 +14,8 @@ import Statistic from "./Statistic";
 import { sidebarArray } from "../../constants/sidebar.constant";
 import ClassroomList from "./ClassroomList";
 import Planifcation from "./Planifcation";
-
+import StudentProfile from "../../components/profile/StudentProfile";
+import Convocation from "../TeacherDashboard/Convocation";
 
 const Dashboard: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -33,12 +34,12 @@ const Dashboard: React.FC = () => {
         className={` w-full  flex-1 md:ml-[86px] ${! isCollapsed ? "xl:ml-[280px]":"xl:ml-[85px]"}  h-screen bg-sous `}
       >
         {  /* <DashboardUpper /> */}
-        <div className=" ">
+        <div className="">
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
             <Route path="addTeacher" element={<AddTeacher />} />
             <Route path="eleves"  element={<Eleves />} />
-            <Route path="TeacherProfil" element={<TeacherProfil />} />
+            <Route path="teachers/:id" element={<TeacherProfil />} />
             <Route path="*" element={<div className="">Page Not Found</div>} />
             <Route path="employes" element={<Employees />} />
             <Route path="addEmployee" element={<AddEmployee />} />
@@ -47,6 +48,8 @@ const Dashboard: React.FC = () => {
             <Route path="classroom" element={<ClassroomList   />} />
             <Route path="" element={<Statistic />} />
             <Route path="planification" element={<Planifcation />} />
+            <Route path="students/:id" element={<StudentProfile />} />
+            <Route path="students/:id/convocation" element={<Convocation />} />
           </Routes>
         </div>
       </div>
