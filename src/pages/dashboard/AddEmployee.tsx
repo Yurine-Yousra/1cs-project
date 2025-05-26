@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import uploadFileToCloudinary from "../../config/UploadCloudinary";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCity } from "react-icons/fa"; // Icône pour Ville
@@ -18,7 +17,6 @@ interface Contract {
 }
 
 const AddEmployee = () => {
-    const [fileText, setFileText] = useState("");
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
@@ -212,17 +210,7 @@ const AddEmployee = () => {
 
     const ChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmployee({ ...employee, [e.target.name]: e.target.value });
-    };
-
-    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const fileURL = await uploadFileToCloudinary(file, "raw");
-            if (fileURL) {
-                setEmployee((prev) => ({ ...prev, file: fileURL }));
-                setFileText("Image uploaded successfully");
-            }
-        }
+        console.log(employee)
     };
 
 
@@ -310,7 +298,7 @@ console.log("Payload :", body);
             }
     
             toast.success("employee created successfully");
-            navigate("/dashboard/enseignants");
+            navigate("/dashboard/employees");
         } catch (error) {
             toast.error(error instanceof Error ? error.message : "An error occurred");
         } finally {
@@ -336,25 +324,7 @@ console.log("Payload :", body);
                 </div>
                 <div className="p-6 grid grid-cols-1 md:grid-cols-5 gap-6">
                     {/* Photo Upload */}
-                    <div className="md:col-span-1">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Photo*</label>
-                        <div className="relative border-2 border-dashed border-gray-300 rounded-lg h-48 flex items-center justify-center">
-                            <input 
-                                type="file" 
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
-                                onChange={handleFileUpload}
-                            />
-                            <div className="text-center p-4">
-                                <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <p className="mt-1 text-sm text-gray-600">Cliquez pour télécharger</p>
-                            </div>
-                        </div>
-                        {fileText && (
-                            <p className="mt-2 text-sm text-green-600">{fileText}</p>
-                        )}
-                    </div>
+                  
 
                     {/* Left Column */}
                     <div className="md:col-span-2 space-y-4">
@@ -555,6 +525,18 @@ className="w-full px-4 py-2 border border-gray-300 rounded-lg
 
   {/* Submit Button */}
   <div className="px-6 pb-6 flex items-center justify-between">
+     <div>
+      <Link 
+      to={"/dashboard/employees"}>
+        <button
+          className="w-full md:w-auto px-6 py-3 bg-red-500 text-white font-medium rounded-lg shadow hover:bg-red-600 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-yousra)] focus:ring-offset-2 transition-colors flex items-center justify-center"
+          
+>
+Annuler
+    </button></Link>
+     
+    </div>
+   
     <div>
       <button
       className="w-full md:w-auto px-6 py-3 bg-[var(--color-yousra)] text-white font-medium rounded-lg shadow hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-yousra)] focus:ring-offset-2 transition-colors flex items-center justify-center"
@@ -573,17 +555,6 @@ className="w-full px-4 py-2 border border-gray-300 rounded-lg
         "Ajouter l'employé"
       )}
     </button>
-    </div>
-    <div>
-      <Link 
-      to={"/dashboard/enseignants"}>
-        <button
-          className="w-full md:w-auto px-6 py-3 bg-red-500 text-white font-medium rounded-lg shadow hover:bg-red-600 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-yousra)] focus:ring-offset-2 transition-colors flex items-center justify-center"
-          
->
-Annuler
-    </button></Link>
-     
     </div>
    
   </div>

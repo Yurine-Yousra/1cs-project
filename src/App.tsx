@@ -34,7 +34,7 @@ const App = () => {
             <Route path="teachers/:id" element={<TeacherProfil />} />
         <Route path="eleves" element={<Eleve />} />
         <Route path="*" element={<div>Page Not Found</div>} />
-        <Route path="employes" element={<Employees />} />
+        <Route path="employees" element={<Employees />} />
         <Route path="addEmployee" element={<AddEmployee />} />
         <Route path="gestion" element={<GestionClass />} />
         <Route path="students/:id/convocation" element={<Convocation />} />

@@ -21,6 +21,33 @@ export interface EmployeesResponse {
   };
 }
 
+export interface EmployeeDetails {
+  employeeId: string;
+  userId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  birthDate: string; // ISO date string (e.g., "0001-01-01")
+  position: string;
+  hireDate: string; // ISO date string (e.g., "2025-05-24")
+  contractType: string;
+  isActive: boolean;
+  permissions: number;
+  phoneNumber: string;
+  address: {
+    adresseId: number;
+    street: string | null;
+    city: string | null;
+    state: string | null;
+    postalCode: string | null;
+    country: string | null;
+  };
+  createdAt: string; // ISO date string (e.g., "0001-01-01T00:00:00")
+  lastModified: string | null; // ISO date string or null
+}
+
+
 export const getEmployees = async (page: number, pageSize: number) => {
   try {
     const response = await fetch(
@@ -55,9 +82,9 @@ export const getEmployees = async (page: number, pageSize: number) => {
 };
 
 
-export const getStudent = async (id:string|null) => {
+export const getEmployee = async (id:string|null) => {
   try {
-    const response = await fetch(`http://localhost:5080/api/students/${id}`, {
+    const response = await fetch(`http://localhost:5080/api/employees/${id}`, {
       method: 'GET',
       headers: {
         'accept': 'text/plain',
@@ -73,7 +100,7 @@ export const getStudent = async (id:string|null) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     
-    const data:StudentDetails = await response.json(); 
+    const data:EmployeeDetails = await response.json(); 
     
     return data;
   } catch (error) {
@@ -83,3 +110,5 @@ export const getStudent = async (id:string|null) => {
 
 
 }  
+
+
