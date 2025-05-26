@@ -11,6 +11,8 @@ import {StudentProfile} from "../../components/_student/StudentProfile";
 import { sidebarArrayTeacher } from "../../constants/sidebar.constant";
 import Convocation from "./Convocation";
 import ConvocationSuccess from "../SuccessPages/ConvocationSuccess";
+import GroupSelectionPage from "./GroupSelectionPage";
+import NotesManagementPage from "./NotesManagementPage";
 
 const TeacherDashboard: React.FC = () => {
   const location = useLocation();
@@ -29,17 +31,16 @@ const TeacherDashboard: React.FC = () => {
       <div
         className={`flex-1 transition-all duration-300 overflow-hidden bg-sous ${isCollapsed ? "lg:ml-[60px]" : "lg:ml-[280px]"}`}
       >
-        {/* Barre de recherche pour certaines pages */}
         {isAddTeacherPage1 && <DashboardUpper />}
 
-        {/* Contenu des routes */}
         <div className="h-full overflow-y-auto  w-full">
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
             <Route path="teachers/:id" element={<TeacherProfil />} />
             <Route path="eleves" element={<Absence />} />
             {/* <Route path="employees" element={<Employees />} /> */}
-            <Route path="notes" element={ <h1>  sssssssss  </h1> } />
+            <Route path="/notes" element={<GroupSelectionPage />} />
+            <Route path="/groups/:groupId/notes" element={<NotesManagementPage />} />
             <Route path="profile" element={<Profil />} />
               <Route path="students/:id" element={<StudentProfile />} />
             <Route path="students/:id/convocation" element={<Convocation />} />

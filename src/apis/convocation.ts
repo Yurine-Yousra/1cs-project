@@ -1,3 +1,5 @@
+import { API_URL } from "../lib/config"
+
 interface ConvocationData {
     studentId: string | undefined;
   titre: string;
@@ -8,7 +10,7 @@ export const sendConvocation = async (data: ConvocationData) => {
     const token = localStorage.getItem('token')
 
   try {
-    const response = await fetch(`http://localhost:5080/api/teacher/reports/add`, {
+    const response = await fetch(`${API_URL}/api/teacher/reports/add`, {
       method: 'POST',
       headers: {
         'accept': 'application/json',

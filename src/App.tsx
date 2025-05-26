@@ -18,6 +18,7 @@ import Convocation from './pages/TeacherDashboard/Convocation'
 import Profil from "./pages/TeacherDashboard/Profil";
 import Calender from "./components/_planification/Calender";
 import ConvocationSuccess from "./pages/SuccessPages/ConvocationSuccess";
+// import NotesManagementPage from "./pages/TeacherDashboard/NotesManagementPage";
 
 const App = () => {
  
@@ -51,6 +52,8 @@ const App = () => {
         <Route path="établisment" element={<Etablisment />} />
         <Route path="profile" element={<Profil />} />
         <Route path="notes" element={<></>} />
+        <Route path="groups/:groupId/notes" element={<></>} />
+        
           <Route path="convocation-success" element={<ConvocationSuccess />} />
       </Route>
 

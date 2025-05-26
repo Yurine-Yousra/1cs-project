@@ -1,0 +1,23 @@
+import type React from "react"
+
+interface AlertProps {
+  children: React.ReactNode
+  className?: string
+}
+
+interface AlertDescriptionProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export const Alert: React.FC<AlertProps> = ({ children, className = "" }) => {
+  return (
+    <div className={`rounded-lg border p-4 ${className}`}>
+      <div className="flex items-start space-x-2">{children}</div>
+    </div>
+  )
+}
+
+export const AlertDescription: React.FC<AlertDescriptionProps> = ({ children, className = "" }) => {
+  return <div className={`text-sm ${className}`}>{children}</div>
+}
