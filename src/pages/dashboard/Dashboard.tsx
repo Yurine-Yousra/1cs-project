@@ -14,7 +14,9 @@ import Statistic from "./Statistic";
 import { sidebarArray } from "../../constants/sidebar.constant";
 import ClassroomList from "./ClassroomList";
 import Planifcation from "./Planifcation";
-
+import StudentProfile from "../../components/profile/StudentProfile";
+import Convocation from "../TeacherDashboard/Convocation";
+import EmployeeProfil from "./EmployeeProfil";
 
 const Dashboard: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -22,7 +24,7 @@ const Dashboard: React.FC = () => {
  
   return (
     <div
-      className={`flex  text-black  `}
+      className={`flex  text-black   min-h-screen `}
     >
      
 
@@ -30,23 +32,26 @@ const Dashboard: React.FC = () => {
 
 
       <div
-        className={` w-full  flex-1 md:ml-[86px] ${! isCollapsed ? "xl:ml-[280px]":"xl:ml-[85px]"}  h-screen bg-sous `}
-      >
+className={`w-full flex flex-col flex-1 md:ml-[86px] ${!isCollapsed ? "xl:ml-[280px]" : "xl:ml-[85px]"} bg-sous pt-6`}      >
         {  /* <DashboardUpper /> */}
-        <div className=" ">
+        <div className="">
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
             <Route path="addTeacher" element={<AddTeacher />} />
             <Route path="eleves"  element={<Eleves />} />
-            <Route path="TeacherProfil" element={<TeacherProfil />} />
+            <Route path="teachers/:id" element={<TeacherProfil />} />
             <Route path="*" element={<div className="">Page Not Found</div>} />
-            <Route path="employes" element={<Employees />} />
+            <Route path="employees" element={<Employees />} />
             <Route path="addEmployee" element={<AddEmployee />} />
             <Route path="gestion" element={<GestionClass />} />
             <Route path="etablisment" element={<Etablisment />} />
             <Route path="classroom" element={<ClassroomList   />} />
             <Route path="" element={<Statistic />} />
             <Route path="planification" element={<Planifcation />} />
+            <Route path="students/:id" element={<StudentProfile />} />
+            <Route path="students/:id/convocation" element={<Convocation />} />
+            <Route path="employees/:id" element={<EmployeeProfil />} />
+
           </Routes>
         </div>
       </div>

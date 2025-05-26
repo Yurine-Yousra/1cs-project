@@ -38,7 +38,8 @@ const InputForm: React.FC<InputProps> = ({
           onChange={onChange}
           placeholder="Enter value..."
           
-          className="w-full rounded-[5px] h-[45px] border-gray-400 border-[2px] focus:border-[var(--color-secondary)] focus:outline-none pl-10"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-[var(--color-yousra)] transition pl-10"
+
         />
         {EyeIcon && (
           <EyeIcon

@@ -3,7 +3,6 @@ import { AuthImage1,AuthImage2, IshakLogo } from "../../assets";
 import AdminInfoForm from "../../components/AdminComponents/AdminInfosForm";
 import SchoolInfoForm from "../../components/auth/SchoolInfosForm";
 import { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
 import { SchoolInfo, SignupData } from "../../types/register.type";
 import { useSignup } from "../../hooks/useSignup";
 
@@ -80,14 +79,27 @@ function Registration() {
             )}
           </div>
           <div className="lg:w-[50%] pl-10 flex flex-col gap-10">
-            <div className="w-[100%]">
-              {!displayed && <h1 className="font-semibold text-[24px]">Bienvenu dans Dirassati</h1>}
-              <p className="text-gray-600">
-                {!displayed
-                  ? "Créez un compte pour votre établissement"
-                  : "Créez un compte administrateur pour votre établissement"}
-              </p>
-            </div>
+           <div className="w-full mt-4 text-start ">
+  {!displayed ? (
+    <>
+      <h1 className="text-3xl font-bold text-[var(--color-yousra)] mb-2">
+        Bienvenue dans Dirassati
+      </h1>
+      <p className="text-lg text-gray-600">
+        Créez un compte pour votre établissement
+      </p>
+    </>
+  ) : (
+    <>
+      <h2 className="text-2xl font-semibold text-[var(--color-primary)] mb-2">
+        Presque terminé !
+      </h2>
+      <p className="text-gray-600">
+        Créez un compte administrateur pour votre établissement
+      </p>
+    </>
+  )}
+</div>
             <div className="flex flex-col gap-4 w-[80%] items-center">
               <div className="w-full flex flex-col gap-2">
                 {!displayed ? (
@@ -96,12 +108,9 @@ function Registration() {
                   <AdminInfoForm setDisplayed={setDisplayed} adminInfos={adminInfos} setAdminInfos={setAdminInfos}  handleSubmit={handleSubmit} />
                 )}
               </div>
-              <Link
-          className="hover:underline font-bold ml-auto"
-          to={"/login"}
-        >
-          Already have acount!
-        </Link> 
+             
+  
+
             </div>
           </div>
         </div>

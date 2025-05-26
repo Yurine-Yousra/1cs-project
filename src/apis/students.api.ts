@@ -69,7 +69,7 @@ export const  getStudents =  async (page: number, pageSize: number) => {
 
 export const getStudent = async (id:string|null) => {
   try {
-    const response = await fetch(`${API_URL}/api/students/${id}`, {
+    const response = await fetch(`http://localhost:5080/api/students/${id}`, {
       method: 'GET',
       headers: {
         'accept': 'text/plain',

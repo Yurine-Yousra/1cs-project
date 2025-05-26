@@ -1,19 +1,15 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-//import { useUserStore } from "../store/userStore"; wiil use later
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../lib/config";
-
-import {jwtDecode} from 'jwt-decode';  // Correct import
+import { jwtDecode } from 'jwt-decode';
 import { useRoleStore } from "../store/utls";
 
 export const Uselogin = () => {
     const [err, setErr] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const navigate = useNavigate();
-    const {role} = useRoleStore()
+    const { role } = useRoleStore();
     
-    // Define interface for the decoded token
     interface DecodedToken {
         sub: string;
         email: string;
@@ -22,17 +18,20 @@ export const Uselogin = () => {
         SchoolId: string;
         exp: number;
         iat: number;
-        SchoolTypeId:string;
-        Permission:string,
+        SchoolTypeId: string;
+        Permission: string;
+        TeacherId:string;
+        EmployeeId:string;
     }
 
     const login = async (email: string, password: string): Promise<void> => {
         setIsLoading(true);
         setErr(false);
 
-        const endpoint = role === "admin" ? "api/auth/login" :"api/teacher/auth/login"
+        const endpoint = role === "admin" ? "api/auth/login" : "api/teacher/auth/login";
+        
         try {
-            const response = await fetch(`${API_URL}/${endpoint}`, {
+            const response = await fetch(`http://localhost:5080/${endpoint}`, {
                 method: "POST",
                 body: JSON.stringify({ email, password }),
                 headers: { 'Content-type': "application/json" },
@@ -42,42 +41,51 @@ export const Uselogin = () => {
 
             if (!response.ok) {
                 setIsLoading(false);
-                setErr(json.error);
+                setErr(json.error || "Login failed");
+                toast.error(json.error || "Login failed");
                 return;
             }
 
             if (response.ok) {
-                // Decode the JWT token after successful login
                 const decoded: DecodedToken = jwtDecode(json.token);
-                console.log(decoded)
-              
-                // Save the token in local storage
-                localStorage.setItem('token', json.token);
-
-                // Set the decoded user info to the store
-               
-                    localStorage.setItem('SchoolId' ,decoded.SchoolId)
-                  localStorage.setItem('role' ,decoded.Permission)
-                  localStorage.setItem('shool',decoded.SchoolTypeId)
+                console.log(decoded);
                 
+                // Store token and common user data
+                localStorage.setItem('token', json.token);
+                localStorage.setItem('SchoolId', decoded.SchoolId);
+                localStorage.setItem('role', decoded.Permission);
+                localStorage.setItem('schoolType', decoded.SchoolTypeId);
+                
+                // Store role-specific ID
+                if(role ==="admin"){
+                    localStorage.setItem('emplyeeId' , decoded.EmployeeId)
+                    console.log(decoded.EmployeeId)
+                }
+                else{
+                    localStorage.setItem('teacherId' , decoded.TeacherId)
+                    console.log(decoded.TeacherId)
+                }
+                
+                // Store user details that might be needed globally
 
-                toast.success("User logged in successfully");
-
-                // Redirect to the dashboard
-                navigate("/dashboard");
+                toast.success("Logged in successfully");
+                
+                // Redirect based on role if needed
+                const redirectPath = role === "admin" ? "/Dashboard" : "/Teacherdashboard";
+                navigate(redirectPath);
             }
         } catch (error) {
+            setIsLoading(false);
+            setErr(true);
             if (error instanceof Error) {
-                toast.error(` ${error.message}`);
-                setErr(true);
+                toast.error(error.message);
             } else {
-                toast.error("An unknown error occurred");
-                setErr(true);
+                toast.error("An unknown error occurred during login");
             }
         } finally {
             setIsLoading(false);
         }
     }
 
-    return { login, isLoading, err }
-}
+    return { login, isLoading, err };
+};

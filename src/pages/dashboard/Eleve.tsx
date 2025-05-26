@@ -6,7 +6,7 @@ import { DataTable } from "../../components/ui/TableData";
 import { Link, useSearchParams } from "react-router-dom";
 
 import StudentForm from "../../components/forms/StudentForm";
-import { StudentProfile } from "../../components/profile/StudentProfile";
+import  StudentProfile  from "../../components/profile/StudentProfile";
 
 
 
@@ -56,8 +56,22 @@ const Eleve = () => {
     return (
       <main className="mt-2  w-[90%] m-auto h-full">
         <nav className="flex justify-between items-center px-10 ">
-          <h1 className="text-yousra text-3xl font-semibold">Listes des élèves</h1>
-          <div className="flex gap-4 items-center">
+<h2 className="text-3xl font-semibold  text-[var(--color-yousra)]  flex items-center gap-2 mb-5">
+  <svg
+    className="w-7 h-7 text-[var(--color-yousra)]"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m10-4a4 4 0 11-8 0 4 4 0 018 0zm-8 0a4 4 0 100-8 4 4 0 000 8z"
+    />
+  </svg>
+  Liste des Eleves
+</h2>          <div className="flex gap-4 items-center">
             <span>
               <h3 className="font-semibold">N.Mohammed</h3>
               <p className="text-gray" dir="rtl">Secretary</p>

@@ -7,14 +7,17 @@ import TeacherProfil from "../dashboard/TeacherProfil";
 import Absence from "./Absence";
 import Profil from "./Profil";
 import Sidebar from "../../components/sideBars/SideBar";
+import StudentProfile from "../../components/profile/StudentProfile";
 import { sidebarArrayTeacher } from "../../constants/sidebar.constant";
+import Convocation from "./Convocation";
+import ConvocationSuccess from "../SuccessPages/ConvocationSuccess";
 
 const TeacherDashboard: React.FC = () => {
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false)
 
 
-  const isAddTeacherPage1 = ["employes", "enseignants"].some(substring =>
+  const isAddTeacherPage1 = ["employes", "enseignants" , "convocation"].some(substring =>
     location.pathname.includes(substring)
   );
 
@@ -33,11 +36,14 @@ const TeacherDashboard: React.FC = () => {
         <div className="h-full overflow-y-auto  w-full">
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
-            <Route path="TeacherProfil" element={<TeacherProfil />} />
+            <Route path="teachers/:id" element={<TeacherProfil />} />
             <Route path="eleves" element={<Absence />} />
             {/* <Route path="employees" element={<Employees />} /> */}
             <Route path="notes" element={ <h1>  sssssssss  </h1> } />
             <Route path="profile" element={<Profil />} />
+              <Route path="students/:id" element={<StudentProfile />} />
+            <Route path="students/:id/convocation" element={<Convocation />} />
+             <Route path="convocation-success" element={<ConvocationSuccess />} />
 
           </Routes>
         </div>

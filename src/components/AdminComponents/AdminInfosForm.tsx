@@ -146,7 +146,7 @@ return {loading,error}
 
       <div className="w-full flex items-center justify-between">
         <button
-          className="flex items-center gap-1 bg-[var(--color-secondary)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
+          className="flex items-center gap-1 bg-[var(--color-yousra)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
           onClick={() => setDisplayed(false)}
         >
           <span>
@@ -156,11 +156,11 @@ return {loading,error}
         </button>
 
         <button
-          className="flex items-center bg-[var(--color-secondary)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
+          className="flex items-center bg-[var(--color-yousra)] text-white py-2 rounded-[50px] px-10 cursor-pointer"
         >
            {isLoading ? <span className="flex items-center gap-2">
                 <FaSpinner className="animate-spin" /> Connexion en cours...
-              </span> : "CFréer"}
+              </span> : "Créer"}
           
         </button>
       </div>
