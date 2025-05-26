@@ -20,9 +20,26 @@ export const DataTable = () => {
   }
     fetchStudent();
   },[currentPage])
+  if (students.length === 0) {
+    return (
+       
+        <div className="text-center py-16 mt-2 bg-white rounded-xl shadow-sm">
+          <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 className="text-lg font-medium text-gray-900">No Student found</h3>
+          <p className="mt-1 text-sm text-gray-500">Try adjusting your token or refresh to find what you're looking for.</p>
+        </div>
+      
+    )
+  }
+
   return (
     <div className="py-2 px-10 mt-5">
       <div className="">
+        
         <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden ">
           <thead className="bg-blue-100 text-gray-600 text-sm uppercase">
             <tr>
@@ -34,7 +51,9 @@ export const DataTable = () => {
             </tr>
           </thead>
           
+
           <tbody className="text-gray-700  ">
+          
             {students.map((user, index) => (
               <tr key={index} className="border-b">
                 <td className="px-6 py-4 flex items-center space-x-3">
@@ -69,6 +88,7 @@ export const DataTable = () => {
         <div className="mt-5 flex items-center justify-center bg-gray-50 ">
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>          </div>
+    
     </div>
   );
 };

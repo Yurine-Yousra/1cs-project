@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
 import { API_URL } from "../../lib/config";
 
-// Helper: image URL to Uint8Array
 const imageUrlToBytes = async (url: string): Promise<Uint8Array> => {
     const response = await fetch(url);
     const blob = await response.blob();
@@ -186,14 +185,6 @@ const AddTeacher = () => {
 
     return (
         <div className="w-full max-w-6xl mx-auto p-6">
-          
-
-          <Link to="/dashboard/enseignants" className="">
-          <button className="  mt-5    flex items-center gap-2 bg-yousra text-white px-4 py-2 rounded-4xl shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200">
-            <IoMdArrowBack size={20} />
-            <span>Back </span>
-          </button>
-        </Link>
             <h1 className="text-2xl mt-2 font-bold text-gray-800 mb-8">
                     
                 Ajouter un Enseignant</h1>
@@ -339,7 +330,15 @@ className="w-full px-4 py-2 border border-gray-300 rounded-lg
                     </div>
 
                     {/* Submit Button */}
-                    <div className="md:col-span-5 flex justify-end">
+                    <div className="md:col-span-5 flex justify-between items-center">
+                         <Link 
+                              to={"/dashboard/enseignants"}>
+                                <button
+                                  className="w-full md:w-auto px-6 py-3 bg-red-500 text-white font-medium rounded-lg shadow hover:bg-red-600 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-yousra)] focus:ring-offset-2 transition-colors flex items-center justify-center"
+                                  
+                        >
+                        Annuler
+                            </button></Link>
                         <button
                             className="px-6 py-3 bg-[var(--color-yousra)] text-white font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
                             onClick={handelSubmit}
@@ -357,6 +356,7 @@ className="w-full px-4 py-2 border border-gray-300 rounded-lg
                                 "Ajouter l'enseignant"
                             )}
                         </button>
+                        
                     </div>
                 </div>
             </div>

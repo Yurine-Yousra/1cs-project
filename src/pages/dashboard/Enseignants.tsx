@@ -26,13 +26,22 @@ const Enseignants: React.FC = () => {
       <div className="flex w-full justify-between items-center">
         <div className="flex items-center gap-6 w-full">
           <div className="flex items-center justify-between gap-4 w-full">
-            <h2 className="text-lg font-semibold mb-4 pt-3">Liste des Enseignants</h2>
-            <div className="flex items-center gap-2">
-              <select className="border border-[var(--color-yousra)] p-1.5 rounded-full text-[var(--color-yousra)] w-[120px] text-[15px]">
-                <option value="alphabet">Alphabet</option>
-                <option value="age">Âge</option>
-              </select>
-            </div>
+<h2 className="text-3xl font-semibold  text-[var(--color-yousra)]  flex items-center gap-2 mb-5">
+  <svg
+    className="w-7 h-7 text-[var(--color-yousra)]"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m10-4a4 4 0 11-8 0 4 4 0 018 0zm-8 0a4 4 0 100-8 4 4 0 000 8z"
+    />
+  </svg>
+  Liste des Enseigants
+</h2>           
             <button
               className="flex items-center gap-2 bg-[var(--color-yousra)] text-white px-4 py-2 rounded-full shadow-lg hover:shadow-2xl hover:cursor-pointer hover:scale-105 transition-all duration-200"
               onClick={() => navigate("/dashboard/addTeacher")}

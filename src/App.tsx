@@ -16,6 +16,7 @@ import GestionClass from "./pages/dashboard/GestionClass";
 import { Toaster } from "react-hot-toast";
 import Convocation from './pages/TeacherDashboard/Convocation'
 import Profil from "./pages/TeacherDashboard/Profil";
+import Calender from "./components/_planification/Calender";
 import ConvocationSuccess from "./pages/SuccessPages/ConvocationSuccess";
 // import NotesManagementPage from "./pages/TeacherDashboard/NotesManagementPage";
 
@@ -27,6 +28,7 @@ const App = () => {
       <Route path="/register" element={<UnProtectedRoute><Registration /></UnProtectedRoute>} />
       <Route path="/login" element={<UnProtectedRoute><Login /></UnProtectedRoute>} />
       <Route path="/" element={<Home />} />
+      <Route path="/calender" element={<Calender  />} />
       {/* Dashboard with subroutes */}
       <Route path="/dashboard" element={ <ProtectedRoute><Dashboard /></ProtectedRoute> }>
         <Route index element={<Etablisment />} /> {/* Default route */}
@@ -35,7 +37,7 @@ const App = () => {
             <Route path="teachers/:id" element={<TeacherProfil />} />
         <Route path="eleves" element={<Eleve />} />
         <Route path="*" element={<div>Page Not Found</div>} />
-        <Route path="employes" element={<Employees />} />
+        <Route path="employees" element={<Employees />} />
         <Route path="addEmployee" element={<AddEmployee />} />
         <Route path="gestion" element={<GestionClass />} />
         <Route path="students/:id/convocation" element={<Convocation />} />
@@ -54,7 +56,7 @@ const App = () => {
         
           <Route path="convocation-success" element={<ConvocationSuccess />} />
       </Route>
-      
+
     </Routes>
     <Toaster />
 
