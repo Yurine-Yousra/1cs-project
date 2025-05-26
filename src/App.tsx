@@ -15,7 +15,7 @@ import Home from "./pages/home/Home";
 import GestionClass from "./pages/dashboard/GestionClass";
 import { Toaster } from "react-hot-toast";
 import Convocation from './pages/TeacherDashboard/Convocation'
-import Profil from "./pages/TeacherDashboard/Profil";
+import ResetTeacherPassword from "./pages/TeacherDashboard/ResetTeacherPassword";
 import ConvocationSuccess from "./pages/SuccessPages/ConvocationSuccess";
 
 const App = () => {
@@ -47,7 +47,7 @@ const App = () => {
             <Route path="teachers/:id" element={<TeacherProfil />} />
         <Route path="eleves" element={<Absence />} />
         <Route path="établisment" element={<Etablisment />} />
-        <Route path="profile" element={<Profil />} />
+        <Route path="profile" element={<ResetTeacherPassword />} />
         <Route path="notes" element={<></>} />
           <Route path="convocation-success" element={<ConvocationSuccess />} />
       </Route>

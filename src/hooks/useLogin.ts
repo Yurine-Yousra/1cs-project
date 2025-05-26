@@ -58,7 +58,7 @@ export const Uselogin = () => {
                 
                 // Store role-specific ID
                 if(role ==="admin"){
-                    localStorage.setItem('emplyeeId' , decoded.EmployeeId)
+                    localStorage.setItem('employeeId' , decoded.EmployeeId)
                     console.log(decoded.EmployeeId)
                 }
                 else{

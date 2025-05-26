@@ -51,7 +51,6 @@ className={`w-full flex flex-col flex-1 md:ml-[86px] ${!isCollapsed ? "xl:ml-[28
             <Route path="students/:id" element={<StudentProfile />} />
             <Route path="students/:id/convocation" element={<Convocation />} />
             <Route path="employees/:id" element={<EmployeeProfil />} />
-
           </Routes>
         </div>
       </div>
