@@ -1,8 +1,11 @@
+import { API_URL } from "../lib/config"
+import { Teacher } from "./getTeacher";
+
 const token = localStorage.getItem("token");
 
 export const getSybjects = async (id:string|null) => {
   try {
-    const response = await fetch(`http://localhost:5080/api/teacher/${id}`, {
+    const response = await fetch(`${API_URL}/api/teacher/${id}`, {
       method: 'GET',
       headers: {
         'accept': 'text/plain',

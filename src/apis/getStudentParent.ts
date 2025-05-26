@@ -1,3 +1,6 @@
+import { API_URL } from "../lib/config"
+
+
 export interface Parent {
     
   parentId: string,
@@ -12,7 +15,7 @@ export interface Parent {
 
 export const getStudentParent = async (id:string|null) => {
   try {
-    const response = await fetch(`http://localhost:5080/api/parents/${id}/parent`, {
+    const response = await fetch(`${API_URL}/api/parents/${id}/parent`, {
       method: 'GET',
       headers: {
         'accept': 'text/plain',
