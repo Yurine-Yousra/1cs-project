@@ -1,14 +1,12 @@
 {
   "files": [],
+  "compilerOptions": {
+    "types": [
+      "@types/babel__core"
+    ]
+  },
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" },
-    {
-      "compilerOptions": {
-        "types": [
-          "@types/babel__core"
-        ]
-      }
-    }
+    { "path": "./tsconfig.node.json" }
   ]
 }

@@ -1,9 +1,11 @@
+import { getRandomKeyword } from "../constants/uplash";
 import { PUBLIC_UNSPLASH } from "../lib/config";
 
 
-export async function fetchNaturePhotos(page: number = 1, perPage: number = 10) {
-  const url = `https://api.unsplash.com/search/photos?query=snow&page=${page}&per_page=${perPage}&client_id=${PUBLIC_UNSPLASH}`;
 
+export async function fetchNaturePhotos(page: number = 1, perPage: number = 10) {
+  const keyword = getRandomKeyword(); 
+  const url = `https://api.unsplash.com/search/photos?query=${keyword}&page=${page}&per_page=${perPage}&client_id=${PUBLIC_UNSPLASH}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {

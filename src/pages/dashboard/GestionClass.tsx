@@ -3,8 +3,6 @@ import { IoIosArrowDown } from "react-icons/io";
 import { GrAddCircle } from "react-icons/gr"
 import SearchBar from "../../components/ui/SearchBar"
 import ClassCard from "../../components/ui/ClassTable";
-import { CiCalendar, CiUser } from "react-icons/ci";
-import { MdOutlineEventNote } from "react-icons/md";
 import { Link,  useSearchParams } from "react-router-dom";
 
  const GestionClass = () => {

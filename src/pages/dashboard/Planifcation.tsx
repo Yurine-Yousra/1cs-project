@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { fetchNaturePhotos } from '../../apis/uplash.api';
 import toast from 'react-hot-toast';
+import Calender from '../../components/_planification/Calender';
+import { Link, Navigate } from 'react-router-dom';
 
 // Types
 type Board = {
@@ -9,44 +11,46 @@ type Board = {
   background: string;
 };
 
-
-
 export default function Planifcation() {
-  // Initial boards
+  const [createModalOpen, setCreateModalOpen] = useState(false);
   const [boards, setBoards] = useState<Board[]>([
     {
       id: '1',
       title: 'Summer Board',
-      background: '/api/placeholder/320/180',
+      background: '',
     },
     {
       id: '2',
       title: 'Third Board',
-      background: '/api/placeholder/320/180',
+      background: '',
     },
     {
       id: '3',
       title: 'Second Board',
-      background: '/api/placeholder/320/180',
+      background: '',
     },
     {
       id: '4',
       title: 'My Board',
-      background: '/api/placeholder/320/180',
+      background: '',
     },
   ]);
   const [photos, setPhotos] = useState<string[]>([]);
   const createButtonRef = useRef<HTMLDivElement>(null);
-const [modalPosition, setModalPosition] = useState<{ top: number, left: number } | null>(null);
-
-
 
   useEffect(() => {
     const fetchPhotos = async () => {
         try {
             const data = await fetchNaturePhotos(1, 9);
             setPhotos(data);
-
+            
+            // Update existing boards with photos from API
+            setBoards(prevBoards => 
+              prevBoards.map((board, index) => ({
+                ...board,
+                background: board.background || data[index] || data[0]
+              }))
+            );
         } catch (error) {
             toast.error('Failed to fetch photos');
         }
@@ -55,10 +59,16 @@ const [modalPosition, setModalPosition] = useState<{ top: number, left: number }
     fetchPhotos();
   }, []);
 
-  const [createModalOpen, setCreateModalOpen] = useState(false);
   const [newBoardTitle, setNewBoardTitle] = useState('');
-  const [selectedBackground, setSelectedBackground] = useState(photos[0]);
+  const [selectedBackground, setSelectedBackground] = useState('');
   const [tooltipVisible, setTooltipVisible] = useState(false);
+
+  // Set default selected background when photos are loaded
+  useEffect(() => {
+    if (photos.length > 0 && selectedBackground === '') {
+      setSelectedBackground(photos[0]);
+    }
+  }, [photos]);
 
   const MAX_BOARDS_FREE = 5;
   const remainingBoards = MAX_BOARDS_FREE - boards.length;
@@ -73,24 +83,21 @@ const [modalPosition, setModalPosition] = useState<{ top: number, left: number }
     const newBoard: Board = {
       id: Date.now().toString(),
       title: newBoardTitle.trim() || 'Untitled Board',
-      background: selectedBackground,
+      background: selectedBackground, // Use the actually selected background
     };
     
     setBoards([...boards, newBoard]);
     setCreateModalOpen(false);
     setNewBoardTitle('');
-    setSelectedBackground(photos[0]);
+    setSelectedBackground(photos[0]); // Reset to first photo for next time
   };
 
   const openCreateModal = () => {
-    if (remainingBoards > 0 && createButtonRef.current) {
-      const rect = createButtonRef.current.getBoundingClientRect();
-      setModalPosition({ top: 150, left: rect.left+400 + window.scrollX });
+    if (remainingBoards > 0) {
       setCreateModalOpen(true);
     }
   };
   
-
   return (
     <div className="bg-gray-50 min-h-screen p-6">
       {/* Header */}
@@ -116,17 +123,19 @@ const [modalPosition, setModalPosition] = useState<{ top: number, left: number }
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {boards.map((board,index) => (
-            <div 
+          {boards.map((board) => (
+            <Link 
+              to={`/Calender?bg=${board.background}`}
               key={board.id} 
               className="bg-cover bg-center h-40 rounded-lg shadow-md overflow-hidden relative cursor-pointer"
-              style={{ backgroundImage: `url(${photos[index]})` }}
+              style={{ backgroundImage: `url(${board.background})` }}
+              
             >
               <div className="absolute inset-0 bg- bg-opacity-20"></div>
               <div className="absolute bottom-0 left-0 right-0 p-3">
                 <h3 className="text-white font-medium text-lg">{board.title}</h3>
               </div>
-            </div>
+            </Link>
           ))}
           
           {/* Create New Board Button */}
@@ -148,15 +157,12 @@ const [modalPosition, setModalPosition] = useState<{ top: number, left: number }
             )}
           </div>
         </div>
-
-      
       </div>
-{/* Create Board Modal */}
-{createModalOpen && modalPosition && (
-        <div className="  absolute bg-opacity-50 flex  justify-center p-4 z-50"
-        style={{ top: modalPosition.top, left: modalPosition.left }}
-        >
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
+
+      {/* Create Board Modal */}
+      {createModalOpen && (
+        <div className="fixed inset-0  bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 z-50 transition-opacity duration-300 ease-out">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-md transform transition-all duration-300 ease-out scale-95 opacity-0 animate-fade-in">
             <div className="p-4 border-b flex justify-between items-center">
               <h3 className="font-medium">Create board</h3>
               <button 
@@ -205,4 +211,3 @@ const [modalPosition, setModalPosition] = useState<{ top: number, left: number }
     </div>
   );
 }
- 
