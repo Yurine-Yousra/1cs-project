@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { API_URL } from "../lib/config";
 
 
@@ -63,6 +64,7 @@ export async function deleteClassroom(classroomId: string): Promise<void> {
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to delete classroom. Status: ${response.status}`);
+      const errorText = await response.text();
+      toast.error(`Error deleting classroom: ${errorText}`);
   }
 } 

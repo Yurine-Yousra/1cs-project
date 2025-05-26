@@ -1,173 +1,22 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { IoMdArrowBack } from "react-icons/io"
 import { Link } from "react-router-dom"
+import { Modal,XIcon,UsersIcon,SchoolIcon, SearchIcon } from "./Icons"
+import { getStudents, Student, StudentsResponse } from "../../apis/students.api"
+import { Classroom, getClassrooms } from "../../apis/classroom.api"
+import { CreateGroupPayload, createStudentGroup } from "../../apis/group.api"
 
-// Mock student data
-const mockStudents = [
-  {
-    id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    name: "First Last Name",
-    refNumber: "124589762I-AA54",
-    parentName: "Parent Name",
-    parentContact: "0642346547987",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "4fb85f64-5717-4562-b3fc-2c963f66afa7",
-    name: "Alice Johnson",
-    refNumber: "124589763I-BB55",
-    parentName: "Robert Johnson",
-    parentContact: "0642346547988",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "5fc85f64-5717-4562-b3fc-2c963f66afa8",
-    name: "Bob Smith",
-    refNumber: "124589764I-CC56",
-    parentName: "Sarah Smith",
-    parentContact: "0642346547989",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "6fd85f64-5717-4562-b3fc-2c963f66afa9",
-    name: "Emma Wilson",
-    refNumber: "124589765I-DD57",
-    parentName: "Michael Wilson",
-    parentContact: "0642346547990",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "7fe85f64-5717-4562-b3fc-2c963f66afaa",
-    name: "David Brown",
-    refNumber: "124589766I-EE58",
-    parentName: "Lisa Brown",
-    parentContact: "0642346547991",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-  {
-    id: "8ff85f64-5717-4562-b3fc-2c963f66afab",
-    name: "Sophie Martin",
-    refNumber: "124589767I-FF59",
-    parentName: "Pierre Martin",
-    parentContact: "0642346547992",
-    avatar: "/placeholder.svg?height=40&width=40",
-  },
-]
 
-// Mock classroom data
-const mockClassrooms = [
-  {
-    classroomId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    className: "1ère année Classe Scientifique",
-    schoolLevelId: 1,
-    specializationId: 101,
-    levelName: "1ère année",
-    specializationName: "Scientifique",
-    schoolType: "Lycée",
-  },
-  {
-    classroomId: "4fb85f64-5717-4562-b3fc-2c963f66afa7",
-    className: "2ème année Classe Littéraire",
-    schoolLevelId: 2,
-    specializationId: 102,
-    levelName: "2ème année",
-    specializationName: "Littéraire",
-    schoolType: "Lycée",
-  },
-  {
-    classroomId: "5fc85f64-5717-4562-b3fc-2c963f66afa8",
-    className: "3ème année Classe Économique",
-    schoolLevelId: 3,
-    specializationId: 103,
-    levelName: "3ème année",
-    specializationName: "Économique",
-    schoolType: "Lycée",
-  },
-  {
-    classroomId: "6fd85f64-5717-4562-b3fc-2c963f66afa9",
-    className: "1ère année Classe Technique",
-    schoolLevelId: 1,
-    specializationId: 104,
-    levelName: "1ère année",
-    specializationName: "Technique",
-    schoolType: "Institut Technique",
-  },
-]
 
-// Icons as SVG components
-const SearchIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-    />
-  </svg>
-)
 
-const XIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-  </svg>
-)
 
-const UsersIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
-    />
-  </svg>
-)
-
-const SchoolIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-    />
-  </svg>
-)
-
-// Modal Component
-const Modal = ({
-  isOpen,
-  onClose,
-  title,
-  children,
-}: {
-  isOpen: boolean
-  onClose: () => void
-  title: string
-  children: React.ReactNode
-}) => {
-  if (!isOpen) return null
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="fixed inset-0 bg-black opacity-40 " onClick={onClose}></div>
-      <div className="relative bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[80vh] overflow-hidden">
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-xl font-semibold">{title}</h2>
-          <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded-full transition-colors">
-            <XIcon />
-          </button>
-        </div>
-        <div className="p-6 overflow-y-auto max-h-[calc(80vh-120px)]">{children}</div>
-      </div>
-    </div>
-  )
-}
 
 export default function CreateGroup() {
+
+  const  [mockClassrooms,setMockClassrooms] = useState<Classroom[]>([])
   const [groupName, setGroupName] = useState("")
   const [selectedClassroom, setSelectedClassroom] = useState<(typeof mockClassrooms)[0] | null>(null)
   const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([])
@@ -175,11 +24,14 @@ export default function CreateGroup() {
   const [classroomSearchTerm, setClassroomSearchTerm] = useState("")
   const [isStudentDialogOpen, setIsStudentDialogOpen] = useState(false)
   const [isClassroomDialogOpen, setIsClassroomDialogOpen] = useState(false)
+  const [mockStudents,setMockStudents] = useState<Student[]>([])
+
+
 
   const filteredStudents = mockStudents.filter(
     (student) =>
-      student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.refNumber.toLowerCase().includes(searchTerm.toLowerCase()),
+      student.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.parentContact.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
   const filteredClassrooms = mockClassrooms.filter(
@@ -210,18 +62,44 @@ export default function CreateGroup() {
     setSelectedClassroom(null)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const payload = {
+    const payload:CreateGroupPayload = {
       groupName,
-      classroomId: selectedClassroom?.classroomId,
+      classroomId: selectedClassroom?.classroomId || "",
       studentIds: selectedStudentIds,
     }
-
-    console.log("Group creation payload:", JSON.stringify(payload, null, 2))
-    alert("Group created! Check console for payload.")
+    await createStudentGroup(payload)
+    
   }
+
+  useEffect(() => {
+     const fetchStudent = async() => {
+        const data:StudentsResponse = await getStudents(1,100);
+        setMockStudents(data.items);
+      }
+        fetchStudent();
+
+
+  },[])
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const data:Classroom[]|string = await getClassrooms(); // ✅ use await here
+      if (typeof data === 'string') {
+      } else {
+        setMockClassrooms(data)
+      }
+    } catch (err: any) {
+    }
+  };
+
+  fetchData();
+
+
+},[])
 
   return (
     <div className="  p-4">
@@ -231,8 +109,8 @@ export default function CreateGroup() {
                     <span>Back </span>
                   </button>
                 </Link>
-      <div className="mx-auto max-w-6xl">
-        <div className="bg-white rounded-lg shadow-sm border">
+      <div className="mx-auto  max-w-6xl">
+        <div className="bg-white rounded-lg shadow-2xl border-white">
           <div className="p-6 border-b">
             <h1 className="text-2xl font-bold text-gray-900">Create New Group</h1>
             <p className="text-gray-600 mt-1">
@@ -430,7 +308,7 @@ export default function CreateGroup() {
                       name="classroom"
                       checked={selectedClassroom?.classroomId === classroom.classroomId}
                       onChange={() => handleClassroomSelection(classroom)}
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500"
+                      className="h-4 w-4 text-blue-600 focus:ring-yousra"
                     />
                     <span className="text-sm font-medium">{classroom.className}</span>
                   </div>
@@ -494,31 +372,31 @@ export default function CreateGroup() {
             <div className="max-h-96 overflow-y-auto">
               {filteredStudents.map((student) => (
                 <div
-                  key={student.id}
+                  key={student.studentId}
                   className={`grid grid-cols-5 gap-4 p-4 hover:bg-gray-50 border-b ${
-                    selectedStudentIds.includes(student.id) ? "bg-blue-50 border-l-4 border-l-blue-500" : ""
+                    selectedStudentIds.includes(student.studentId) ? "bg-blue-50 border-l-4 border-l-blue-500" : ""
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <input
                       type="checkbox"
-                      checked={selectedStudentIds.includes(student.id)}
-                      onChange={(e) => handleStudentSelection(student.id, e.target.checked)}
+                      checked={selectedStudentIds.includes(student.studentId)}
+                      onChange={(e) => handleStudentSelection(student.studentId, e.target.checked)}
                       className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                     />
                     <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">
-                      {student.name
+                      {student.firstName
                         .split(" ")
                         .map((n) => n[0])
                         .join("")}
                     </div>
-                    <span className="text-sm font-medium">{student.name}</span>
+                    <span className="text-sm font-medium">{student.lastName}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-sm text-blue-600">{student.refNumber}</span>
+                    <span className="text-sm text-blue-600">{student.studentIdNumber}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-sm">{student.parentName}</span>
+                    <span className="text-sm">{student.parentFullName}</span>
                   </div>
                   <div className="flex items-center">
                     <span className="text-sm">{student.parentContact}</span>
@@ -547,7 +425,7 @@ export default function CreateGroup() {
             <button
               type="button"
               onClick={() => setIsStudentDialogOpen(false)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-4 py-2  text-white rounded-md text-sm font-medium bg-yousra focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Done ({selectedStudentIds.length} selected)
             </button>

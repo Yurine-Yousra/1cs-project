@@ -183,7 +183,7 @@ fetchLevels();
     setOpenMenuId(null);
   };
 
-  const handleDeleteClassroom = (classroom: Classroom) => {
+  const handleDeleteClassroom =  (classroom: Classroom) => {
     setSelectedClassroom(classroom);
     setIsDeleteDialogOpen(true);
     setOpenMenuId(null);
@@ -194,7 +194,8 @@ fetchLevels();
       setClassrooms(classrooms.filter(c => c.classroomId !== selectedClassroom.classroomId));
       setIsDeleteDialogOpen(false);
       setSelectedClassroom(null);
-      await deleteClassroom(selectedClassroom.classroomId)
+      deleteClassroom(selectedClassroom.classroomId)
+      console.log("Classroom deleted:", selectedClassroom.classroomId);
       toast.success("Classroom deleted successfully",{  position: 'bottom-right'});
     }
   };

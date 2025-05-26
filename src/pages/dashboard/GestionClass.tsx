@@ -10,7 +10,8 @@ import CreateGroup from "../../components/_group/CreateGroup";
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [searchParams] = useSearchParams();
     const [tab, setTab] = useState<string>("");
-  
+    const [searchTerm,setSearchTerm] = useState<string>("")
+
     useEffect(() => {
       setTab(searchParams.get("tab") || "");
     }, [searchParams]);
@@ -30,7 +31,7 @@ import CreateGroup from "../../components/_group/CreateGroup";
    
           { (tab === "" ) &&  <>  
                 <div className="mt-10 px-10 flex justify-between">
-                           <SearchBar />
+                    <SearchBar setSearchTerm={setSearchTerm} />
                         
                           <div className="flex items-center gap-4">
                          <div className="relative w-48">
@@ -60,22 +61,15 @@ import CreateGroup from "../../components/_group/CreateGroup";
                                 <span>Ajouter une classe</span>
                             <GrAddCircle /> 
                         </Link>
-                  </div>
-                        
-                            
-            
-            
-            
-            
-            
-            
-            </div>  
-                        
-            <ClassCard />
-                        </>  }       
-                        { tab === "addGroup" &&  <CreateGroup />   }
-            
-                                        
+                  </div>        
+                 </div>  
+              <ClassCard searchTerm={searchTerm} />
+                        </> 
+                         }       
+              { tab === "addGroup" &&  <CreateGroup />   }
+              { tab === "group-details" &&  <h1> group details </h1>   }
+
+
                                     
 
 

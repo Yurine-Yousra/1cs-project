@@ -33,6 +33,35 @@ export  const GetStudentGroup = async () => {
      return result;
     }
   };
+
+  
+export type CreateGroupPayload = {
+    groupName: string;
+    classroomId: string;
+    studentIds: string[];
+  };
+  
+export const createStudentGroup = async (payload: CreateGroupPayload) => {
+    const response = await fetch(`${API_URL}/api/group/students`, {
+      method: 'POST',
+      headers: {
+        'Accept': '*/*',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+  
+    if (!response.ok) {
+      console.error('Failed to create group:', response.status, await response.text());
+    } else {
+      const result = await response.json();
+      alert("Group created successfully!");
+      return result;
+    }
+  };
+  
+ 
   
  
   
