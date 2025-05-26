@@ -14,7 +14,7 @@ import Statistic from "./Statistic";
 import { sidebarArray } from "../../constants/sidebar.constant";
 import ClassroomList from "./ClassroomList";
 import Planifcation from "./Planifcation";
-import StudentProfile from "../../components/profile/StudentProfile";
+import {StudentProfile} from "../../components/_student/StudentProfile";
 import Convocation from "../TeacherDashboard/Convocation";
 import EmployeeProfil from "./EmployeeProfil";
 

@@ -1,3 +1,5 @@
+import { API_URL } from "../lib/config";
+
 // src/apis/getEmployee.ts
 const token = localStorage.getItem("token");
 
@@ -51,7 +53,7 @@ export interface EmployeeDetails {
 export const getEmployees = async (page: number, pageSize: number) => {
   try {
     const response = await fetch(
-      `http://localhost:5080/api/employees?page=${page}&pageSize=${pageSize}`,
+      `${API_URL}/api/employees?page=${page}&pageSize=${pageSize}`,
       {
         method: "GET",
         headers: {
@@ -107,8 +109,6 @@ export const getEmployee = async (id:string|null) => {
     console.error('Failed to fetch students:', error);
     throw error;
   }
-
-
 }  
 
 

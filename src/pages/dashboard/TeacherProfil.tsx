@@ -1,5 +1,5 @@
 import imageSrc from '../../assets/image copy 5.png';
-import ImageProfil from '../../assets/image copy 4.png';
+// import ImageProfil from '../../assets/image copy 4.png';
 import { BiPhone } from 'react-icons/bi';
 import { TfiEmail } from 'react-icons/tfi';
 import { BiDotsHorizontalRounded } from "react-icons/bi";
@@ -41,7 +41,7 @@ const TeacherProfil = () => {
           {teacher?.photo ? (
             <img src={teacher.photo} alt="profile" className="w-24 h-24 rounded-full object-cover border-4 border-white" />
           ) : (
-            <img src={ImageProfil} alt="default profile" className="w-24 h-24 rounded-full border-4 border-white" />
+            <img src={`https://avatar.iran.liara.run/public/boy?username=${teacher?.firstName}`} alt="default profile" className="w-24 h-24 rounded-full border-4 border-white" />
           )}
         </div>
 

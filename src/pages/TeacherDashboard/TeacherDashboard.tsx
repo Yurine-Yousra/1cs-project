@@ -7,7 +7,7 @@ import TeacherProfil from "../dashboard/TeacherProfil";
 import Absence from "./Absence";
 import Profil from "./Profil";
 import Sidebar from "../../components/sideBars/SideBar";
-import StudentProfile from "../../components/profile/StudentProfile";
+import {StudentProfile} from "../../components/_student/StudentProfile";
 import { sidebarArrayTeacher } from "../../constants/sidebar.constant";
 import Convocation from "./Convocation";
 import ConvocationSuccess from "../SuccessPages/ConvocationSuccess";

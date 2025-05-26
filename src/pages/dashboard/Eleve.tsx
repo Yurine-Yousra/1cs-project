@@ -6,7 +6,7 @@ import { DataTable } from "../../components/ui/TableData";
 import { Link, useSearchParams } from "react-router-dom";
 
 import StudentForm from "../../components/forms/StudentForm";
-import  StudentProfile  from "../../components/profile/StudentProfile";
+import  {StudentProfile}  from "../../components/_student/StudentProfile";
 
 
 
@@ -14,7 +14,7 @@ const Eleve = () => {
   const [searchParams] = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [tab, setTab] = useState<string>("");
-
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   
 
@@ -86,7 +86,7 @@ const Eleve = () => {
         </nav>
 
         <div className="mt-10 px-10 flex justify-between">
-          <SearchBar />
+          <SearchBar setSearchTerm={setSearchTerm} />
           {(tab === "" || tab === "class" )&& (
             <div className="flex items-center gap-4">
             <div className="relative w-48">
@@ -121,7 +121,7 @@ const Eleve = () => {
         
         
 
-           <DataTable />       
+           <DataTable  searchTerm={searchTerm} />       
       </main>
     );
   }

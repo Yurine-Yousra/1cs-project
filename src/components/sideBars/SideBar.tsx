@@ -146,6 +146,7 @@ export default function Sidebar({isCollapsed,setIsCollapsed,sidebarArray}:Sideba
             const isActiveAdd =
               (location.pathname === "/dashboard/addTeacher" && index === 2) ||
               (location.pathname === "/dashboard/addEmployee" && index === 4)
+            const isProfile =    (location.pathname === "/dashboard/teachers/86b837ee-678d-4249-accf-1ab4e840237b" && index === 2) 
 
             return (
               <Link
@@ -155,7 +156,7 @@ export default function Sidebar({isCollapsed,setIsCollapsed,sidebarArray}:Sideba
                   flex items-center rounded-md mx-auto px-4 py-3 text-gray-700
                   ${isCollapsed ? "justify-center" : "justify-start w-[94%]"}
                   
-                  ${isActive || isActiveAdd ? "text-white bg-yousra" : "hover:bg-indigo-100"}
+                  ${isActive || isActiveAdd || isProfile ? "text-white bg-yousra" : "hover:bg-indigo-100"}
                 `}
               >
                 <span className={`w-6 h-6 ${isCollapsed ? "mr-0" : "mr-3"} flex-shrink-0`}>

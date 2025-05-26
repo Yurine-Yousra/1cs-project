@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getTeachers, Teacher } from "../../apis/getTeacher";
 import { Globe, Mail, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
+import { bgColor200Array } from "../../constants/colors";
 
 const Enseignants: React.FC = () => {
   const navigate = useNavigate();
@@ -53,12 +54,12 @@ const Enseignants: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
-        {teachers.map((teacher) => (
+        {teachers.map((teacher,index) => (
           <div key={teacher.teacherId} className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
             <div className="p-4 pb-2">
               <div className="flex items-center gap-4">
                 <div className="relative h-16 w-16 rounded-full border-2 border-white shadow-md overflow-hidden">
-                  <div className={`absolute inset-0 flex items-center justify-center bg-[var(--color-primary)] text-white font-medium`}>
+                  <div className={`absolute inset-0 flex items-center justify-center ${bgColor200Array[index]}  font-medium`}>
                     {teacher.firstName[0]}{teacher.lastName[0]}
                   </div>
                 </div>

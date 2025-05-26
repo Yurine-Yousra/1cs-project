@@ -54,7 +54,7 @@ export const Uselogin = () => {
                 localStorage.setItem('token', json.token);
                 localStorage.setItem('SchoolId', decoded.SchoolId);
                 localStorage.setItem('role', decoded.Permission);
-                localStorage.setItem('schoolType', decoded.SchoolTypeId);
+                localStorage.setItem('shool', decoded.SchoolTypeId); // do change this to SchoolTypeId
                 
                 // Store role-specific ID
                 if(role ==="admin"){
