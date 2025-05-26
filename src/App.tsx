@@ -16,11 +16,8 @@ import GestionClass from "./pages/dashboard/GestionClass";
 import { Toaster } from "react-hot-toast";
 import Convocation from './pages/TeacherDashboard/Convocation'
 import Profil from "./pages/TeacherDashboard/Profil";
-<<<<<<< HEAD
 import Calender from "./components/_planification/Calender";
-=======
 import ConvocationSuccess from "./pages/SuccessPages/ConvocationSuccess";
->>>>>>> 58858cc15cdb408b0c8043a3b31a215bb5a5d145
 
 const App = () => {
  
