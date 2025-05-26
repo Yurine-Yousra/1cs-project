@@ -15,6 +15,7 @@ import Home from "./pages/home/Home";
 import GestionClass from "./pages/dashboard/GestionClass";
 import { Toaster } from "react-hot-toast";
 import Profil from "./pages/TeacherDashboard/Profil";
+import Calender from "./components/_planification/Calender";
 
 const App = () => {
  
@@ -24,6 +25,7 @@ const App = () => {
       <Route path="/register" element={<UnProtectedRoute><Registration /></UnProtectedRoute>} />
       <Route path="/login" element={<UnProtectedRoute><Login /></UnProtectedRoute>} />
       <Route path="/" element={<Home />} />
+      <Route path="/calender" element={<Calender  />} />
       {/* Dashboard with subroutes */}
       <Route path="/dashboard" element={ <ProtectedRoute><Dashboard /></ProtectedRoute> }>
         <Route index element={<Etablisment />} /> {/* Default route */}
@@ -49,7 +51,7 @@ const App = () => {
         <Route path="notes" element={<></>} />
 
       </Route>
-      
+
     </Routes>
     <Toaster />
 
