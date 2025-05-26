@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { API_URL } from "../lib/config";
 
 
@@ -51,4 +52,19 @@ export async function createClassroom(newClass: CreateClassroomRequest): Promise
   }
 
   return await response.text(); // assuming the API returns plain text
+} 
+
+export async function deleteClassroom(classroomId: string): Promise<void> {
+  const response = await fetch(`${API_URL}/api/classrooms/${classroomId}`, {
+    method: 'DELETE',
+    headers: {
+      'Accept': '*/*',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    }
+  });
+
+  if (!response.ok) {
+      const errorText = await response.text();
+      toast.error(`Error deleting classroom: ${errorText}`);
+  }
 } 

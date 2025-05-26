@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
 import { useRoleStore } from "../store/utls";
+import { API_URL } from "../lib/config";
 
 export const Uselogin = () => {
     const [err, setErr] = useState<boolean>(false);
@@ -31,7 +32,7 @@ export const Uselogin = () => {
         const endpoint = role === "admin" ? "api/auth/login" : "api/teacher/auth/login";
         
         try {
-            const response = await fetch(`http://localhost:5080/${endpoint}`, {
+            const response = await fetch(`${API_URL}/${endpoint}`, {
                 method: "POST",
                 body: JSON.stringify({ email, password }),
                 headers: { 'Content-type': "application/json" },

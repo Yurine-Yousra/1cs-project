@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import uploadFileToCloudinary from "../../config/UploadCloudinary";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { IoMdArrowBack } from "react-icons/io";
+import { API_URL } from "../../lib/config";
 
-// Helper: image URL to Uint8Array
 const imageUrlToBytes = async (url: string): Promise<Uint8Array> => {
     const response = await fetch(url);
     const blob = await response.blob();
@@ -97,7 +98,7 @@ const AddTeacher = () => {
             setLoading(true);
             const token = localStorage.getItem("token");
             try {
-                const response = await fetch("http://localhost:5080/api/Subjects/BySchoolLevel", {
+                const response = await fetch(`${API_URL}/api/Subjects/BySchoolLevel`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -105,7 +106,7 @@ const AddTeacher = () => {
                     },
                 });
 
-                const response1 = await fetch("http://localhost:5080/api/teacher/contract-types", {
+                const response1 = await fetch(`${API_URL}/api/teacher/contract-types`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -158,7 +159,7 @@ const AddTeacher = () => {
     
             console.log("📦 Request body to send:", body);
     
-            const response = await fetch("http://localhost:5080/api/teacher/create", {
+            const response = await fetch("${API_URL}/api/teacher/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

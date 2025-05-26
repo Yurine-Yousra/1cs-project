@@ -1,5 +1,6 @@
 import Image1 from '../../assets/images/image copy 2.png';
 import React, { useState } from 'react';
+import { API_URL } from '../../lib/config';
 
 const ResetTeacherPassword = () => {
   const [formData, setFormData] = useState({
@@ -72,7 +73,7 @@ const ResetTeacherPassword = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch("http://localhost:5080/api/Accounts/change-password", {
+      const res = await fetch(`${API_URL}/api/Accounts/change-password`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,

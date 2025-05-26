@@ -16,7 +16,9 @@ import GestionClass from "./pages/dashboard/GestionClass";
 import { Toaster } from "react-hot-toast";
 import Convocation from './pages/TeacherDashboard/Convocation'
 import ResetTeacherPassword from "./pages/TeacherDashboard/ResetTeacherPassword";
+import Calender from "./components/_planification/Calender";
 import ConvocationSuccess from "./pages/SuccessPages/ConvocationSuccess";
+// import NotesManagementPage from "./pages/TeacherDashboard/NotesManagementPage";
 
 const App = () => {
  
@@ -26,6 +28,7 @@ const App = () => {
       <Route path="/register" element={<UnProtectedRoute><Registration /></UnProtectedRoute>} />
       <Route path="/login" element={<UnProtectedRoute><Login /></UnProtectedRoute>} />
       <Route path="/" element={<Home />} />
+      <Route path="/calender" element={<Calender  />} />
       {/* Dashboard with subroutes */}
       <Route path="/dashboard" element={ <ProtectedRoute><Dashboard /></ProtectedRoute> }>
         <Route index element={<Etablisment />} /> {/* Default route */}
@@ -49,9 +52,11 @@ const App = () => {
         <Route path="établisment" element={<Etablisment />} />
         <Route path="profile" element={<ResetTeacherPassword />} />
         <Route path="notes" element={<></>} />
+        <Route path="groups/:groupId/notes" element={<></>} />
+        
           <Route path="convocation-success" element={<ConvocationSuccess />} />
       </Route>
-      
+
     </Routes>
     <Toaster />
 

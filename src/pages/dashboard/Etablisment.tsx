@@ -13,6 +13,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import uploadFileToCloudinary from "../../config/UploadCloudinary";
 import {bytesToBase64, imageUrlToBytes} from "../../config/bytesToBase64";
+import { API_URL } from "../../lib/config";
 import { codesPostauxAlgerie } from "../../constants/codePostaux";
 interface Spécialité {
   specializationId: number,
@@ -187,12 +188,12 @@ const Etablisment = () => {
       setLoading(true);
       try {
         const [schoolRes, specializationsRes] = await Promise.all([
-          fetch("http://localhost:5080/api/School", {
+          fetch(`${API_URL}/api/School`, {
             headers: {
               "Authorization": `Bearer ${token}` 
             }
           }),
-          fetch("http://localhost:5080/api/Levels/specializations", {
+          fetch(`${API_URL}/api/Levels/specializations`, {
             headers: {
               "Authorization": `Bearer ${token}` 
             }
@@ -265,20 +266,10 @@ const Etablisment = () => {
           endDate: editSchool.endDate || showSchool.academicYear?.endDate
         }
       };
-console.log(body)
-      // If logo is a URL and hasn't changed, convert it to base64
-      let logoBase64 = body.logo;
-      if (body.logo && !body.logo.startsWith('data:image')) {
-        try {
-          const imageBytes = await imageUrlToBytes(body.logo);
-          logoBase64 = bytesToBase64(imageBytes);
-        } catch (error) {
-          console.error("Error converting image to base64:", error);
-          // Keep the original logo if conversion fails
-        }
-      }
 
-      const response = await fetch("http://localhost:5080/api/School", {
+      console.log(body)
+
+      const response = await fetch("${API_URL}/api/School", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
