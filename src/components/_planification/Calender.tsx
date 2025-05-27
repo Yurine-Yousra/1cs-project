@@ -61,9 +61,7 @@ export default function Calender() {
     }
   }, [showAIPopup])
 
-  const [currentView, setCurrentView] = useState("week")
-  const [currentMonth, setCurrentMonth] = useState("March 2025")
-  const [currentDate, setCurrentDate] = useState("March 5")
+
   const [selectedEvent, setSelectedEvent] = useState(null)
 
   const handleEventClick = (event) => {
@@ -255,7 +253,7 @@ export default function Calender() {
   ]
 
   // Sample calendar days for the week view
-  const weekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+  const weekDays = ["SUN", "MON", "TUE", "WED", "THU"]
   const weekDates = [3, 4, 5, 6, 7, 8, 9]
   const timeSlots = Array.from({ length: 9 }, (_, i) => i + 8) // 8 AM to 4 PM
 
@@ -267,21 +265,6 @@ export default function Calender() {
     const height = (end - start) * 80
     return { top: `${top}px`, height: `${height}px` }
   }
-
-  // Sample calendar for mini calendar
-  const daysInMonth = 31
-  const firstDayOffset = 5 // Friday is the first day of the month in this example
-  const miniCalendarDays = Array.from({ length: daysInMonth + firstDayOffset }, (_, i) =>
-    i < firstDayOffset ? null : i - firstDayOffset + 1,
-  )
-
-  // Sample my calendars
-  const myCalendars = [
-    { name: "My Calendar", color: "bg-blue-500" },
-    { name: "Work", color: "bg-green-500" },
-    { name: "Personal", color: "bg-purple-500" },
-    { name: "Family", color: "bg-orange-500" },
-  ]
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying)
@@ -335,7 +318,7 @@ export default function Calender() {
           <div className="flex-1 overflow-auto p-4">
             <div className="bg-white/20 backdrop-blur-lg rounded-xl border border-white/20 shadow-xl h-full">
               {/* Week Header */}
-              <div className="grid grid-cols-8 border-b border-white/20">
+              <div className="grid grid-cols-6 border-b border-white/20">
                 <div className="p-2 text-center text-white/50 text-xs"></div>
                 {weekDays.map((day, i) => (
                   <div key={i} className="p-2 text-center border-l border-white/20">
@@ -346,7 +329,7 @@ export default function Calender() {
               </div>
 
               {/* Time Grid */}
-              <div className="grid grid-cols-8">
+              <div className="grid grid-cols-6">
                 {/* Time Labels */}
                 <div className="text-white/70">
                   {timeSlots.map((time, i) => (
@@ -357,7 +340,7 @@ export default function Calender() {
                 </div>
 
                 {/* Days Columns */}
-                {Array.from({ length: 7 }).map((_, dayIndex) => (
+                {Array.from({ length: 5 }).map((_, dayIndex) => (
                   <div key={dayIndex} className="border-l border-white/20 relative">
                     {timeSlots.map((_, timeIndex) => (
                       <div key={timeIndex} className="h-20 border-b border-white/10"></div>

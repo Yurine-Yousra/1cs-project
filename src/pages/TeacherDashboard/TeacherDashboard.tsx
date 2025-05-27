@@ -37,9 +37,9 @@ const TeacherDashboard: React.FC = () => {
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
             <Route path="teachers/:id" element={<TeacherProfil />} />
-            <Route path="eleves" element={<Absence />} />
-            {/* <Route path="employees" element={<Employees />} /> */}
-            <Route path="/notes" element={<GroupSelectionPage />} />
+            <Route path="eleves" element={   <GroupSelectionPage tab="eleves" />} />
+            <Route path="groups/:groupId/eleves" element={<Absence />} />
+            <Route path="/notes" element={<GroupSelectionPage tab="notes" />} />
             <Route path="/groups/:groupId/notes" element={<NotesManagementPage />} />
             <Route path="profile" element={<Profil />} />
               <Route path="students/:id" element={<StudentProfile />} />

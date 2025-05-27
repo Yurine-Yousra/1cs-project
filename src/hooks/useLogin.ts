@@ -72,7 +72,7 @@ export const Uselogin = () => {
                 toast.success("Logged in successfully");
                 
                 // Redirect based on role if needed
-                const redirectPath = role === "admin" ? "/Dashboard" : "/Teacherdashboard";
+                const redirectPath = role === "admin" ? "/dashboard" : "/Teacherdashboard/profile";
                 navigate(redirectPath);
             }
         } catch (error) {

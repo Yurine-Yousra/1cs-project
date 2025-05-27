@@ -38,7 +38,7 @@ className={`w-full flex flex-col flex-1 md:ml-[86px] ${!isCollapsed ? "xl:ml-[28
           <Routes>
             <Route path="enseignants" element={<Enseignants />} />
             <Route path="addTeacher" element={<AddTeacher />} />
-            <Route path="eleves"  element={<Eleves />} />
+            <Route path="Eleves"  element={<Eleves />} />
             <Route path="teachers/:id" element={<TeacherProfil />} />
             <Route path="*" element={<div className="">Page Not Found</div>} />
             <Route path="employees" element={<Employees />} />

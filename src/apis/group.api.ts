@@ -59,9 +59,71 @@ export const createStudentGroup = async (payload: CreateGroupPayload) => {
       alert("Group created successfully!");
       return result;
     }
-  };
+  };   
+  
+  export interface Student {
+    studentId: string;
+    firstName: string;
+    lastName: string;
+    studentIdNumber: string;
+    parentName: string;
+    parentContact: string;
+    parentEmail: string;
+  }
+  
+  export async function getStudentsByGroup(groupId: string): Promise<Student[] | string> {
+    const response = await fetch(`${API_URL}/api/group/students/by-group/${groupId}`, {
+      method: 'GET',
+      headers: {
+        'Accept': '*/*',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      }
+    });
+  
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  
+    try {
+      const data = await response.json();
+      return data as Student[];
+    } catch {
+      return await response.text();
+    }
+  }
+  
+  export async function assignStudentToGroup(studentId: string, groupId: string): Promise<string> {
+    try {
+      const response = await fetch(`${API_URL}/api/Groups/assign-student`, {
+        method: 'POST',
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
+        },
+        body: JSON.stringify({
+          studentId,
+          groupId
+        })
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        return JSON.stringify(data); 
+      } else {
+        return await response.text();
+      }
+    } catch (error) {
+      console.error('Error assigning student to group:', error);
+      return `Error: ${(error as Error).message}`;
+    }
+  }
   
  
   
- 
   

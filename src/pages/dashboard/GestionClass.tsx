@@ -5,6 +5,7 @@ import SearchBar from "../../components/ui/SearchBar"
 import ClassCard from "../../components/ui/ClassTable";
 import { Link,  useSearchParams } from "react-router-dom";
 import CreateGroup from "../../components/_group/CreateGroup";
+import { GroupDetails } from "../../components/_group/GroupDetails";
 
  const GestionClass = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -67,7 +68,7 @@ import CreateGroup from "../../components/_group/CreateGroup";
                         </> 
                          }       
               { tab === "addGroup" &&  <CreateGroup />   }
-              { tab === "group-details" &&  <h1> group details </h1>   }
+              { tab === "group-details" &&  <GroupDetails />   }
 
 
                                     

@@ -8,7 +8,7 @@ export interface SidebarItem {
     { path: "/dashboard/etablisment", icon: "Image9", title: "Etablissement" },
     { path: "/dashboard", icon: "Image2", title: "Statistiques" },
     { path: "/dashboard/enseignants", icon: "Image11", title: "Enseignants" },
-    { path: "/dashboard/eleves", icon: "Image7", title: "Élèves" },
+    { path: "/dashboard/Eleves", icon: "Image7", title: "Élèves" },
     { path: "/dashboard/employees", icon: "Image3", title: "Employés" },
     { path: "/dashboard/gestion", icon: "Image4", title: "Gestion des classes" },
     { path: "/dashboard/classroom", icon: "Image15", title: "Class rooms" },

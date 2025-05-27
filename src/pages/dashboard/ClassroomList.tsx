@@ -132,22 +132,23 @@ fetchLevels();
     setFilteredClassrooms(result);
   }, [searchTerm, filters, classrooms]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data:Classroom[]|string = await getClassrooms(); // ✅ use await here
-        if (typeof data === 'string') {
-          
-        } else {
-          setClassrooms(data); 
-        }
-      } catch (err: any) {
-        toast.error(err.message,{  position: 'top-right'});
+  const fetchData = async () => {
+    try {
+      const data:Classroom[]|string = await getClassrooms(); // ✅ use await here
+      if (typeof data === 'string') {
+        
+      } else {
+        setClassrooms(data); 
       }
-    };
+    } catch (err: any) {
+      toast.error(err.message,{  position: 'top-right'});
+    }
+  };
+  useEffect(() => {
+   
 
     fetchData();
-  }, [classrooms]);
+  }, []);
 
   // Get unique values for filter options
   const schoolTypes = [...new Set(classrooms.map(item => item.schoolType))];
@@ -166,7 +167,7 @@ fetchLevels();
       await createClassroom(newClass);
     }
     
-    // Reset states
+    await fetchData(); // Refresh the classroom list
     closeDialog();
   };
 

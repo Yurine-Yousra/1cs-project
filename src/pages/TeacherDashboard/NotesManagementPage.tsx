@@ -1,32 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  ArrowLeft,
-  Upload,
-  Download,
-  FileText,
-  CheckCircle,
-  AlertCircle,
-} from "lucide-react";
-
+import {ArrowLeft,Upload,Download,FileText,CheckCircle,AlertCircle} from "lucide-react";
 import { Alert, AlertDescription } from "./components/ui/alert";
 import { Button } from "./components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./components/ui/card";
+import {Card,CardContent,CardDescription,CardHeader,CardTitle} from "./components/ui/card";
 import { Label } from "./components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./components/ui/select";
+import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from "./components/ui/select";
 import { Input } from "./components/ui/input";
+import { ExamType, getExamTypes } from "../../apis/ExamTypes.api";
+import { getSubjectsBySchoolLevel, Subject } from "../../apis/subject.api";
+import { downloadNotesTemplate, uploadNotesCSV } from "../../apis/note.api";
 
 interface FormData {
   tremester: string;
@@ -36,6 +19,7 @@ interface FormData {
 }
 
 export default function NotesManagementPage() {
+  const [examType,setExamType] = useState<ExamType[]>([])
   const { groupId } = useParams<{ groupId: string }>();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
@@ -44,6 +28,7 @@ export default function NotesManagementPage() {
     examTypeId: "",
     subjectId: "",
   });
+  const [subjects, setSubjects] = useState<Subject[]>([]);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDownloading, setIsDownloading] = useState<boolean>(false);
   const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -72,37 +57,46 @@ export default function NotesManagementPage() {
   const downloadTemplate = async (): Promise<void> => {
     setIsDownloading(true);
     setMessage(null);
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      const csvContent = `Name,FirstName,StudentNumber,Grade
-Smith,John,20230001,
-Doe,Jane,20230002,`;
-      const blob = new Blob([csvContent], { type: "text/csv" });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `template-students-${groupId?.slice(0, 8)}.csv`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-      setMessage({
-        type: "success",
-        text: "Template downloaded successfully!",
-      });
-    } catch {
-      setMessage({
-        type: "error",
-        text: "Failed to download template. Please try again.",
-      });
-    } finally {
-      setIsDownloading(false);
-    }
+    // try {
+    //   await new Promise((resolve) => setTimeout(resolve, 1000));
+    //   const csvContent = `Name,FirstName,StudentNumber,Grade
+    //   Smith,John,20230001,
+    //   Doe,Jane,20230002,`;
+    //   const blob = new Blob([csvContent], { type: "text/csv" });
+    //   const url = window.URL.createObjectURL(blob);
+    //   const a = document.createElement("a");
+    //   a.href = url;
+    //   a.download = `template-students-${groupId?.slice(0, 8)}.csv`;
+    //   document.body.appendChild(a);
+    //   a.click();
+    //   window.URL.revokeObjectURL(url);
+    //   document.body.removeChild(a);
+    //   setMessage({
+    //     type: "success",
+    //     text: "Template downloaded successfully!",
+    //   });
+    // } catch {
+    //   setMessage({
+    //     type: "error",
+    //     text: "Failed to download template. Please try again.",
+    //   });
+    // } finally {
+    //   setIsDownloading(false);
+    // }
+    await downloadNotesTemplate(groupId || "");
   };
 
   const uploadNotes = async (): Promise<void> => {
-    if (!selectedFile) {
-      setMessage({ type: "error", text: "Please select a CSV file to upload" });
+    if (selectedFile && groupId) {
+      try {
+        await uploadNotesCSV(selectedFile,groupId, formData);
+        setMessage({ type: "success", text: "Notes uploaded successfully!" });
+      } catch (error) {
+        setMessage({
+          type: "error",
+          text: "Failed to upload notes. Please try again.",
+        });
+      }
       return;
     }
     const requiredFields: (keyof FormData)[] = [
@@ -151,10 +145,41 @@ Doe,Jane,20230002,`;
       : `Group ${id?.slice(0, 8) || "Unknown"}`;
   };
 
+  useEffect(() => {
+    const fetchExamType = async () => {
+      try {
+        const data = await getExamTypes();
+        if(typeof data != "string")
+            setExamType(data);  
+      } catch (error) {
+        console.log("error",error)
+      }
+    }
+    fetchExamType();
+  },[])
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      try {
+        const response = await getSubjectsBySchoolLevel()
+        if (typeof response !== "string") {
+            setSubjects(response);
+        } 
+      } catch (error) {
+        console.error("Error fetching subjects:", error);
+        setMessage({
+          type: "error",
+          text: "Failed to fetch subjects. Please try again later.",
+        });
+      }
+    };
+    fetchSubjects();
+  }, []);
+
+
   return (
     <div className=" ">
       <div className=" mx-auto px-4 py-6">
-        <div className="max-w-7xl mx-auto space-y-8">
+        <div className="max-w-[80%] mx-auto space-y-8">
           <div className="flex items-center gap-4">
             <Button
               onClick={handleGoBack}
@@ -270,10 +295,10 @@ Doe,Jane,20230002,`;
                         <SelectValue placeholder="Sélectionner le type d'examen" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1">Examen de Mi-Parcours</SelectItem>
-                        <SelectItem value="2">Examen Final</SelectItem>
-                        <SelectItem value="3">Quiz</SelectItem>
-                        <SelectItem value="4">Devoir</SelectItem>
+                        {examType.map((exam) => (
+                        <SelectItem value={String(exam.examTypeId)}> {exam.name} </SelectItem>
+                        ))}
+
                       </SelectContent>
                     </Select>
                   </div>
@@ -284,15 +309,22 @@ Doe,Jane,20230002,`;
                     >
                       Subject *
                     </Label>
-                    <Input
-                      id="subject"
-                      className="input-primary"
-                      placeholder="ex: 1"
-                      value={formData.subjectId}
-                      onChange={(e) =>
-                        handleInputChange("subjectId", e.target.value)
+                    <Select
+                      onValueChange={(value) =>
+                        handleInputChange("subjectId", value)
                       }
-                    />
+                    >
+                      <SelectTrigger className="input-primary">
+                        <SelectValue placeholder="Sélectionner un module" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {subjects.map((subject) => (
+                        <SelectItem value={String(subject.subjectId)}> {subject.name} </SelectItem>
+                        ))}
+
+                      </SelectContent>
+                    </Select>
+
                   </div>
                 </div>
                 <Button

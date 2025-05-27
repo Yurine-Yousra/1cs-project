@@ -1,19 +1,7 @@
 const KEYWORDS = [
   "snow",
-  "forest",
-  "beach",
-  "mountains",
-  "river",
-  "desert",
   "sunset",
-  "sky",
   "ocean",
-  "waterfall",
-  "lake",
-  "flowers",
-  "trees",
-  "valley",
-  "nature"
 ];
 
  function getRandomKeyword(): string {
