@@ -124,6 +124,50 @@ export const createStudentGroup = async (payload: CreateGroupPayload) => {
     }
   }
   
- 
+  export interface UpdateGroupPayload {
+    groupName: string;
+    groupCapacity: number;
+    studentIds: string[]; 
+  }
+  
+  export const updateGroup = async (
+    groupId: string,
+    payload: UpdateGroupPayload
+  ) => {
+    const response = await fetch(`${API_URL}/api/Groups/${groupId}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': '*/*',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+  
+    if (!response.ok) {
+      console.error('Failed to update group:', response.status, await response.text());
+    } else {
+      const result = await response.json();
+      alert("Group updated successfully!");
+      return result;
+    }
+  };
+   
+  export const deleteGroup = async (groupId: string) => {
+    const response = await fetch(`${API_URL}/api/Groups/${groupId}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': '*/*',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+  
+    if (!response.ok) {
+      console.error('Failed to delete group:', response.status, await response.text());
+    } else {
+      alert("Group deleted successfully!");
+    }
+  };
+  
   
   

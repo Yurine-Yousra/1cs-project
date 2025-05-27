@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import {  BookOpen,  Calendar,  GraduationCap,  MapPin,  Phone,  User,  Users,  Clock, FileText, Video, Link as LinkIcon, Download, Eye, UserCheck, Award, ChevronRight, Search, Filter} from "lucide-react"
+import {  BookOpen,  Calendar,  GraduationCap,  MapPin,  Phone,  User,  Users,  Clock, FileText, Video, Link as LinkIcon, Download, Eye, UserCheck, Award, ChevronRight, Search, Filter, Edit, Trash2} from "lucide-react"
 import { Link, useSearchParams } from "react-router-dom"
 import { calculateAge, formatDate } from "../../utils/timePack"
 import {  specializationMap } from "../../utils/schoolLevels"
-import { GetStudentGroup, getStudentsByGroup, GroupResponse, Student } from "../../apis/group.api"
+import { deleteGroup, GetStudentGroup, getStudentsByGroup, GroupResponse, Student, updateGroup } from "../../apis/group.api"
 import { bgColor200Array } from "../../constants/colors"
 
 interface GroupDetails {
@@ -31,6 +31,12 @@ export const GroupDetails = () => {
   const [groupData, setGroupData] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [studentSearchTerm, setStudentSearchTerm] = useState('');
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editFormData, setEditFormData] = useState({
+    groupName: '',
+    groupCapacity: 0
+  });
 
   useEffect(() => {
     const fetchGroupData = async () => {
@@ -86,6 +92,57 @@ export const GroupDetails = () => {
     fetchGroups();
   }, [groupId]); 
 
+  const handleEditGroup = () => {
+    // Initialize edit form with current group data
+    if (studentGroup) {
+      setEditFormData({
+        groupName: studentGroup.groupName,
+        groupCapacity: studentGroup.groupCapacity
+      });
+      setShowEditModal(true);
+    }
+  };
+
+  const handleSaveEdit = async () => {
+    try {
+      console.log('Save group edits:', { groupId, ...editFormData });
+     if (groupId) {
+      await updateGroup(groupId, {
+        groupName: editFormData.groupName,
+        groupCapacity: editFormData.groupCapacity,
+        studentIds: [] 
+      });
+    }
+      
+      if (studentGroup) {
+        setStudentGroup({
+          ...studentGroup,
+          groupName: editFormData.groupName,
+          groupCapacity: editFormData.groupCapacity
+        });
+      }
+      
+      setShowEditModal(false);
+      // Show success message
+    } catch (error) {
+      console.error('Error updating group:', error);
+      // Handle error (show toast, etc.)
+    }
+  };
+
+  const handleDeleteGroup = async () => {
+    try {
+    await deleteGroup(groupId || '');
+      setShowDeleteConfirm(false);
+    } catch (error) {
+      console.error('Error deleting group:', error);
+      // Handle error (show toast, etc.)
+    }finally {
+      // Optionally, redirect or refresh the page after deletion
+      window.location.href = '/dashboard/gestion';
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
@@ -112,9 +169,29 @@ export const GroupDetails = () => {
       {studentGroup && (
         <div className="space-y-4">
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <Users className="h-6 w-6 text-blue-600" />
-              <h4 className="text-xl font-semibold text-blue-800">{studentGroup.groupName}</h4>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <Users className="h-6 w-6 text-blue-600" />
+                <h4 className="text-xl font-semibold text-blue-800">{studentGroup.groupName}</h4>
+              </div>
+              
+              {/* Action buttons */}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleEditGroup}
+                  className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                >
+                  <Edit className="h-4 w-4" />
+                  Edit Group
+                </button>
+                <button
+                  onClick={() => setShowDeleteConfirm(true)}
+                  className="flex items-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Delete Group
+                </button>
+              </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -261,6 +338,110 @@ export const GroupDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 backdrop-blur-md shadow-2xl border-2  flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-10 w-10 bg-red-100 rounded-full flex items-center justify-center">
+                <Trash2 className="h-5 w-5 text-red-600" />
+              </div>
+              <h3 className="text-lg font-semibold">Delete Group</h3>
+            </div>
+            
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to delete this group? This action cannot be undone. 
+              All students will be removed from the group.
+            </p>
+            
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                className="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteGroup}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                Delete Group
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Group Modal */}
+      {showEditModal && (
+        <div className="fixed inset-0 backdrop-blur-xs  border-2 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
+                <Edit className="h-5 w-5 text-blue-600" />
+              </div>
+              <h3 className="text-lg font-semibold">Edit Group</h3>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
+                  Group Name
+                </label>
+                <input
+                  type="text"
+                  id="groupName"
+                  value={editFormData.groupName}
+                  onChange={(e) => setEditFormData({ ...editFormData, groupName: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter group name"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="groupCapacity" className="block text-sm font-medium text-gray-700 mb-2">
+                  Group Capacity
+                </label>
+                <input
+                  type="number"
+                  id="groupCapacity"
+                  min="1"
+                  value={editFormData.groupCapacity}
+                  onChange={(e) => setEditFormData({ ...editFormData, groupCapacity: parseInt(e.target.value) || 0 })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter capacity"
+                />
+                {studentGroup && editFormData.groupCapacity < studentGroup.studentCount && (
+                  <p className="text-red-600 text-sm mt-1">
+                    Warning: Capacity cannot be less than current student count ({studentGroup.studentCount})
+                  </p>
+                )}
+              </div>
+            </div>
+            
+            <div className="flex justify-end gap-3 mt-6">
+              <button
+                onClick={() => setShowEditModal(false)}
+                className="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveEdit}
+                disabled={
+                  !editFormData.groupName.trim() || 
+                  editFormData.groupCapacity < 1 || 
+                  (studentGroup && editFormData.groupCapacity < studentGroup.studentCount)
+                }
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
