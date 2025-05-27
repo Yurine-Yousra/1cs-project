@@ -58,7 +58,7 @@ export const useSignup = () => {
               country: data.school.address.country
             },
           specializationsId: [],
-          logo: "",
+          LogoUrl: "",
           websiteUrl: "",
           academicYear: {
       startDate: "2025-04-12",
