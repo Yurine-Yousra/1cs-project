@@ -5,7 +5,7 @@ import DashboardUpper from "../../components/AdminComponents/DashboardUpper";
 import TeacherProfil from "../dashboard/TeacherProfil";
 //import Employees from "../dashboard/Employees";
 import Absence from "./Absence";
-import Profil from "./Profil";
+import ResetTeacherPassword from "./ResetTeacherPassword";
 import Sidebar from "../../components/sideBars/SideBar";
 import {StudentProfile} from "../../components/_student/StudentProfile";
 import { sidebarArrayTeacher } from "../../constants/sidebar.constant";
@@ -41,7 +41,7 @@ const TeacherDashboard: React.FC = () => {
             <Route path="groups/:groupId/eleves" element={<Absence />} />
             <Route path="/notes" element={<GroupSelectionPage tab="notes" />} />
             <Route path="/groups/:groupId/notes" element={<NotesManagementPage />} />
-            <Route path="profile" element={<Profil />} />
+            <Route path="profile" element={<ResetTeacherPassword />} />
               <Route path="students/:id" element={<StudentProfile />} />
             <Route path="students/:id/convocation" element={<Convocation />} />
              <Route path="convocation-success" element={<ConvocationSuccess />} />

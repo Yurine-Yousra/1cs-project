@@ -1,6 +1,5 @@
 import Profile from "../../components/ui/profile"
 import Image1 from '../../assets/images/image copy 2.png'
-
 import { BiPlus } from "react-icons/bi"
 import { LuPhone } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
@@ -15,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import uploadFileToCloudinary from "../../config/UploadCloudinary";
 import {bytesToBase64, imageUrlToBytes} from "../../config/bytesToBase64";
 import { API_URL } from "../../lib/config";
-
+import { codesPostauxAlgerie } from "../../constants/codePostaux";
 interface Spécialité {
   specializationId: number,
   name: string,
@@ -57,6 +56,7 @@ interface School1 {
     schoolTypeId: number,
     name: string,
   },
+    specializations: number[] ,
   address: {
     street: string,
     city: string,
@@ -67,8 +67,7 @@ interface School1 {
 }
 
 const Etablisment = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [loading, setLoading] = useState<boolean>(false);
   const [err, setErr] = useState<string>("");
   const [state, setState] = useState<string[]>([]);
   const [wilaya, setWilaya] = useState<string>("Oran");
@@ -92,6 +91,7 @@ const Etablisment = () => {
       schoolTypeId: 0,
       name: "",
     },
+        specializations:  [] ,
     address: {
       street: "",
       city: "",
@@ -115,6 +115,7 @@ const Etablisment = () => {
     country: "Algeria",
     specializations: []
   });
+ 
   const navigate = useNavigate();
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,148 +140,6 @@ const Etablisment = () => {
     });
   };
 
-  const codesPostauxAlgerie = [
-    {
-      wilaya: "Adrar",
-      codePostal: "01000",
-      regions: ["Adrar", "Reggane", "Timimoun", "Aoulef", "Zaouiet Kounta"]
-    },
-    {
-      wilaya: "Chlef",
-      codePostal: "02000",
-      regions: ["Chlef", "Ténès", "Oued Fodda", "El Karimia", "Ouled Fares"]
-    },
-    {
-      wilaya: "Laghouat",
-      codePostal: "03000",
-      regions: ["Laghouat", "Aflou", "Brida", "Hassi R'Mel", "El Assafia"]
-    },
-    {
-      wilaya: "Oum El Bouaghi",
-      codePostal: "04000",
-      regions: ["Oum El Bouaghi", "Aïn Beida", "Aïn M'lila", "Sigus", "F'kirina"]
-    },
-    {
-      wilaya: "Batna",
-      codePostal: "05000",
-      regions: ["Batna", "Barika", "Merouana", "Arris", "Timgad"]
-    },
-    {
-      wilaya: "Béjaïa",
-      codePostal: "06000",
-      regions: ["Béjaïa", "Akbou", "Kherrata", "Seddouk", "Amizour"]
-    },
-    {
-      wilaya: "Biskra",
-      codePostal: "07000",
-      regions: ["Biskra", "Tolga", "El Kantara", "Ouled Djellal", "Sidi Khaled"]
-    },
-    {
-      wilaya: "Béchar",
-      codePostal: "08000",
-      regions: ["Béchar", "Kenadsa", "Béni Abbès", "Taghit", "Abadla"]
-    },
-    {
-      wilaya: "Blida",
-      codePostal: "09000",
-      regions: ["Blida", "Boufarik", "El Affroun", "Mouzaïa", "Bouinan"]
-    },
-    {
-      wilaya: "Bouira",
-      codePostal: "10000",
-      regions: ["Bouira", "Lakhdaria", "Sour El Ghozlane", "Haizer", "El Hachimia"]
-    },
-    {
-      wilaya: "Tamanrasset",
-      codePostal: "11000",
-      regions: ["Tamanrasset", "Abalessa", "In Guezzam", "In Salah", "Tazrouk"]
-    },
-    {
-      wilaya: "Tébessa",
-      codePostal: "12000",
-      regions: ["Tébessa", "Bir El Ater", "Cheria", "El Ogla", "Morsott"]
-    },
-    {
-      wilaya: "Tlemcen",
-      codePostal: "13000",
-      regions: ["Tlemcen", "Maghnia", "Nedroma", "Remchi", "Ghazaouet"]
-    },
-    {
-      wilaya: "Tiaret",
-      codePostal: "14000",
-      regions: ["Tiaret", "Frenda", "Sougueur", "Mahdia", "Dahmouni"]
-    },
-    {
-      wilaya: "Tizi Ouzou",
-      codePostal: "15000",
-      regions: ["Tizi Ouzou", "Draa Ben Khedda", "Azeffoun", "Boghni", "Freha"]
-    },
-    {
-      wilaya: "Alger",
-      codePostal: "16000",
-      regions: ["Alger-Centre", "Bab El Oued", "Kouba", "Hussein Dey", "El Harrach"]
-    },
-    {
-      wilaya: "Djelfa",
-      codePostal: "17000",
-      regions: ["Djelfa", "Messaad", "Aïn Oussera", "El Idrissia", "Hassi Bahbah"]
-    },
-    {
-      wilaya: "Jijel",
-      codePostal: "18000",
-      regions: ["Jijel", "Taher", "El Milia", "Chekfa", "Sidi Abdelaziz"]
-    },
-    {
-      wilaya: "Sétif",
-      codePostal: "19000",
-      regions: ["Sétif", "El Eulma", "Aïn Oulmene", "Bougaa", "Guidjel"]
-    },
-    {
-      wilaya: "Saïda",
-      codePostal: "20000",
-      regions: ["Saïda", "El Hassasna", "Youb", "Aïn El Hadjar", "Ouled Khaled"]
-    },
-    {
-      wilaya: "Oran",
-      codePostal: "31000",
-      regions: ["Oran", "Es Senia", "Bir El Djir", "Aïn Turk", "Boutlelis"]
-    },
-    {
-      wilaya: "Constantine",
-      codePostal: "25000",
-      regions: ["Constantine", "El Khroub", "Aïn Smara", "Hamma Bouziane", "Didouche Mourad"]
-    },
-    {
-      wilaya: "Médéa",
-      codePostal: "26000",
-      regions: ["Médéa", "Berrouaghia", "Ouzera", "El Omaria", "Tablat"]
-    },
-    {
-      wilaya: "Mostaganem",
-      codePostal: "27000",
-      regions: ["Mostaganem", "Aïn Tédelès", "Hassi Mameche", "Bouguirat", "Kheireddine"]
-    },
-    {
-      wilaya: "Ouargla",
-      codePostal: "30000",
-      regions: ["Ouargla", "Touggourt", "Hassi Messaoud", "N'Goussa", "El Borma"]
-    },
-    {
-      wilaya: "Ghardaïa",
-      codePostal: "47000",
-      regions: ["Ghardaïa", "Berriane", "Metlili", "El Atteuf", "Daya Ben Dahoua"]
-    },
-    {
-      wilaya: "El Oued",
-      codePostal: "39000",
-      regions: ["El Oued", "Robbah", "Guemar", "Debila", "Taleb Larbi"]
-    },
-    {
-      wilaya: "Relizane",
-      codePostal: "48000",
-      regions: ["Relizane", "Zemmoura", "Oued Rhiou", "Mazouna", "Sidi Khettab"]
-    }
-  ];
 
   const handleSelectWilaya = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedWilaya = e.target.value;
@@ -288,7 +147,6 @@ const Etablisment = () => {
     setEditSchool(prev => ({ 
       ...prev, 
       city: selectedWilaya,
-      // Reset state when wilaya changes
       state: "",
       postalCode: codesPostauxAlgerie.find(w => w.wilaya === selectedWilaya)?.codePostal || ""
     }));
@@ -357,18 +215,18 @@ const Etablisment = () => {
           websiteUrl: schoolData.websiteUrl,
           startDate: schoolData.academicYear?.startDate || "",
           endDate: schoolData.academicYear?.endDate || "",
-          phoneNumbers: schoolData.phoneNumbers,
+          phoneNumbers: schoolData.phoneNumbers || [{ number: "" }],
           street: schoolData.address.street,
           city: schoolData.address.city,
           state: schoolData.address.state,
           postalCode: schoolData.address.postalCode,
-          country: schoolData.address.country,
+          country: schoolData.address.country || "Algeria",
           specializations: []
         });
         
         setSpe(specializationsData);
         setWilaya(schoolData.address.city || "Oran");
-        console.log(editSchool.logo)
+        setSelectedSpe(schoolData.specializations || []);
 
       } catch (err) {
         setErr(err instanceof Error ? err.message : "Unknown error");
@@ -386,30 +244,26 @@ const Etablisment = () => {
     const token = localStorage.getItem("token");
 
     try {
-      // Convert logo to Base64 if it's a new upload
-      let logoBase64 = editSchool.logo;
-      if (editSchool.logo && !editSchool.logo.startsWith('data:')) {
-        const imageBytes = await imageUrlToBytes(editSchool.logo);
-        logoBase64 = bytesToBase64(imageBytes);
-      }
-
+      // Prepare the request body
       const body = {
-        name: editSchool.name,
-        email: editSchool.email,
-        logo: logoBase64,
-        websiteUrl: editSchool.websiteUrl,
-        phoneNumbers: editSchool.phoneNumbers.filter(phone => phone.number.trim() !== ""),
+        name: editSchool.name || showSchool.name,
+        email: editSchool.email || showSchool.email,
+        logo: editSchool.logo || showSchool.logo,
+        websiteUrl: editSchool.websiteUrl || showSchool.websiteUrl,
+        phoneNumbers: editSchool.phoneNumbers
+          .filter(phone => phone.number.trim() !== "")
+          .map(phone => ({ number: phone.number })),
         address: {
-          street: editSchool.street,
-          city: editSchool.city,
-          state: editSchool.state,
-          postalCode: editSchool.postalCode,
-          country: "Algeria"
+          street: editSchool.street || showSchool.address.street,
+          city: editSchool.city || showSchool.address.city,
+          state: editSchool.state || showSchool.address.state,
+          postalCode: editSchool.postalCode || showSchool.address.postalCode,
+          country: editSchool.country || showSchool.address.country || "Algeria"
         },
-        specializations: selectedSpe,
+        specializations: selectedSpe.length > 0 ? selectedSpe : (showSchool.specializations || []),
         academicYear: {
-          startDate: editSchool.startDate,
-          endDate: editSchool.endDate
+          startDate: editSchool.startDate || showSchool.academicYear?.startDate,
+          endDate: editSchool.endDate || showSchool.academicYear?.endDate
         }
       };
 
@@ -421,7 +275,10 @@ const Etablisment = () => {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify({
+          ...body,
+          logo: logoBase64
+        }),
       });
 
       if (!response.ok) {
@@ -453,17 +310,19 @@ const Etablisment = () => {
         websiteUrl: showSchool.websiteUrl,
         startDate: showSchool.academicYear?.startDate || "",
         endDate: showSchool.academicYear?.endDate || "",
-        phoneNumbers: showSchool.phoneNumbers,
+        phoneNumbers: showSchool.phoneNumbers || [{ number: "" }],
         street: showSchool.address.street,
         city: showSchool.address.city,
         state: showSchool.address.state,
         postalCode: showSchool.address.postalCode,
-        country: showSchool.address.country,
-        specializations: []
+        country: showSchool.address.country || "Algeria",
+        specializations: showSchool.specializations || []
       });
       setWilaya(showSchool.address.city || "Oran");
+      setSelectedSpe(showSchool.specializations || []);
     }
   };
+
 
  
 
@@ -777,24 +636,7 @@ className="w-full px-4 py-2 border border-gray-300 rounded-lg
               </div>
 
               {/* Specializations */}
-              {permitted && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Spécialités</label>
-                  <select
-                    name="specializations"
-                    multiple
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg h-32 focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-transparent"
-                    onChange={handleSpecialitéChange}
-                    value={selectedSpe.map(String)}
-                  >
-                    {spe?.map((sp, index) => (
-                      <option value={sp.specializationId} key={index}>
-                        {sp.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
+             
             </div>
           </div>
 
@@ -848,3 +690,6 @@ className="w-full px-4 py-2 border border-gray-300 rounded-lg
 
 
 export default Etablisment;
+
+
+

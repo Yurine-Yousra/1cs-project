@@ -2,7 +2,7 @@ import Image1 from '../../assets/images/image copy 2.png';
 import React, { useState } from 'react';
 import { API_URL } from '../../lib/config';
 
-const Profil = () => {
+const ResetTeacherPassword = () => {
   const [formData, setFormData] = useState({
     oldPassword: '',
     newPassword: '',
@@ -317,4 +317,4 @@ const Profil = () => {
   );
 };
 
-export default Profil;
+export default ResetTeacherPassword;
