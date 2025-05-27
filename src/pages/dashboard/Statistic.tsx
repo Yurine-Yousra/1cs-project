@@ -74,39 +74,6 @@ const  Statistic = () => {
     </div>
   </div>
 </div>
-
-
-      {/* <div className="bg-white rounded-xl shadow-md p-6 mt-6">
-        <h3 className="text-lg font-semibold">Monthly Attendance Rate</h3>
-        <p className="text-sm text-gray-500 mb-4">Attendance trends over the past 6 months</p>
-        <div className="h-80">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={attendanceData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Bar dataKey="rate" fill={COLORS[1]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-xl shadow-md p-6 mt-6">
-        <h3 className="text-lg font-semibold">Average Grades by Subject</h3>
-        <p className="text-sm text-gray-500 mb-4">Performance across different subjects</p>
-        <div className="h-80">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={performanceData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="subject" />
-              <YAxis />
-              <Bar dataKey="average" fill={COLORS[2]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div> */}
-      <CustomAreaChart />
-
       <div className="grid gap-6 md:grid-cols-2 mt-6">
         <div className="bg-white rounded-xl shadow-md p-6">
           <h3 className="text-lg font-semibold">Upcoming Events</h3>
@@ -167,24 +134,6 @@ const genderData = [
   {name:"Male",value:600},
   ]
 
-const attendanceData = [
-  { month: "Jan", rate: 92 },
-  { month: "Feb", rate: 91 },
-  { month: "Mar", rate: 93 },
-  { month: "Apr", rate: 94 },
-  { month: "May", rate: 95 },
-  { month: "Jun", rate: 94 },
-
-]
-
-const performanceData = [
-  { subject: "Math", average: 78 },
-  { subject: "Science", average: 82 },
-  { subject: "English", average: 85 },
-  { subject: "History", average: 79 },
-  { subject: "Art", average: 88 },
-  { subject: "PE", average: 91 },
-]
 
 const upcomingEvents = [
   {

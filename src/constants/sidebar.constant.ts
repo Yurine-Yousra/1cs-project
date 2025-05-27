@@ -16,11 +16,11 @@ export interface SidebarItem {
     { path: "/dashboard/paiments", icon: "Image6", title: "Paiments" },
   ];
   
-const teacherId = localStorage.getItem('teacherId') || '';
+const teacherId = localStorage.getItem('teacherId');
 export  const sidebarArrayTeacher:SidebarItem[] = [
     { path: `/Teacherdashboard/teachers/${teacherId}`, icon: "Image12", title: "Profile" },
     { path: "/Teacherdashboard/profile", icon: "Image13", title: "Statistiques" },
     { path: "/Teacherdashboard/eleves", icon: "Image7", title: "Absence" },
    { path: "/Teacherdashboard/notes", icon: "Image14", title: "Notes" },
-    { path: "/Teacherdashboard/examens", icon: "Image8", title: "Planification" },
+    { path: "/Teacherdashboard/planification", icon: "Image8", title: "Planification" },
   ]

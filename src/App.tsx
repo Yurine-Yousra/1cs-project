@@ -54,7 +54,8 @@ const App = () => {
         <Route path="notes" element={<></>} />
         <Route path="groups/:groupId/notes" element={<></>} />
         <Route path="groups/:groupId/eleves" element={<></>} />
-
+        <Route path="planification" element={<></>} />
+        <Route path="paiments" element={<></>} />
           <Route path="convocation-success" element={<ConvocationSuccess />} />
       </Route>
 

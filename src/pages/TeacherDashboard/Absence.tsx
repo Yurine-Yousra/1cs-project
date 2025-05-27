@@ -5,8 +5,18 @@ import { useEffect, useState } from "react";
 import SearchBar from "../../components/ui/SearchBar";
 import { useParams } from "react-router-dom";
 import { getStudentsByGroup, Student } from "../../apis/group.api";
-import { markAbsences } from "../../apis/absence.api";
+import { addTeacherReport, markAbsences } from "../../apis/absence.api";
 import toast from "react-hot-toast";
+
+// Add this interface for the report API
+interface SendReportData {
+  studentId: string;
+  title: string;
+  description: string;
+  reportDate: string;
+}
+
+
 
 const Absence = () => {
   const [checkedRows, setCheckedRows] = useState<{ [key: string]: boolean }>({});
@@ -14,6 +24,13 @@ const Absence = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [submitting, setSubmitting] = useState<boolean>(false);
+  
+  // New state for report modal
+  const [showReportModal, setShowReportModal] = useState<boolean>(false);
+  const [selectedStudentForReport, setSelectedStudentForReport] = useState<Student | null>(null);
+  const [reportTitle, setReportTitle] = useState<string>("");
+  const [reportDescription, setReportDescription] = useState<string>("");
+  const [sendingReport, setSendingReport] = useState<boolean>(false);
 
   const handleCheckboxChange = (studentId: string) => {
     setCheckedRows((prev) => ({
@@ -49,6 +66,66 @@ const Absence = () => {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  // New function to handle opening report modal
+  const handleOpenReportModal = (student: Student) => {
+    setSelectedStudentForReport(student);
+    setShowReportModal(true);
+    setReportTitle("");
+    setReportDescription("");
+  };
+
+  // New function to handle sending report
+  const handleSendReport = async () => {
+    if (!selectedStudentForReport) {
+      toast.error("Aucun étudiant sélectionné");
+      return;
+    }
+
+    if (!reportTitle.trim()) {
+      toast.error("Veuillez saisir un titre pour le rapport");
+      return;
+    }
+
+    if (!reportDescription.trim()) {
+      toast.error("Veuillez saisir une description pour le rapport");
+      return;
+    }
+
+    try {
+      setSendingReport(true);
+      
+      const reportData: SendReportData = {
+        studentId: selectedStudentForReport.studentId,
+        title: reportTitle.trim(),
+        description: reportDescription.trim(),
+        reportDate: new Date().toISOString()
+      };
+
+      await addTeacherReport(reportData);
+      
+      toast.success("Rapport envoyé avec succès");
+      setShowReportModal(false);
+      setSelectedStudentForReport(null);
+      setReportTitle("");
+      setReportDescription("");
+      window.location.href = "/Teacherdashboard/convocation-success"; 
+
+    } catch (error) {
+      console.error("Error sending report:", error);
+      toast.error("Erreur lors de l'envoi du rapport");
+    } finally {
+      setSendingReport(false);
+    }
+  };
+
+  // Function to close modal
+  const handleCloseReportModal = () => {
+    setShowReportModal(false);
+    setSelectedStudentForReport(null);
+    setReportTitle("");
+    setReportDescription("");
   };
 
   const { groupId } = useParams();
@@ -117,11 +194,11 @@ const Absence = () => {
               <tr>
                 <th className="w-[5%]"></th>
                 <th className="w-[5%] text-[15px] font-semibold"></th>
-                <th className="w-[20%] text-left text-[15px] font-semibold text-gray-800">Nom</th>
-                <th className="w-[20%] text-left text-[15px] font-semibold text-gray-800">N° Réf</th>
-                <th className="w-[20%] text-left text-[15px] font-semibold text-gray-800">Nom du Parent</th>
-                <th className="w-[25%] text-left text-[15px] font-semibold text-gray-800">Contact du Parent</th>
-                <th className="w-[5%]">action</th>
+                <th className="w-[15%] text-left text-[15px] font-semibold text-gray-800">Nom</th>
+                <th className="w-[15%] text-left text-[15px] font-semibold text-gray-800">N° Réf</th>
+                <th className="w-[15%] text-left text-[15px] font-semibold text-gray-800">Nom du Parent</th>
+                <th className="w-[20%] text-left text-[15px] font-semibold text-gray-800">Contact du Parent</th>
+                <th className="w-[10%] text-center text-[15px] font-semibold text-gray-800">Actions</th>
               </tr>
             </thead>
           </table>
@@ -177,22 +254,33 @@ const Absence = () => {
                       <td className="w-[5%]">
                         <img src={Image} alt="Profile" className="w-10 h-10 object-cover rounded-full" />
                       </td>
-                      <td className="w-[20%] text-[14px] text-left">
+                      <td className="w-[15%] text-[14px] text-left">
                         {student.firstName} {student.lastName}
                       </td>
-                      <td className="w-[20%] text-left text-[14px] text-[var(--color-yousra)]">
+                      <td className="w-[15%] text-left text-[14px] text-[var(--color-yousra)]">
                         {student.studentIdNumber || "Non défini"}
                       </td>
-                      <td className="w-[20%] text-left text-[14px]">
+                      <td className="w-[15%] text-left text-[14px]">
                         {student.parentName}
                       </td>
-                      <td className="w-[25%] text-left text-[14px]">
+                      <td className="w-[20%] text-left text-[14px]">
                         {student.parentContact}
                       </td>
-                      <td className="w-[5%] text-[14px] text-left">
-                        <div className="flex justify-center items-center bg-yousra rounded-full  py-0.5 text-white relative">
-                          <button>Voir</button>
-                          <RiArrowRightSLine className="text-xl absolute right-0" />
+                      <td className="w-[10%] text-[14px]">
+                        <div className="flex gap-2 justify-center">
+                          {/* View Button */}
+                          <div className="flex justify-center items-center bg-yousra rounded-full px-3 py-0.5 text-white relative">
+                            <button>Voir</button>
+                            <RiArrowRightSLine className="text-xl absolute right-0" />
+                          </div>
+                          
+                          {/* Report Button */}
+                          <button
+                            onClick={() => handleOpenReportModal(student)}
+                            className="flex justify-center items-center bg-orange-500 hover:bg-orange-600 rounded-full px-3 py-0.5 text-white text-xs transition-colors duration-200"
+                          >
+                            Rapport
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -228,6 +316,97 @@ const Absence = () => {
           </button>
         )}
       </div>
+
+      {/* Report Modal */}
+      {showReportModal && (
+        <div className="fixed inset-0 backdrop-blur-lg flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">
+                Envoyer un rapport
+              </h3>
+              <button
+                onClick={handleCloseReportModal}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {selectedStudentForReport && (
+              <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+                <p className="text-sm text-gray-600">Étudiant sélectionné:</p>
+                <p className="font-medium text-gray-800">
+                  {selectedStudentForReport.firstName} {selectedStudentForReport.lastName}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {selectedStudentForReport.studentIdNumber}
+                </p>
+              </div>
+            )}
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Titre du rapport *
+                </label>
+                <input
+                  type="text"
+                  value={reportTitle}
+                  onChange={(e) => setReportTitle(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-transparent"
+                  placeholder="Ex: Comportement inapproprié"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Description *
+                </label>
+                <textarea
+                  value={reportDescription}
+                  onChange={(e) => setReportDescription(e.target.value)}
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-yousra)] focus:border-transparent resize-none"
+                  placeholder="Décrivez les détails du rapport..."
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={handleCloseReportModal}
+                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleSendReport}
+                disabled={sendingReport || !reportTitle.trim() || !reportDescription.trim()}
+                className={`flex-1 px-4 py-2 rounded-lg text-white transition-colors duration-200 ${
+                  sendingReport || !reportTitle.trim() || !reportDescription.trim()
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-[var(--color-yousra)] hover:bg-opacity-90'
+                }`}
+              >
+                {sendingReport ? (
+                  <div className="flex items-center justify-center">
+                    <svg className="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Envoi...
+                  </div>
+                ) : (
+                  'Envoyer le rapport'
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

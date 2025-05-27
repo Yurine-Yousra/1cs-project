@@ -13,6 +13,7 @@ import Convocation from "./Convocation";
 import ConvocationSuccess from "../SuccessPages/ConvocationSuccess";
 import GroupSelectionPage from "./GroupSelectionPage";
 import NotesManagementPage from "./NotesManagementPage";
+import Time from "./Time";
 
 const TeacherDashboard: React.FC = () => {
   const location = useLocation();
@@ -45,6 +46,7 @@ const TeacherDashboard: React.FC = () => {
               <Route path="students/:id" element={<StudentProfile />} />
             <Route path="students/:id/convocation" element={<Convocation />} />
              <Route path="convocation-success" element={<ConvocationSuccess />} />
+             <Route path="planification" element={<Time />} />
 
           </Routes>
         </div>

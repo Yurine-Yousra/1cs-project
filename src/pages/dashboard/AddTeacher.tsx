@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import uploadFileToCloudinary from "../../config/UploadCloudinary";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { IoMdArrowBack } from "react-icons/io";
 import { API_URL } from "../../lib/config";
 
 const imageUrlToBytes = async (url: string): Promise<Uint8Array> => {
@@ -159,7 +158,7 @@ const AddTeacher = () => {
     
             console.log("📦 Request body to send:", body);
     
-            const response = await fetch("${API_URL}/api/teacher/create", {
+            const response = await fetch(`${API_URL}/api/teacher/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

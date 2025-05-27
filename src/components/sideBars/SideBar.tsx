@@ -149,6 +149,7 @@ export default function Sidebar({isCollapsed,setIsCollapsed,sidebarArray}:Sideba
             const isProfile =    (location.pathname === "/dashboard/teachers/86b837ee-678d-4249-accf-1ab4e840237b" && index === 2) 
             const endsWithEleves = (location.pathname.endsWith("/eleves") && index === 2 );
             const endsWithNotes = (location.pathname.endsWith("/notes") && index === 3);
+            const isConvocation = (location.pathname.endsWith("/convocation-success") && index === 2);
 
             return (
               <Link
@@ -158,7 +159,7 @@ export default function Sidebar({isCollapsed,setIsCollapsed,sidebarArray}:Sideba
                   flex items-center rounded-md mx-auto px-4 py-3 text-gray-700
                   ${isCollapsed ? "justify-center" : "justify-start w-[94%]"}
                   
-                  ${isActive || isActiveAdd || isProfile || endsWithEleves || endsWithNotes  ? "text-white bg-yousra" : "hover:bg-indigo-100"}
+                  ${isActive || isActiveAdd || isProfile || endsWithEleves || endsWithNotes || isConvocation ? "text-white bg-yousra" : "hover:bg-indigo-100"}
                 `}
               >
                 <span className={`w-6 h-6 ${isCollapsed ? "mr-0" : "mr-3"} flex-shrink-0`}>

@@ -26,7 +26,7 @@ export default function ConvocationSuccess() {
         {/* Action Buttons */}
         <div className="flex flex-col space-y-3">
           <button
-            onClick={() => navigate("/Teacherdashboard")}
+            onClick={() => navigate("/Teacherdashboard/eleves")}
             className="flex items-center justify-center gap-2 w-full bg-[var(--color-yousra)] hover:cursor-pointer text-white py-2 px-4 rounded-lg transition-colors"
           >
             <FaEnvelope />
